@@ -1,3 +1,8 @@
+.row {
+    margin-top: 1cm;
+}
+
+
 section {
     padding-top: 20px;
 }
@@ -5,20 +10,37 @@ section {
 .btn-custom {
     padding: 25px;
     font-size: 15pt;
-    height: 25vh;
+    height: 30vh;
     width: 25vw;
 
-    border-radius: 10%;
+    border-radius: 20px;
 }
 
-.row {
-    margin-top: 20px;
+li {
+    list-style-type: none;
 }
+
+
+.nav-item dropdown
 
 .h1, h1 {
     font-size: calc(3rem + 3vw);
+    margin-left: 50%;
 }
 
+.container-fluid {
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+}
+
+.navbar-toggler {
+    margin-right: 0.5cm;
+}
+
+.dropdown-menu-end[data-bs-popper] {
+    right: 0.4cm;
+    left: auto;
+}
 
 /*
 .btn-container .row {
