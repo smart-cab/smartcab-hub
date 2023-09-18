@@ -1,10 +1,44 @@
+body {
+    background: radial-gradient(circle, rgba(172,250,223,1) 0%, rgba(232,255,206,0.8634163137911415) 100%);
+}
+
+.nav-pils {
+    align-self: center
+}
+
 .row {
     margin-top: 1cm;
 }
 
+.navbar {
+    background-color: rgb(135 225 201 / 50%);
+}
+
+
 
 section {
     padding-top: 20px;
+}
+
+.btn-danger {
+    background-color: #FA8072; 
+    display: flex; 
+    justify-content: flex-end;
+    margin-right: 0.2cm;
+}
+
+.center {
+  padding: 70px 0;
+  text-align: center;
+}
+
+.align-items-start {
+    margin-left: 0.3cm;
+}
+
+.tab-content {
+    position: relative;
+    top: -100px
 }
 
 .btn-custom {
@@ -25,7 +59,15 @@ li {
 
 .h1, h1 {
     font-size: calc(3rem + 3vw);
-    margin-left: 50%;
+}
+
+img {
+    margin-left: 0.5cm;
+}
+
+.nav-link {
+    color: black;
+    font-weight: 600;
 }
 
 .container-fluid {

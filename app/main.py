@@ -1,18 +1,27 @@
-from flask import Flask, render_template
+from threading import Thread
+from flask import Flask, render_template, jsonify
+from zigbee.sub import SENSOR, client
 
 
 app = Flask(__name__)
 
 
 @app.route("/")
-@app.route("/index")
 def index():
     return render_template("index.html")
 
 
-def main():
-    app.run()
+@app.route("/get_temp")
+def get_temp():
+    data = {
+        "temperature": SENSOR.temperature,
+        "humidity": SENSOR.humidity
+    }
+    return jsonify(data)
 
 
 if __name__ == "__main__":
-    main()
+    t2 = Thread(target=client.loop_forever, 
+                name="Zigbee")
+    t2.start()
+    app.run()
