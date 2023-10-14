@@ -4,6 +4,7 @@ const _DateAndTime = () => {
 setInterval(_DateAndTime, 1000);
 _DateAndTime();
 
+<<<<<<< HEAD
 const _Humidity = () => {
   document.querySelector("#currentHumidity").innerHTML = "98%";
 }
@@ -30,3 +31,18 @@ function updateDynamicContent() {
 
 updateDynamicContent();
 setInterval(updateDynamicContent, 1000);  
+||||||| parent of 28e9825 (update intarface)
+document.getElementById('date-time').innerHTML=time;
+*/
+=======
+
+const _Humidity = () => {
+  document.querySelector("#currentHumidity").innerHTML = "98%";
+}
+_Humidity();
+
+const _Temperature = () => {
+  document.querySelector("#currentTemperature").innerHTML = "20°";
+}
+_Temperature();
+>>>>>>> 28e9825 (update intarface)

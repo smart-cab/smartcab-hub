@@ -10,10 +10,20 @@ body {
     margin-top: 1cm;
 }
 
+<<<<<<< HEAD
 .navbar {
     background-color: rgb(135 225 201 / 50%);
 }
 
+||||||| parent of 28e9825 (update intarface)
+background: rgb(238,174,202);
+background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+=======
+.navbar {
+    background-color: rgba(148, 173, 215,0.5);
+}
+
+>>>>>>> 28e9825 (update intarface)
 
 
 section {
