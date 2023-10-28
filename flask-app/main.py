@@ -1,9 +1,17 @@
-from threading import Thread
 from flask import Flask, render_template, jsonify
-from zigbee.sub import SENSOR, client
+from flask_login import (
+    LoginManager,
+    login_url,
+    login_required,
+    logout_user,
+    current_user
+)
+from zigbee.sub import SENSOR
 
 
 app = Flask(__name__)
+login_manager = LoginManager()
+# login_manager.init_app(app)
 
 
 @app.route("/")
@@ -20,8 +28,9 @@ def get_temp():
     return jsonify(data)
 
 
-if __name__ == "__main__":
-    t2 = Thread(target=client.loop_forever, 
-                name="Zigbee")
-    t2.start()
+def main():
     app.run()
+
+
+if __name__ == "__main__":
+    main()

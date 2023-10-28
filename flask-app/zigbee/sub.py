@@ -2,18 +2,15 @@ import paho.mqtt.client as mqtt
 import json
 
 
-BROKER_URL = "192.168.0.100"
-BROKER_PORT = 1883
-
-
 class Sensor:
     temperature: float
     humidity: float
     battery: int
 
 
+BROKER_URL = "192.168.43.107"
+BROKER_PORT = 1883
 SENSOR = Sensor()
-
 
 def on_connect(client, userdata, flags, rc):
     print(f"Connected With Result Code {rc}")
@@ -39,16 +36,16 @@ def on_disconnect(client, userdata, rc):
 
 def on_message(client, userdata, message):
     data = json.loads(message.payload.decode())
-    SENSOR.battery = data["battery"]
-    SENSOR.temperature = data["temperature"]
-    SENSOR.humidity = data["humidity"]
+    sensor.battery = data["battery"]
+    sensor.temperature = data["temperature"]
+    sensor.humidity = data["humidity"]
     print("Message Recieved: " + message.payload.decode())
 
 
 client = mqtt.Client()
-
 client.on_connect = on_connect
 client.on_message = on_message
-
 client.connect(BROKER_URL, BROKER_PORT)
-client.subscribe("zigbee2mqtt/0x54ef441000779c83", qos=1)
+
+msg = client.subscribe("zigbee2mqtt/0x54ef441000779c83", qos=1)
+client.loop_forever()
