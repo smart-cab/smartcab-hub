@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, Response
+from flask import Flask, jsonify, request
 from zigbee.sub import SENSOR, client
 from threading import Thread
  
@@ -42,6 +42,32 @@ def get_co2():
     response.headers["Access-Control-Allow-Origin"] = "*"
     return response
      
+
+@app.route('/get_pressure', methods=["GET"])
+def get_pressure():
+    data = {
+        "status": "OK",
+        "pressure": SENSOR.pressure
+        }
+
+    response = jsonify(data)
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    return response
+
+
+@app.route("/dev_control", methods=["POST"])
+def device_control():
+    device_id = request.args.get("dev_id")
+    option = request.args.get("option")
+    print("-----------------------", device_id, option)
+    client.publish(f"zigbee2mqtt/{device_id}/set", option)
+    data = {
+            "status": "OK"
+        }
+    response = jsonify(data)
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    return response
+
 
 if __name__ == '__main__':
     subscriber_client_thread = Thread(target=client.loop_forever)

@@ -1,10 +1,12 @@
 import paho.mqtt.client as mqtt
+from pprint import pprint
 import json
 
 
 class Sensor:
     temperature: float=0
     humidity: float=0
+    pressure: float=0
     co2: float=0
     battery: int=0
 
@@ -43,8 +45,9 @@ def on_message(client, userdata, message):
     SENSOR.battery = int(data["battery"])
     SENSOR.temperature = float(data["temperature"])
     SENSOR.humidity = float(data["humidity"])
+    SENSOR.pressure = float(data["pressure"])
     # SENSOR.co2 = float(data["co2"])
-    print("Message Recieved: " + message.payload.decode())
+    pprint("Message Recieved: " + message.payload.decode())
 
 
 client = mqtt.Client()
@@ -52,4 +55,10 @@ client.on_connect = on_connect
 client.on_message = on_message
 client.connect(BROKER_URL, BROKER_PORT)
 
+# temp + humidity sensor
 client.subscribe("zigbee2mqtt/0x54ef441000779c83", qos=1)
+
+# socket
+# client.subscribe("zigbee2mqtt/0xa4c1382d21ae8016", qos=1)
+
+# client.subscribe("zigbee2mqtt/bridge/devices")

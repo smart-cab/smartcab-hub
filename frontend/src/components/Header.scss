@@ -2,7 +2,8 @@
     background: rgba(185, 185, 185, 0.25);
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
+    height: 3cm;
 }
 
 .HeaderGroup {
@@ -14,11 +15,11 @@
 .HeaderElement {
     display: flex;
     align-items: center;
-    padding-left: 1cm;
-    padding-right: 1cm;
+    padding-left: 0.8cm;
+    padding-right: 0.8cm;
 }
 
 .MainTime {
     font-size: 1.3cm;
-    font-weight: bolder;
+    font-weight: 999;
 }

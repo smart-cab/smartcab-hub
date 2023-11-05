@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react"
-import {Time, Co2, Humidity, Temp} from "./Sensors"
-import './Header.css'
+import Co2 from "./sensors/Co2"
+import Temp from "./sensors/Temp"
+import Humidity from "./sensors/Humidity"
+import Pressure from "./sensors/Pressure"
+import './Header.scss'
 
 
 export default function Header() {
@@ -8,14 +11,12 @@ export default function Header() {
     return (
         <header className="Header">
 
-            <div className="HeaderGroup">
-                <div className="HeaderElement">
-                    <img src="/only_cube_logo.png" className="Logo" alt="logo" width="110cm" height="110cm"/>
-                    <Time />
-                </div>
-            </div>
-
             <div className="HeaderGroup" style={{marginRight: 1 + "cm"}}>
+
+                <div className="HeaderElement">
+                    <img src="/pressure.svg" className="Pressure" alt="press" width="70cm" height="70cm" />
+                    <Pressure />
+                </div>
 
                 <div className="HeaderElement">
                     <img src="/co2.svg" className="Co2" alt="co2" width="55cm" height="55cm" style={{marginRight: 0.3 + "cm"}}/>
