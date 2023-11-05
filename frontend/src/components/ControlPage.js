@@ -4,6 +4,7 @@ import { Grid, Paper } from '@mui/material';
 import MySwitch from "./controls/Switch.js";
 import MyButton from "./controls/Button.js";
 import "./ControlPage.scss";
+import MySlider from "./controls/Slider.js";
 
 
 function ControlPage() {
@@ -58,8 +59,14 @@ function ControlPage() {
                 </Grid>
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
+                        <Paper style={paperStyle}>
+                            <p>Яркость лампы QWER99</p>
+                            <MySlider />
+                        </Paper>
                     </Grid>
                     <Grid item xs={6}>
+                        <Paper style={paperStyle}>
+                        </Paper>
                     </Grid>
                 </Grid>
             </div>
