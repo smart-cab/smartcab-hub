@@ -1,15 +1,15 @@
 import React from "react";
 import Header from "./Header.js";
-import { Grid, Paper, Typography } from '@mui/material';
-import MySwitch from "./Switch.js";
+import { Grid, Paper } from '@mui/material';
+import MySwitch from "./controls/Switch.js";
+import MyButton from "./controls/Button.js";
 import "./ControlPage.scss";
-import { makeStyles } from "@material-ui/core";
 
 
 function ControlPage() {
     const paperStyle = {
         display: "flex",
-        backgroundColor: 'rgba(202, 200, 200, 0.4)', // Измените на ваш желаемый цвет фона
+        backgroundColor: 'rgba(202, 200, 200, 0.4)', 
         padding: "16",
         textAlign: 'center',
         padding: "16px",
@@ -21,7 +21,7 @@ function ControlPage() {
         flexDirection: "column",
         borderRadius: "15px",
         boxShadow: "0px 0px 0px 0px",
-        fontSize: "20px",
+        fontSize: "1.5em",
         gap: "10px",
     };
 
@@ -43,9 +43,6 @@ function ControlPage() {
                         </Paper>
                     </Grid>
                 </Grid>
-
-
-
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <Paper style={paperStyle}>
@@ -55,8 +52,14 @@ function ControlPage() {
                     </Grid>
                     <Grid item xs={6}>
                         <Paper style={paperStyle}>
-                            <MySwitch />
+                            <MyButton text={"Закрыть кабинет"}/>
                         </Paper>
+                    </Grid>
+                </Grid>
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                    </Grid>
+                    <Grid item xs={6}>
                     </Grid>
                 </Grid>
             </div>

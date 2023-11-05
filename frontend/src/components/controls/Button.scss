@@ -1,0 +1,25 @@
+@font-face {
+  font-family: montserratAlternates;
+  src: url(../../../public/fonts/MontserratAlternates-Regular.woff) format('woff'); 
+}
+
+
+.ButtonBlue {
+    background-color: #A7DFF0;
+    height: 100%;
+    width: 100%;
+    padding-right: 3em;
+    padding-left: 3em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: #7da4b0;
+    border-width: 3px;
+    font-size: 0.85em;
+}
+
+
+p {
+    font-family: montserratAlternates;
+}

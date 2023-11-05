@@ -21,10 +21,10 @@ function App() {
             <Routes>
                 <Route path='/' element={<AppLayout />}>
                     <Route path='/scenaries' element={<ControlPage />} />
-                    <Route path='/started' element={<ControlPage />} />
-                    <Route path='/calendar' element={<ControlPage />} />
-                    <Route path='/user' element={<ControlPage />} />
-                    <Route path='/order' element={<ControlPage />} />
+                    <Route path='/started' element={<div />} />
+                    <Route path='/calendar' element={<div />} />
+                    <Route path='/user' element={<div />} />
+                    <Route path='/order' element={<div />} />
                 </Route>
             </Routes>
         </BrowserRouter>
