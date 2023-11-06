@@ -7,7 +7,7 @@ function MySlider({min, max, current_value=(max - min)/2, step=1}) {
     return (
         <div>
             <tc-range-slider 
-                slider-width="12em"
+                slider-width="11em"
                 slider-bg="lightgrey"
                 slider-bg-fill="#81D7DD"
                 

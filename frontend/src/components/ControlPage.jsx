@@ -16,8 +16,8 @@ function ControlPage() {
         textAlign: 'center',
         padding: "16px",
         textAlign: "center",
-        marginTop: "10%",
-        height: "3cm",
+        marginTop: "0.8em",
+        height: "5.5em",
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
@@ -28,7 +28,7 @@ function ControlPage() {
     };
 
     return (
-        <div>
+        <div style={{ marginBottom: '5em' }}>
             <Header />
             <div className="TabPage">
                 <Grid container spacing={2}>
@@ -67,6 +67,21 @@ function ControlPage() {
                     </Grid>
                     <Grid item xs={6}>
                         <Paper style={paperStyle}>
+                            <p>Свет 1</p>
+                            <MySwitch />
+                        </Paper>
+                    </Grid>
+                </Grid>
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <Paper style={paperStyle}>
+                            <p>Яркость лампы QWER99</p>
+                            <MySlider />
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Paper style={paperStyle}>
+                            <MyButton text={"Закрыть кабинет"} button_type={"ButtonBlue"}/>
                         </Paper>
                     </Grid>
                 </Grid>

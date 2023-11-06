@@ -14,6 +14,12 @@ import ControlPage from "./ControlPage";
 //     next();
 // });
 //
+function getData() {
+
+
+    return data
+}
+
 
 function App() {
 	return (
