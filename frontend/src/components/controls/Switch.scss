@@ -2,6 +2,15 @@
   margin: 20px;
 }
 
+.ant-switch.ant-switch-checked {
+    background-color: #A7DFF0 !important;
+}
+
+
+.MySwitch {
+    transform: scale(1.5);
+}
+
 .react-switch {
   vertical-align: middle;
   margin-left: 4px;

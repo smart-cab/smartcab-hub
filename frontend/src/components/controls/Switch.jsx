@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-// import ky from "ky";
 // import axios from "axios";
 import {Switch} from "antd";
+import "./Switch.scss";
 
 
 function useSocket(checked, event) {
@@ -41,6 +41,7 @@ function MySwitch() {
     return (
         <Switch 
             onChange={useSocket}
+            className="MySwitch"
         />
     );
 }
