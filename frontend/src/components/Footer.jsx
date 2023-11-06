@@ -1,5 +1,5 @@
 import React from "react";
-import MyButton from "./controls/Button.js";
+import MyButton from "./controls/Button";
 import "./Footer.scss";
 
  

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import "./App.scss";
 import AppLayout from './layout/AppLayout';
-import ControlPage from "./ControlPage.js";
+import ControlPage from "./ControlPage";
 
 //
 // const express = require("express")

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "../Sidebar.js";
+import Sidebar from "../Sidebar.jsx";
 
 const AppLayout = () => {
     return <div style={{
