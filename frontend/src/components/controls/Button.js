@@ -11,10 +11,11 @@ const MyRipples = createRipples({
 })
 
 
-function MyButton({text}) {
+function MyButton({text, button_type}) {
+    console.log(button_type);
     return (
         <MyRipples>
-            <button className="ButtonBlue"> 
+            <button className={button_type}> 
                 <p>{text}</p>
             </button>
         </MyRipples>

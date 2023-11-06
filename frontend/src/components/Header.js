@@ -6,7 +6,7 @@ import Pressure from "./sensors/Pressure"
 import './Header.scss'
 
 
-export default function Header() {
+function Header() {
 
     return (
         <header className="Header">
@@ -37,3 +37,6 @@ export default function Header() {
         </header>   
     );
 }
+
+
+export default Header;

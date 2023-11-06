@@ -5,6 +5,7 @@ import MySwitch from "./controls/Switch.js";
 import MyButton from "./controls/Button.js";
 import "./ControlPage.scss";
 import MySlider from "./controls/Slider.js";
+import Footer from "./Footer.js";
 
 
 function ControlPage() {
@@ -53,7 +54,7 @@ function ControlPage() {
                     </Grid>
                     <Grid item xs={6}>
                         <Paper style={paperStyle}>
-                            <MyButton text={"Закрыть кабинет"}/>
+                            <MyButton text={"Закрыть кабинет"} button_type={"ButtonBlue"}/>
                         </Paper>
                     </Grid>
                 </Grid>
@@ -70,6 +71,7 @@ function ControlPage() {
                     </Grid>
                 </Grid>
             </div>
+            <Footer />
         </div>
 
     );
