@@ -32,7 +32,7 @@ const sidebarNavItems = [
     },
 ]
 
-export function Sidebar()  {
+function Sidebar()  {
     const [activeIndex, setActiveIndex] = useState(0);
     const [stepHeight, setStepHeight] = useState(0);
     const sidebarRef = useRef();

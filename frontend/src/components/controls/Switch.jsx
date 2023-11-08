@@ -1,36 +1,28 @@
 import React, {useState} from "react";
-// import axios from "axios";
+import axios from "axios";
 import {Switch} from "antd";
 import "./Switch.scss";
 
 
 function useSocket(checked, event) {
+    let opt = "";
     if (checked) {
-        // axios.post('http://127.0.0.1:5000/dev_control', {
-        //     "dev_id": "0xa4c1382d21ae8016", 
-        //     "option": "ON"
-        // }).then((response) => {
-        //     console.log(response.data);
-        // }).catch((error) => {
-        //     console.error(error);
-        // })
-        /*
-        const data = { dev_id: "0xa4c1382d21ae8016", option: "ON"};
-        const response = ky.post("http://127.0.0.1:5000/dev_control", {json: data}) 
-        console.log(response);
-        */
+        opt = "ON"
     } else {
-        /*
-        axios.post('http://127.0.0.1:5000/dev_control', {
-            "dev_id": "0xa4c1382d21ae8016", 
-            "option": "OFF"
-        }).then((response) => {
-            console.log(response.data);
-        }).catch((error) => {
-            console.error(error);
-        })
-        */
+        opt = "OFF"
     }
+    axios.post('http://127.0.0.1:5000/dev_control', null, 
+            {
+                params: {
+                    dev_id: "0xa4c1382d21ae8016", 
+                    option: opt 
+                }
+            }
+    ).then((response) => {
+        console.log(response.data);
+    }).catch((error) => {
+        console.error(error);
+    })
 }
 
 

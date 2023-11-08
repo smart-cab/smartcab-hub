@@ -1,9 +1,11 @@
 from flask import Flask, jsonify, request
 from zigbee.sub import SENSOR, client
-from threading import Thread
- 
+from flask_cors import CORS
+from threading import Thread 
+
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/get_temp', methods=["GET"])
@@ -55,17 +57,15 @@ def get_pressure():
     return response
 
 
-@app.route("/dev_control", methods=["POST"])
+@app.route("/dev_control", methods=["POST", "OPTIONS"])
 def device_control():
     device_id = request.args.get("dev_id")
     option = request.args.get("option")
-    print("-----------------------", device_id, option)
     client.publish(f"zigbee2mqtt/{device_id}/set", option)
     data = {
             "status": "OK"
         }
     response = jsonify(data)
-    response.headers["Access-Control-Allow-Origin"] = "*"
     return response
 
 
