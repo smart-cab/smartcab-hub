@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import "./App.scss";
-import AppLayout from './layout/AppLayout';
+import AppLayout from './AppLayout';
 import ControlPage from "./ControlPage";
 
-//
+
 // const express = require("express")
 // const app = express();
 // app.use(function(req, res, next) {
@@ -13,7 +13,7 @@ import ControlPage from "./ControlPage";
 //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 //     next();
 // });
-//
+
 function getData() {
 
 

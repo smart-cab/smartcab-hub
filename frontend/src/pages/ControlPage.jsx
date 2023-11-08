@@ -1,11 +1,12 @@
 import React from "react";
-import Header from "./Header";
-import { Grid, Paper } from '@mui/material';
-import MySwitch from "./controls/Switch";
-import MyButton from "./controls/Button";
 import "./ControlPage.scss";
-import MySlider from "./controls/Slider";
-import Footer from "./Footer";
+import { Grid, Paper } from '@mui/material';
+
+import Header from "../components/Header";
+import MySwitch from "../components/controls/Switch";
+import MyButton from "../components/controls/Button";
+import MySlider from "../components/controls/Slider";
+import Footer from "../components/Footer";
 
 
 function ControlPage() {
