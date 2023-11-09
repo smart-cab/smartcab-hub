@@ -36,25 +36,25 @@ pages:
   - name: "Scripts"
     section_blocks: 
       - name: "Content block title"
-        section:
+        content:
           - name: "LW204 lamp"
             element:
               type: toggler
               device: "0x54ef441000779c83"
-              activates: command/toggle_LW204
+              triggers: command/toggle_LW204
           - name: "QWER99 lamp"
             element:
               type: slider
               device: "0x31d8573583859ac4"
-              activates: command/brightness_QWER99
+              triggers: command/brightness_QWER99
           - name: "Start cab"
             element:
               type: button
-              activates: script/start_cab
+              triggers: script/start_cab
     - name: "User Services"
       section_blocks:
         - name: "Distance Lesson Conference"
-          section: service/conference_camera
+          content: service/conference_camera
         - name: "Smart Chess"
-          section: service/smart_chess
+          content: service/smart_chess
 ```
