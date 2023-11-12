@@ -34,6 +34,7 @@ services:
 
 pages:
   - name: "Scripts"
+    private: yes
     section_blocks: 
       - name: "Content block title"
         content:
@@ -52,6 +53,7 @@ pages:
               type: button
               triggers: script/start_cab
     - name: "User Services"
+      private: no
       section_blocks:
         - name: "Distance Lesson Conference"
           content: service/conference_camera
