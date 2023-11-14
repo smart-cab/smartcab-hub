@@ -13,7 +13,7 @@ const sidebarNavItems = [
         section: 'scenaries'
     },
     {
-        display: 'Свет',
+        display: 'Оценка урока',
         icon: <i className='bx bx-star'></i>,
         to: '/started',
         section: 'started'

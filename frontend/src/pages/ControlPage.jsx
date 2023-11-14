@@ -7,6 +7,7 @@ import MySwitch from "../components/controls/Switch";
 import MyButton from "../components/controls/Button";
 import MySlider from "../components/controls/Slider";
 import Footer from "../components/Footer";
+// import GradeCard from "./GradeCard";
 
 
 function ControlPage() {
