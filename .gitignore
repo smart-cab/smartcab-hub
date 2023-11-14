@@ -1,3 +1,5 @@
+/zigbee2mqtt-data/log
+/zigbee2mqtt-data/state.json
 __pycache__
 .idea
 .vscode
