@@ -9,4 +9,4 @@ COPY . .
 RUN yarn --frozen-lockfile --link-duplicates
 
 CMD ["yarn", "start"]
-EXPOSE ${FRONTEND_PORT}
+EXPOSE 3000

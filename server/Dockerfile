@@ -21,4 +21,4 @@ COPY . .
 RUN poetry install --no-cache --no-dev --no-interaction --no-ansi
 
 CMD ["poetry", "run", "python", "server.py"]
-EXPOSE ${SERVER_PORT}
+EXPOSE 5000
