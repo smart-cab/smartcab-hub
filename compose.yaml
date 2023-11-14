@@ -29,6 +29,7 @@ services:
       - /mosquitto/log
 
   backend:
+    container_name: server
     build:
       context: ./server
     ports:
@@ -38,6 +39,7 @@ services:
     stop_grace_period: 1s
 
   frontend:
+    container_name: frontend
     build:
       context: ./frontend
     ports:
