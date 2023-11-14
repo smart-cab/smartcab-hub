@@ -1,9 +1,8 @@
 [tool.poetry]
 name = "hub"
 version = "0.1.0"
-description = ""
+description = "Hub control panel"
 authors = ["Alchemmist <anton.ingrish@gmail.com>"]
-license = "gpl"
 readme = "README.md"
 
 [tool.poetry.dependencies]
