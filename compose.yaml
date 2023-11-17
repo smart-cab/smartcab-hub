@@ -29,9 +29,9 @@ services:
       - /mosquitto/log
 
   backend:
-    container_name: server
+    container_name: backend
     build:
-      context: ./server
+      context: .
     ports:
       - 5000:5000
     networks:
@@ -41,7 +41,7 @@ services:
   frontend:
     container_name: frontend
     build:
-      context: ./frontend
+      context: .
     ports:
       - 3000:3000
     networks:
