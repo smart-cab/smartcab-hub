@@ -4,7 +4,6 @@ services:
   zigbee2mqtt:
     container_name: zigbee2mqtt
     image: koenkk/zigbee2mqtt
-    restart: unless-stopped
     volumes:
       - ./zigbee2mqtt-data:/app/data
       - /run/udev:/run/udev:ro
@@ -18,7 +17,6 @@ services:
 
   mosquitto:
     container_name: mosquitto
-    restart: unless-stopped
     image: eclipse-mosquitto:2.0.18
     user: mosquitto
     ports:
