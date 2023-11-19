@@ -20,13 +20,12 @@ services:
     container_name: mosquitto
     restart: unless-stopped
     image: eclipse-mosquitto:2.0.18
+    user: mosquitto
     ports:
       - 1883:1883
       - 9001:9001
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
-      - /mosquitto/data
-      - /mosquitto/log
 
   backend:
     container_name: backend
@@ -41,7 +40,7 @@ services:
   frontend:
     container_name: frontend
     build:
-      context: .
+      context: ./frontend
     ports:
       - 3000:3000
     networks:
