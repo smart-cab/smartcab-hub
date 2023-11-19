@@ -12,10 +12,10 @@ class TextFormating:
 
 def print_worning(text: str):
     print(f"{TextFormating.UNDERLINE}{TextFormating.WARNING}\
-            Warning: {text}{TextFormating.ENDC}")
+Warning: {text}{TextFormating.ENDC}")
 
 
 def print_succes(text: str):
     print(f"{TextFormating.BOLD}{TextFormating.OKGREEN}\
-            ✔ {text}{TextFormating.ENDC}")
+✔ {text}{TextFormating.ENDC}")
 

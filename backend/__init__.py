@@ -43,6 +43,6 @@ def make_app():
         ERROR_404_HELP=False,
     ))
 
-    config.print_succes("✔ Application was created successfully")
+    config.print_succes("Application was created successfully")
     return app
 
