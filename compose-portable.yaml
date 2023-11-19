@@ -1,0 +1,54 @@
+version: "3"
+
+services:
+  zigbee2mqtt:
+    container_name: zigbee2mqtt
+    image: koenkk/zigbee2mqtt
+    volumes:
+      - ./zigbee2mqtt-data:/app/data
+      - /run/udev:/run/udev:ro
+    ports:
+      - 8080:8080 # zigbee2mqtt-frontend port
+    environment:
+      - TZ=Europe/Moscow
+    devices:
+      # Location of CC2531 USB sniffer
+      - /dev/tty0:/dev/ttyACM0
+
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto:2.0.18
+    user: mosquitto
+    ports:
+      - 1883:1883
+      - 9001:9001
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+  backend:
+    container_name: backend
+    image: backend:latest
+    secrets:
+      - source: secret_key
+    ports:
+      - 5000:5000
+    networks:
+      - default
+    stop_grace_period: 1s
+
+  frontend:
+    container_name: frontend
+    image: frontend:latest
+    ports:
+      - 3000:3000
+    networks:
+      - default
+    stop_grace_period: 1s
+
+secrets:
+  secret_key:
+    file: .secrets/secret_key
+
+networks:
+  default:
+    driver: bridge
