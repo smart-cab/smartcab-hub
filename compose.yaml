@@ -29,6 +29,8 @@ services:
     container_name: backend
     build:
       context: .
+    secrets:
+      - source: secret_key
     ports:
       - 5000:5000
     networks:
@@ -44,6 +46,10 @@ services:
     networks:
       - default
     stop_grace_period: 1s
+
+secrets:
+  secret_key:
+    file: .secrets/secret_key
 
 networks:
   default:
