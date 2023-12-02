@@ -1,9 +1,9 @@
 [tool.poetry]
-name = "hub"
+name = "smartcab-hub"
 version = "0.1.0"
-description = ""
+description = "Local hub api server"
 authors = ["Alchemmist <anton.ingrish@gmail.com>", "Mark Meliksetyan <markmelix@gmail.com>"]
-packages = [{include = "backend"}]
+packages = [{include = "smartcab"}]
 
 
 [tool.poetry.dependencies]

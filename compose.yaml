@@ -5,7 +5,7 @@ services:
     container_name: zigbee2mqtt
     image: koenkk/zigbee2mqtt
     volumes:
-      - ./zigbee2mqtt-data:/app/data
+      - ./zigbee2mqtt.yaml:/app/data/configuration.yaml
       - /run/udev:/run/udev:ro
     ports:
       - 8080:8080 # zigbee2mqtt-frontend port
@@ -26,9 +26,9 @@ services:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
 
   backend:
-    container_name: backend
+    container_name: hub-backend
     build:
-      context: .
+      context: ./backend
     secrets:
       - source: secret_key
     ports:
@@ -38,7 +38,7 @@ services:
     stop_grace_period: 1s
 
   frontend:
-    container_name: frontend
+    container_name: hub-frontend
     build:
       context: ./frontend
     ports:

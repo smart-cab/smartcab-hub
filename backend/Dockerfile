@@ -17,9 +17,8 @@ RUN pip install --no-cache-dir "poetry==$POETRY_VERSION"
 COPY pyproject.toml .env README.md .
 RUN poetry config --no-cache virtualenvs.create false && poetry install --no-cache --no-root --no-interaction --no-ansi --only main
 
-# COPY pyproject.toml poetry.lock .env backend .
-COPY backend ./backend
+COPY . .
 RUN poetry install --no-cache --no-interaction --no-ansi --only main
 
-CMD ["poetry", "run", "python", "backend/run.py"]
+CMD ["poetry", "run", "python", "smartcab/run.py"]
 EXPOSE ${SERVER_PORT}
