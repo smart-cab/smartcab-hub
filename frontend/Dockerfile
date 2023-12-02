@@ -8,5 +8,8 @@ COPY . .
 
 RUN yarn --frozen-lockfile --link-duplicates --network-timeout 500000
 
+ENV GENERATE_SOURCEMAP=false
+ENV NODE_OPTIONS=--max-old-space-size=512
+
 CMD ["yarn", "start"]
 EXPOSE ${FRONTEND_PORT}
