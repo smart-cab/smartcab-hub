@@ -1,9 +1,10 @@
 [tool.poetry]
-name = "hub"
+name = "smartcab-hub"
 version = "0.1.0"
-description = "Hub control panel"
-authors = ["Alchemmist <anton.ingrish@gmail.com>"]
-readme = "README.md"
+description = "Local hub api server"
+authors = ["Alchemmist <anton.ingrish@gmail.com>", "Mark Meliksetyan <markmelix@gmail.com>"]
+packages = [{include = "smartcab"}]
+
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -12,9 +13,12 @@ flask = "^2.3.3"
 flask-cors = "^4.0.0"
 python-dotenv = "^1.0.0"
 pyyaml = "^6.0.1"
+sqlalchemy = "^2.0.23"
+
 
 [tool.poetry.group.dev.dependencies]
 alembic = "^1.12.0"
+
 
 [build-system]
 requires = ["poetry-core"]

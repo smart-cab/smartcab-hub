@@ -1,14 +1,12 @@
 import os
-
+import smartcab
 from flask import Flask, jsonify, request
 
 from zigbee.sub import SENSOR, client
 from flask_cors import CORS
 from threading import Thread
 
-
-app = Flask(__name__)
-CORS(app)
+app = smartcab.make_app()
 
 
 @app.route("/get_temp", methods=["GET"])

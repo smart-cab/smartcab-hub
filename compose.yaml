@@ -3,10 +3,9 @@ version: "3"
 services:
   zigbee2mqtt:
     container_name: zigbee2mqtt
-    image: koenkk/zigbee2mqtt:1.33.2
-    restart: unless-stopped
+    image: koenkk/zigbee2mqtt
     volumes:
-      - ./zigbee2mqtt-data:/app/data
+      - ./zigbee2mqtt.yaml:/app/data/configuration.yaml
       - /run/udev:/run/udev:ro
     ports:
       - 8080:8080 # zigbee2mqtt-frontend port
@@ -18,20 +17,20 @@ services:
 
   mosquitto:
     container_name: mosquitto
-    restart: unless-stopped
     image: eclipse-mosquitto:2.0.18
+    user: mosquitto
     ports:
       - 1883:1883
       - 9001:9001
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
-      - /mosquitto/data
-      - /mosquitto/log
 
   backend:
-    container_name: server
+    container_name: hub-backend
     build:
-      context: ./server
+      context: ./backend
+    secrets:
+      - source: secret_key
     ports:
       - 5000:5000
     networks:
@@ -39,7 +38,7 @@ services:
     stop_grace_period: 1s
 
   frontend:
-    container_name: frontend
+    container_name: hub-frontend
     build:
       context: ./frontend
     ports:
@@ -47,6 +46,14 @@ services:
     networks:
       - default
     stop_grace_period: 1s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+secrets:
+  secret_key:
+    file: .secrets/secret_key
 
 networks:
   default:

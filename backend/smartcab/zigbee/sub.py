@@ -14,7 +14,7 @@ class Sensor:
 SENSOR = Sensor()
 
 
-BROKER_URL = "192.168.0.100"
+BROKER_URL = "192.168.0.104"
 BROKER_PORT = 1883
 
 
