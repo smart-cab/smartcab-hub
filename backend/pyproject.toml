@@ -3,10 +3,10 @@ name = "smartcab-hub"
 version = "0.1.0"
 description = "Local hub api server"
 authors = ["Alchemmist <anton.ingrish@gmail.com>", "Mark Meliksetyan <markmelix@gmail.com>"]
+packages = [{include = "smartcab"}]
 
 
 [tool.poetry.dependencies]
-smartcab = {path = "./smartcab/"}
 python = "^3.10"
 paho-mqtt = "^1.6.1"
 flask = "^2.3.3"

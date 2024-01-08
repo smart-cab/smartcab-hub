@@ -1,22 +1,18 @@
 import os
-import config
-from data.db import get_db_url
+import logging
 from flask import Flask
 from flask_cors import CORS
-
-
-# Load .env file
-from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv())
+from smartcab.data.db import get_db_url
 
 
 def get_secret_key():
     if not os.getenv("SECRET_KEY_FILE"):
-        config.print_worning("In .env file don't set SECRET_KEY_FILE")
+        logging.warning("In .env file don't set SECRET_KEY_FILE")
 
     with open(os.getenv("SECRET_KEY_FILE", "/run/secrets/secret_key")) as file:
         return file.read().rstrip()
 
+import logging
 
 def make_app():
     # Create app
@@ -32,17 +28,18 @@ def make_app():
         case "production":
             debug = True
         case _:
-            config.print_worning("In .env file don't set FLASK_MODE")
+            logging.warning("In .env file don't set FLASK_MODE")
             debug = False
 
     # set app config
-    app.config.update(dict(
-        DEBUG=debug,
-        DATABASE=get_db_url(),
-        SECRET_KEY=get_secret_key(),
-        ERROR_404_HELP=False,
-    ))
+    app.config.update(
+        dict(
+            DEBUG=debug,
+            DATABASE=get_db_url(),
+            SECRET_KEY=get_secret_key(),
+            ERROR_404_HELP=False,
+        )
+    )
 
-    config.print_succes("Application was created successfully")
+    logging.info("Application was created successfully")
     return app
-

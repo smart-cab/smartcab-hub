@@ -1,18 +1,11 @@
-import paho.mqtt.client as mqtt
-from pprint import pprint
 import json
 
+from pprint import pprint
+import paho.mqtt.client as mqtt
+from smartcab import interface
+from smartcab.dev import DEVICES
 
-class Sensor:
-    temperature: float=0
-    humidity: float=0
-    pressure: float=0
-    co2: float=0
-    battery: int=0
-
-
-SENSOR = Sensor()
-
+MQTTC = mqtt.Client()
 
 BROKER_URL = "192.168.0.104"
 BROKER_PORT = 1883
@@ -42,23 +35,34 @@ def on_disconnect(client, userdata, rc):
 
 def on_message(client, userdata, message):
     data = json.loads(message.payload.decode())
-    SENSOR.battery = int(data["battery"])
-    SENSOR.temperature = float(data["temperature"])
-    SENSOR.humidity = float(data["humidity"])
-    SENSOR.pressure = float(data["pressure"])
-    # SENSOR.co2 = float(data["co2"])
+
+    for device in DEVICES.values():
+        mqtti = device.get_interface(interface.MQTT)
+        if mqtti is None:
+            continue
+        mqtti.unpack_data(data)
+
     pprint("Message Recieved: " + message.payload.decode())
 
 
-client = mqtt.Client()
-client.on_connect = on_connect
-client.on_message = on_message
-client.connect(BROKER_URL, BROKER_PORT)
+def setup_client_hooks():
+    MQTTC.on_connect = on_connect
+    MQTTC.on_message = on_message
 
-# temp + humidity sensor
-client.subscribe("zigbee2mqtt/0x54ef441000779c83", qos=1)
 
-# socket
-# client.subscribe("zigbee2mqtt/0xa4c1382d21ae8016", qos=1)
+def apply_subscriptions():
+    for device in DEVICES.values():
+        mqtti = device.get_interface(interface.MQTT)
+        if mqtti is None or not mqtti.subscribe:
+            continue
+        MQTTC.subscribe(mqtti.addr, qos=1)
 
-# client.subscribe("zigbee2mqtt/bridge/devices")
+
+def connect_client():
+    MQTTC.connect(BROKER_URL, BROKER_PORT)
+
+
+def init():
+    setup_client_hooks()
+    connect_client()
+    apply_subscriptions()
