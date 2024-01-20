@@ -1,12 +1,16 @@
 from contextlib import AbstractContextManager, contextmanager
 import sqlalchemy as sa
 import os
+import platform
+import logging
 
 import sqlalchemy.ext.declarative as dec
 import sqlalchemy.orm as orm
 from sqlalchemy.orm import Session
 
+
 SqlAlchemyBase = dec.declarative_base()
+
 
 factory = None
 engine = None
@@ -14,9 +18,9 @@ engine = None
 
 def get_db_url():
     db_folder = os.getenv("DB_FOLDER")
-    db_name = os.getenv("DB_FOLDER")
-    absolute_path = __file__.split("/")[:-1]
-    return f"sqlite:///{absolute_path}/{db_folder}/{db_name}"
+    db_name = os.getenv("DB_NAME")
+
+    return f"sqlite:///{db_folder}/{db_name}"
 
 
 def global_init():
@@ -26,7 +30,7 @@ def global_init():
     if factory:
         return
 
-    print(f"db_url: {get_db_url()}")
+    logging.info(f"db_url: {get_db_url()}")
     engine = sa.create_engine(get_db_url(), echo=False)
     engine.update_execution_options(connect_args={"connect_timeout": 5})
     factory = orm.sessionmaker(bind=engine)

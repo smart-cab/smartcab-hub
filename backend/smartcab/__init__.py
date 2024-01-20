@@ -12,7 +12,9 @@ def get_secret_key():
     with open(os.getenv("SECRET_KEY_FILE", "/run/secrets/secret_key")) as file:
         return file.read().rstrip()
 
+
 import logging
+
 
 def make_app():
     # Create app
@@ -22,7 +24,7 @@ def make_app():
     CORS(app)
 
     # Definition app mode
-    match os.getenv("FLAK_MODE"):
+    match os.getenv("FLASK_MODE"):
         case "development":
             debug = False
         case "production":

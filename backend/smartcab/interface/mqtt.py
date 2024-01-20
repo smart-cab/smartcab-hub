@@ -34,6 +34,7 @@ def on_disconnect(client, userdata, rc):
 
 
 def on_message(client, userdata, message):
+    print(message.topic.decode())
     data = json.loads(message.payload.decode())
 
     for device in DEVICES.values():
@@ -55,7 +56,6 @@ def apply_subscriptions():
         mqtti = device.get_interface(interface.MQTT)
         if mqtti is None or not mqtti.subscribe:
             continue
-        MQTTC.subscribe(mqtti.addr, qos=1)
 
 
 def connect_client():

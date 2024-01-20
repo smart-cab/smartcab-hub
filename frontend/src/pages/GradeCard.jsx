@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './GradeCard.scss';
-import HidingAll from '../components/HidingAll';
+import Hiding from '../components/Hiding';
 
 
 function GradeButton({left, top, icon, color}) {
@@ -74,7 +74,7 @@ function GradeCard() {
         <div>
             {isShown && (
                 <div>
-                    <HidingAll />
+                    <Hiding layout="all"/>
 
                     <button className="CloseHiding" onClick={CloseHiding}>
                         <img width="65px" src="close.svg" alt="close"/>
