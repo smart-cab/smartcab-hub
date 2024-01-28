@@ -1,5 +1,6 @@
 import sqlalchemy as sa
 from sqlalchemy.orm import relationship
+from smartcab.data import db
 
 from .db import SqlAlchemyBase
 
@@ -12,3 +13,16 @@ class EvalType(SqlAlchemyBase):
 
     lessons = relationship("Lesson")
 
+
+def init_base_types():
+    beast = EvalType(eval_type="beast")
+    thinking = EvalType(eval_type="thinking")
+    sleep = EvalType(eval_type="sleep")
+    headboom = EvalType(eval_type="headboom")
+
+    with db.session() as db_sess:
+        db_sess.add(beast)
+        db_sess.add(thinking)
+        db_sess.add(sleep)
+        db_sess.add(headboom)
+        db_sess.commit()

@@ -1,4 +1,5 @@
 from contextlib import AbstractContextManager, contextmanager
+from os.path import isfile
 import sqlalchemy as sa
 import os
 import platform
@@ -30,6 +31,8 @@ def global_init():
     if factory:
         return
 
+    init_filling = not os.path.isfile(f"{os.getenv('DB_FOLDER')}/{os.getenv('DB_NAME')}")
+
     logging.info(f"db_url: {get_db_url()}")
     engine = sa.create_engine(get_db_url(), echo=False)
     engine.update_execution_options(connect_args={"connect_timeout": 5})
@@ -38,6 +41,13 @@ def global_init():
     from . import __all_models
 
     SqlAlchemyBase.metadata.create_all(engine)
+
+    if init_filling:
+        from smartcab.data.eval_types import init_base_types
+
+        init_base_types()
+        logging.info("Was created base eval types: beast, thinking, sleep, headboom")
+
 
 
 def remove():

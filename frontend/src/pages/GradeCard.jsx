@@ -1,9 +1,25 @@
 import React, {useState} from 'react';
 import './GradeCard.scss';
 import Hiding from '../components/Hiding';
+import axios from "axios";
 
 
-function GradeButton({left, top, icon, color}) {
+function Voting(code) {
+    axios.post('http://127.0.0.1:5000/new_vote', null, 
+        {
+            params: {
+                vote: code, 
+            }
+        }
+    ).then((response) => {
+        console.log(response.data);
+    }).catch((error) => {
+        console.error(error);
+    })
+};
+
+
+function GradeButton({left, top, icon, color, onClick}) {
     const [isPressed, setIsPressed] = useState(false);
 
     const handlePress = () => {
@@ -44,7 +60,7 @@ function GradeButton({left, top, icon, color}) {
                 }}/>
             <img 
                 className="GradeButton" 
-                // onClick={}
+                onClick={onClick}
                 style={buttonStyle}
                 onMouseDown={handlePress}
                 onMouseUp={handleRelease}
@@ -64,11 +80,10 @@ function GradeCard() {
     const [isShown, setIsShown] = useState(true);
 
     const CloseHiding = _ => {
-    // setIsShown(current => !current);
         setIsShown(false);
     };
 
-
+    
 
     return (
         <div>
@@ -83,10 +98,10 @@ function GradeCard() {
                     <div className="card">
                         <h1 className="card-title">Как вам урок?</h1>
 
-                        <GradeButton top="60%" left="15%" icon="grade-best.png" color="red" />
-                        <GradeButton top="60%" left="38%" icon="grade-thinking.png" color="	#7F00FF"/>
-                        <GradeButton top="60%" left="62%" icon="grade-sleep.png" color="#0096FF"/>
-                        <GradeButton top="56%" left="85%" icon="grade-headboom.png" color="green"/>
+                        <GradeButton top="60%" left="15%" icon="grade-best.png" color="red" onClick={() => Voting("beast")}/>
+                        <GradeButton top="60%" left="38%" icon="grade-thinking.png" color="	#7F00FF" onClick={() => Voting("thinking")}/>
+                        <GradeButton top="60%" left="62%" icon="grade-sleep.png" color="#0096FF" onClick={() => Voting("sleep")}/>
+                        <GradeButton top="56%" left="85%" icon="grade-headboom.png" color="green" onClick={() => Voting("headboom")}/>
 
                     </div>
 

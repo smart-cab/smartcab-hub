@@ -42,6 +42,8 @@ def make_app():
             ERROR_404_HELP=False,
         )
     )
+    app.logger.setLevel(logging.INFO)
+    logging.getLogger().setLevel(logging.DEBUG)
 
     logging.info("Application was created successfully")
     return app
