@@ -4,6 +4,7 @@ import "./App.scss";
 import AppLayout from './AppLayout';
 import ControlPage from "./ControlPage";
 import GradeCard from "./GradeCard";
+import Pin from "../components/Pin";
 
 
 function getData() {
@@ -18,7 +19,7 @@ function App() {
                 <Route path='/' element={<AppLayout />}>
                     <Route path='/scenaries' element={<ControlPage />} />
                     <Route path='/started' element={<GradeCard />} />
-                    <Route path='/calendar' element={<div />} />
+                    <Route path='/calendar' element={<Pin />} />
                     <Route path='/user' element={<div />} />
                     <Route path='/order' element={<div />} />
                 </Route>

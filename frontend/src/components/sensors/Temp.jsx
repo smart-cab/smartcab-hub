@@ -9,9 +9,9 @@ export default function Temp() {
 
     useEffect(() => {
         var timer = setInterval(()=> {
-            axios.get("http://127.0.0.1:5000/get_temp")
+            axios.get("http://127.0.0.1:5000/device/sensors1")
                 .then((response) => {
-                        setTemp(Math.round(response.data["temp"]))
+                        setTemp(Math.round(response.data["temperature"]))
                     })
                 .catch(err => console.log(err));
 

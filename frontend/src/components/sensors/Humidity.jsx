@@ -8,7 +8,7 @@ export default function Humidity() {
 
     useEffect(() => {
         var timer = setInterval(()=> {
-            axios.get("http://127.0.0.1:5000/get_humidity")
+            axios.get("http://127.0.0.1:5000/device/sensors1")
                 .then((response) => {
                         setHumidity(Math.round(response.data["humidity"]))
                     })
@@ -21,7 +21,9 @@ export default function Humidity() {
         }
     });
 
-    return (
-        <h1>{humidity}%</h1>
-    );
+    if (humidity < 30) {
+        return ( <h1 style={{color: 'red'}}>{humidity}%</h1>)
+    } else {
+        return (<h1>{humidity}%</h1>)
+    }
 }

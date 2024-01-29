@@ -8,7 +8,7 @@ export default function Co2() {
 
     useEffect(() => {
         var timer = setInterval(()=> {
-            axios.get("http://127.0.0.1:5000/get_co2")
+            axios.get("http://127.0.0.1:5000/device/sensors2")
                 .then((response) => {
                         setCo2(Math.round(response.data["co2"]))
                     })
@@ -21,7 +21,15 @@ export default function Co2() {
         }
     });
 
-    return (
-        <h1>{co2}</h1>
-    );
+    if (co2 > 400) {
+        return (
+             <h1 style={{color: 'red'}}>{co2}</h1>
+        )
+    } else {
+        return (
+            <h1>{co2}</h1>
+        )
+    }
+
+
 }

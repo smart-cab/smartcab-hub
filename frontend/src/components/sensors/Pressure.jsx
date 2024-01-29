@@ -8,7 +8,7 @@ export default function Pressure() {
 
     useEffect(() => {
         var timer = setInterval(()=> {
-            axios.get("http://127.0.0.1:5000/get_pressure")
+            axios.get("http://127.0.0.1:5000/device/sensors1")
                 .then((response) => {
                         setPressure(Math.round(response.data["pressure"]))
                     })
@@ -22,6 +22,6 @@ export default function Pressure() {
     });
 
     return (
-        <h1>{pressure}гПа</h1>
+        <h1>{pressure}</h1>
     );
 }

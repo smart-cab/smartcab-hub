@@ -13,19 +13,30 @@ class Device:
 
 
 DEVICES = {
-    "sensors": Device(
+    "sensors1": Device(
         interfaces=(
             interface.MQTT(
                 addr="zigbee2mqtt/0x54ef441000779c83",
                 subscribe=True,
                 data_unpacker=lambda data: {
-                    "battery": int(data["baterry"]),
+                    "battery": int(data["battery"]),
                     "temperature": int(data["temperature"]),
                     "humidity": int(data["humidity"]),
                     "pressure": int(data["pressure"]),
-                    "co2": float(data["co2"]),
+                },
+            ),
+        ),
+    ),
+    "sensors2": Device(
+        interfaces=(
+            interface.MQTT(
+                addr="zigbee2mqtt/0xa4c138971597b830",
+                subscribe=True,
+                data_unpacker=lambda data: {
+                    "co2": int(data["co2"]),
                 },
             ),
         ),
     ),
 }
+
