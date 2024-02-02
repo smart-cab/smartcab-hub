@@ -11,8 +11,12 @@ export default function Pressure() {
         var timer = setInterval(()=> {
             axios.get("http://127.0.0.1:5000/device/sensors1")
                 .then((response) => {
-                        setPressure(Math.round(response.data["pressure"]))
-                        // setPressure(1230)
+                        var answer = response.data["pressure"]
+                        if (answer == null) {
+                            setPressure("- ")
+                        } else {
+                            setPressure(Math.round(answer))
+                        }
                     })
                 .catch(err => console.log(err));
 

@@ -12,7 +12,12 @@ export default function Humidity() {
         var timer = setInterval(()=> {
             axios.get("http://127.0.0.1:5000/device/sensors1")
                 .then((response) => {
-                        setHumidity(Math.round(response.data["humidity"]))
+                        var answer = response.data["humidity"]
+                        if (answer == null) {
+                            setHumidity("- ")
+                        } else {
+                            setHumidity(Math.round(answer))
+                    }
                         // setHumidity(29)
                     })
                 .catch(err => console.log(err));

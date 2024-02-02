@@ -13,8 +13,12 @@ export default function Temp() {
         var timer = setInterval(()=> {
             axios.get("http://127.0.0.1:5000/device/sensors1")
                 .then((response) => {
-                        setTemp(Math.round(response.data["temperature"]))
-                        // setTemp(10)
+                        var answer = response.data["temperature"]
+                        if (answer == null) {
+                            setTemp("- ")
+                        } else {
+                            setTemp(Math.round(answer))
+                        }
                     })
                 .catch(err => console.log(err));
 

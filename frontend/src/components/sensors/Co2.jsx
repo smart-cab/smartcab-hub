@@ -12,8 +12,12 @@ export default function Co2() {
         var timer = setInterval(()=> {
             axios.get("http://127.0.0.1:5000/device/sensors2")
                 .then((response) => {
-                        setCo2(Math.round(response.data["co2"]))
-                        // setCo2(480)
+                        var answer = response.data["co2"]
+                        if (answer == null) {
+                            setCo2("- ")
+                        } else {
+                            setCo2(Math.round(answer))
+                        }
                     })
                 .catch(err => console.log(err));
 
