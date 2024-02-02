@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import './GradeCard.scss';
 import Hiding from '../components/Hiding';
 import axios from "axios";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 
 function Voting(code) {
@@ -83,7 +85,27 @@ function GradeCard() {
         setIsShown(false);
     };
 
-    
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+    }
+        setOpen(false);
+    };
+
+    const [isFrozen, setFrozen] = useState(false);
+
+    const freezePage = () => {
+        setFrozen(true);
+        setTimeout(() => {
+        setFrozen(false);
+        }, 2000);
+    };
 
     return (
         <div>
@@ -91,17 +113,54 @@ function GradeCard() {
                 <div>
                     <Hiding layout="all"/>
 
+
+
                     <button className="CloseHiding" onClick={CloseHiding}>
-                        <img width="65px" src="close.svg" alt="close"/>
+                        <img width="45px" src="close.svg" alt="close"/>
                     </button>
+
+                    {isFrozen && <div 
+                        style={{ 
+                            position: 'fixed', 
+                            top: 0, 
+                            left: 0, 
+                            width: '100%', 
+                            height: '100%', 
+                            background: 'rgba(255, 255, 255, 0.0)', 
+                            zIndex: 9999 }}></div>}
+
+                    <Snackbar
+                        open={open}
+                        autoHideDuration={1000}
+                        onClose={handleClose}
+                        anchorOrigin={{ vertical: 'down', horizontal: 'center' }}
+                        style={{ top: "80%"}}
+                    >
+                        <Alert onClose={handleClose} severity="success">
+                            Спасибо! Ваш голос учтён
+                        </Alert>
+                    </Snackbar>
+
 
                     <div className="card">
                         <h1 className="card-title">Как вам урок?</h1>
 
-                        <GradeButton top="60%" left="15%" icon="grade-best.png" color="red" onClick={() => Voting("beast")}/>
-                        <GradeButton top="60%" left="38%" icon="grade-thinking.png" color="	#7F00FF" onClick={() => Voting("thinking")}/>
-                        <GradeButton top="60%" left="62%" icon="grade-sleep.png" color="#0096FF" onClick={() => Voting("sleep")}/>
-                        <GradeButton top="56%" left="85%" icon="grade-headboom.png" color="green" onClick={() => Voting("headboom")}/>
+                        <GradeButton top="60%" left="15%" icon="grade-best.png" color="red" onClick={function(event){ 
+                            Voting("beast"); 
+                            handleOpen(); 
+                            freezePage() }}/>
+                        <GradeButton top="60%" left="38%" icon="grade-thinking.png" color="	#7F00FF" onClick={function(event){
+                            Voting("thinking");
+                            handleOpen();
+                            freezePage() }}/>
+                        <GradeButton top="60%" left="62%" icon="grade-sleep.png" color="#0096FF" onClick={function(event){ 
+                            Voting("sleep");
+                            handleOpen(); 
+                            freezePage() }}/>
+                        <GradeButton top="56%" left="85%" icon="grade-headboom.png" color="green" onClick={function(event){
+                            Voting("headboom");
+                            handleOpen();
+                            freezePage() }}/>
 
                     </div>
 
