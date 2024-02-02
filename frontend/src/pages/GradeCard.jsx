@@ -7,7 +7,7 @@ import Alert from '@mui/material/Alert';
 
 
 function Voting(code) {
-    axios.post('http://127.0.0.1:5000/new_vote', null, 
+    axios.post('/new_vote', null, 
         {
             params: {
                 vote: code, 

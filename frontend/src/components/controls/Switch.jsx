@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 import axios from "axios";
 import {Switch} from "antd";
 import "./Switch.scss";
+import Ripples from 'react-ripples';
 
 
 function useSocket(checked, event) {
@@ -11,7 +12,7 @@ function useSocket(checked, event) {
     } else {
         opt = "OFF"
     }
-    axios.post('http://127.0.0.1:5000/dev_control', null, 
+    axios.post('/dev_control', null,
             {
                 params: {
                     dev_id: "0xa4c1382d21ae8016", 
@@ -26,7 +27,6 @@ function useSocket(checked, event) {
 }
 
 
-import Ripples from 'react-ripples';
 function MySwitch() {
     // const [state, setState] = useState(false);
 

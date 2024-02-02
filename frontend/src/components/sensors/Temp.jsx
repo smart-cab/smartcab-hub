@@ -11,7 +11,7 @@ export default function Temp() {
 
     useEffect(() => {
         var timer = setInterval(()=> {
-            axios.get("http://127.0.0.1:5000/device/sensors1")
+            axios.get("/device/sensors1")
                 .then((response) => {
                         var answer = response.data["temperature"]
                         if (answer == null) {

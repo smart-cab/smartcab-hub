@@ -10,7 +10,7 @@ export default function Co2() {
 
     useEffect(() => {
         var timer = setInterval(()=> {
-            axios.get("http://127.0.0.1:5000/device/sensors2")
+            axios.get("/device/sensors2")
                 .then((response) => {
                         var answer = response.data["co2"]
                         if (answer == null) {

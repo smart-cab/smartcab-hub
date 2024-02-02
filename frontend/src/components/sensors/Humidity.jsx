@@ -10,7 +10,7 @@ export default function Humidity() {
 
     useEffect(() => {
         var timer = setInterval(()=> {
-            axios.get("http://127.0.0.1:5000/device/sensors1")
+            axios.get("/device/sensors1")
                 .then((response) => {
                         var answer = response.data["humidity"]
                         if (answer == null) {
