@@ -19,7 +19,7 @@ app = smartcab.make_app()
 
 
 @app.route("/new_vote", methods=["GET", "POST"])
-def new_voice():
+def new_vote():
     vote = request.args.get("vote")
     with db.session() as db_sess:
         type_id = db_sess.query(EvalType).filter(EvalType.eval_type == vote).first().id
