@@ -41,7 +41,7 @@ function GradeButton({left, top, icon, color, onClick}) {
         top: top,
         zIndex: 51,
         borderWidth: 0,
-        position: "fixied",
+        position: "fixed",
     };
 
     return (
@@ -145,7 +145,7 @@ function GradeCard() {
                     <div className="card">
                         <h1 className="card-title">Как вам урок?</h1>
 
-                        <GradeButton top="60%" left="15%" icon="grade-best.png" color="red" onClick={function(event){ 
+                        <GradeButton top="60%" left="15%" icon="grade-best.png" color="red" onClick={function(event){
                             Voting("beast"); 
                             handleOpen(); 
                             freezePage() }}/>
@@ -161,7 +161,6 @@ function GradeCard() {
                             Voting("headboom");
                             handleOpen();
                             freezePage() }}/>
-
                     </div>
 
                 </div>

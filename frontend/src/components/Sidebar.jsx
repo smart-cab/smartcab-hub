@@ -15,20 +15,20 @@ const sidebarNavItems = [
     {
         display: 'Оценка урока',
         icon: <i className='bx bx-star'></i>,
-        to: '/started',
-        section: 'started'
+        to: '/grade',
+        section: 'grade'
     },
     {
         display: 'Шторы',
         icon: <i className='bx bx-calendar'></i>,
-        to: '/calendar',
-        section: 'calendar'
+        to: '/pin',
+        section: 'pin'
     },
     {
         display: 'Настройки',
         icon: <i className='bx bx-user'></i>,
-        to: '/user',
-        section: 'user'
+        to: '/settings',
+        section: 'settings'
     },
 ]
 

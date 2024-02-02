@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react"
 import Co2 from "./sensors/Co2"
 import Temp from "./sensors/Temp"
 import Humidity from "./sensors/Humidity"
