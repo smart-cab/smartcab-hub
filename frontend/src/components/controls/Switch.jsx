@@ -6,20 +6,9 @@ import Ripples from 'react-ripples';
 
 
 function useSocket(checked, event) {
-    let opt = "";
-    if (checked) {
-        opt = "ON"
-    } else {
-        opt = "OFF"
-    }
-    axios.post('/dev_control', null,
-            {
-                params: {
-                    dev_id: "0xa4c1382d21ae8016", 
-                    option: opt 
-                }
-            }
-    ).then((response) => {
+    const state = "ON" ? checked : "OFF";
+    axios.post("/device/test", null, { params: { value: state } }) // TODO убрать заглушку
+    .then((response) => {
         console.log(response.data);
     }).catch((error) => {
         console.error(error);
