@@ -1,4 +1,4 @@
-const UPDATE_INTERVAL = 10_000
+const UPDATE_INTERVAL = 1_000
 
 
 

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 import UPDATE_INTERVAL from "../config"
+import "./Sensor.scss"
+import SensorWarning from "./SensorWarning";
 
 
 export default function Temp() {
@@ -12,6 +14,7 @@ export default function Temp() {
             axios.get("http://127.0.0.1:5000/device/sensors1")
                 .then((response) => {
                         setTemp(Math.round(response.data["temperature"]))
+                        // setTemp(10)
                     })
                 .catch(err => console.log(err));
 
@@ -22,7 +25,21 @@ export default function Temp() {
         }
     });
 
-    return (
-        <h1>{temp}°C</h1>
-    );
+    if (temp > 24 || temp < 17) {
+        return (
+            <div className="sensor">
+                <SensorWarning width="9%"/>
+                <img src="/temp.svg" className="Temp" alt="temp" width="45cm" height="45cm" style={{zIndex: 11}}/>
+                <h1 style={{color: 'black', zIndex: 11}}>{temp}°C</h1>
+            </div>
+        )
+    } else {
+        return (
+            <div className="sensor">
+                <img src="/temp.svg" className="Temp" alt="temp" width="45cm" height="45cm" />
+                <h1 style={{color: 'black'}}>{temp}°C</h1>
+            </div>
+        );
+
+    }
 }
