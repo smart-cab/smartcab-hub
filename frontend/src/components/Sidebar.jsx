@@ -57,7 +57,7 @@ function Sidebar()  {
     return <div className='sidebar'>
         <div className="HeaderGroup">
             <div className="HeaderElement" style={{paddingBottom: "0.1cm"}}>
-                <img src="emblema_logo.png" className="Logo" alt="logo" width="110cm" height="110cm"/>
+                <img src="emblema_logo.png" className="Logo" alt="logo" width="35%" height="35%" style={{marginTop: "10px", marginRight: "15px"}}/>
                 <Time />
             </div>
         </div>
