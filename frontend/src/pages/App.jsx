@@ -10,9 +10,9 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<AppLayout />}>
-                    <Route path='/scenaries' element={<ControlPage />} />
-                    <Route path='/grade' element={<GradeCard />} />
-                    <Route path='/pin' element={<Pin />} />
+                    <Route path='/scenaries' element={<Pin lockedView=<ControlPage /> />} />
+                    <Route path='/grade' element={<Pin lockedView=<GradeCard /> />} />
+                    <Route path='/pin' element={<div />} />
                     <Route path='/settings' element={<div />} />
                 </Route>
             </Routes>
