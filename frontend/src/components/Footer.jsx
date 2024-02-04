@@ -2,7 +2,6 @@ import React from "react";
 import MyButton from "./controls/Button";
 import "./Footer.scss";
 
- 
 const Footer = () => {
     return (
         <header className="fixed-bottom Footer">
@@ -10,6 +9,5 @@ const Footer = () => {
         </header>
     );
 };
-
 
 export default Footer;

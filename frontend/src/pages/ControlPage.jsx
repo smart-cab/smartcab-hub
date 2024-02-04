@@ -1,6 +1,6 @@
 import React from "react";
 import "./ControlPage.scss";
-import { Grid, Paper } from '@mui/material';
+import { Grid, Paper } from "@mui/material";
 
 import Header from "../components/Header";
 import MySwitch from "../components/controls/Switch";
@@ -8,13 +8,12 @@ import MyButton from "../components/controls/Button";
 import MySlider from "../components/controls/Slider";
 import Footer from "../components/Footer";
 
-
 function ControlPage() {
     const paperStyle = {
         display: "flex",
-        backgroundColor: 'rgba(202, 200, 200, 0.4)', 
+        backgroundColor: "rgba(202, 200, 200, 0.4)",
         padding: "16",
-        textAlign: 'center',
+        textAlign: "center",
         padding: "16px",
         textAlign: "center",
         marginTop: "0.8em",
@@ -29,7 +28,7 @@ function ControlPage() {
     };
 
     return (
-        <div style={{ marginBottom: '5em' }}>
+        <div style={{ marginBottom: "5em" }}>
             <Header />
             <div className="TabPage">
                 <Grid container spacing={2}>
@@ -55,7 +54,10 @@ function ControlPage() {
                     </Grid>
                     <Grid item xs={6}>
                         <Paper style={paperStyle}>
-                            <MyButton text={"Закрыть кабинет"} button_type={"ButtonBlue"}/>
+                            <MyButton
+                                text={"Закрыть кабинет"}
+                                button_type={"ButtonBlue"}
+                            />
                         </Paper>
                     </Grid>
                 </Grid>
@@ -82,16 +84,17 @@ function ControlPage() {
                     </Grid>
                     <Grid item xs={6}>
                         <Paper style={paperStyle}>
-                            <MyButton text={"Закрыть кабинет"} button_type={"ButtonBlue"}/>
+                            <MyButton
+                                text={"Закрыть кабинет"}
+                                button_type={"ButtonBlue"}
+                            />
                         </Paper>
                     </Grid>
                 </Grid>
             </div>
             <Footer />
         </div>
-
     );
 }
-
 
 export default ControlPage;

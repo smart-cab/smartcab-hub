@@ -1,21 +1,24 @@
 /* HighlightOverlay.css */
 
-.sensor-warning{
-  position: absolute;
-  width: 7%;
-  height: 7%;
-  pointer-events: none; /* Прозрачный для событий мыши */
+.sensor-warning {
+    position: absolute;
+    width: 7%;
+    height: 7%;
+    pointer-events: none; /* Прозрачный для событий мыши */
 }
 
 .sensor-warning::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, #C41E3A, #FF0000); /* Градиентный цвет подсветки */
-  filter: blur(30px); /* Размытие */
-  opacity: 0.9; /* Прозрачность */
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        #c41e3a,
+        #ff0000
+    ); /* Градиентный цвет подсветки */
+    filter: blur(30px); /* Размытие */
+    opacity: 0.9; /* Прозрачность */
 }
-
