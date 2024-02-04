@@ -5,7 +5,7 @@ import ReactNativePinView from "./PinView.jsx";
 
 // Receives lockedView property which is a component to be shown when correct
 // pin is entered
-export default function Pin(props) {
+export default function Pin({ lockedView }) {
     const correctCode = "1234";
     const pinView = useRef(null);
     const [enteredPin, setEnteredPin] = useState("");
@@ -74,7 +74,7 @@ export default function Pin(props) {
                     </Text>
                 />
             ) : (
-                props.lockedView
+                lockedView
             )}
         </>
     );
