@@ -7,18 +7,40 @@ import ReactNativePinView from "./PinView.jsx";
 // pin is entered
 export default function Pin({ lockedView }) {
     const correctCode = "1234";
+    const attemptsToBlock = 3;
+    const blockForSeconds = 60;
+
     const pinView = useRef(null);
     const [enteredPin, setEnteredPin] = useState("");
     const [locked, setLocked] = useState(true);
+    const [failedAttempts, setFailedAttempts] = useState(0);
+    const [blocked, setBlocked] = useState(false);
+    const [blockedDate, setBlockedDate] = useState(Date.now());
 
     useEffect(() => {
-        if (enteredPin === correctCode) {
-            setLocked(false);
-        } else if (
-            enteredPin.length === correctCode.length &&
-            enteredPin != correctCode
-        ) {
-            pinView.current.clearAll();
+        if (blocked) {
+            if ((Date.now() - blockedDate) / 1000 > blockForSeconds) {
+                setBlocked(false);
+                pinView.current.className = "";
+            } else {
+                setEnteredPin(enteredPin.substring(0, enteredPin.length - 1));
+            }
+        }
+        if (enteredPin.length === correctCode.length) {
+            if (enteredPin === correctCode) {
+                setLocked(false);
+                setBlocked(false);
+                setFailedAttempts(0);
+            } else {
+                pinView.current.clearAll();
+                setFailedAttempts(failedAttempts + 1);
+                if (failedAttempts >= attemptsToBlock) {
+                    setFailedAttempts(0);
+                    setBlocked(true);
+                    pinView.current.className = "blocked";
+                    setBlockedDate(Date.now());
+                }
+            }
         }
     }, [enteredPin]);
 
