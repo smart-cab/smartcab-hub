@@ -64,8 +64,7 @@ function ControlPage() {
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <Paper style={paperStyle}>
-                            <p>Яркость лампы QWER99</p>
-                            <MySlider />
+                            <MySlider name="Шторы 1"/>
                         </Paper>
                     </Grid>
                     <Grid item xs={6}>
@@ -78,8 +77,7 @@ function ControlPage() {
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <Paper style={paperStyle}>
-                            <p>Яркость лампы QWER99</p>
-                            <MySlider />
+                            <MySlider name="Шторы 2"/>
                         </Paper>
                     </Grid>
                     <Grid item xs={6}>

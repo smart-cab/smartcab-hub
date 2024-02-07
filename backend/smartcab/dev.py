@@ -1,6 +1,8 @@
 from copy import deepcopy
 from typing import Iterable, Optional
 
+from sqlalchemy.orm import interfaces
+
 from smartcab import interface
 
 
@@ -34,7 +36,23 @@ DEVICES = {
                 subscribe=True,
                 data_unpacker=lambda data: {
                     "co2": int(data["co2"]),
+                    "temperature": int(data["temperature"]),
+                    "humidity": int(data["humidity"]),
                 },
+            ),
+        ),
+    ),
+    "power_socket1": Device(
+        interfaces=(
+            interface.MQTT(
+                addr="zigbee2mqtt/0xa4c1382d21ae8016",
+            ),
+        ),
+    ),
+    "curtains_roller1": Device(
+        interfaces=(
+            interface.MQTT(
+                addr="zigbee2mqtt/0x54ef441000841506",
             ),
         ),
     ),

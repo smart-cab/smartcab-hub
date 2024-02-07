@@ -5,9 +5,15 @@ import "./Switch.scss";
 import Ripples from "react-ripples";
 
 function useSocket(checked, event) {
-    const state = "ON" ? checked : "OFF";
+    let state
+    if (checked) {
+        state = "ON"
+    } else {
+        state = "OFF"
+    }
+
     axios
-        .post("/device/test", null, { params: { value: state } }) // TODO убрать заглушку
+        .post("/device/power_socket1", null, { params: { value: state } }) // TODO убрать заглушку
         .then((response) => {
             console.log(response.data);
         })

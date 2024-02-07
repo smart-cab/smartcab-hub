@@ -53,6 +53,7 @@ def mqtt_publish(device_id):
 
     field = request.args.get("field", None)
     value = request.args.get("value")
+    print(value, field)
 
     mqtti.set(value, field)
     return {"status": "ok"}
@@ -60,7 +61,7 @@ def mqtt_publish(device_id):
 
 if __name__ == "__main__":
     db.global_init()
-    # mqtt.init()
-    # subscriber_client_thread = Thread(target=MQTTC.loop_forever)
-    # subscriber_client_thread.start()
+    mqtt.init()
+    subscriber_client_thread = Thread(target=MQTTC.loop_forever)
+    subscriber_client_thread.start()
     app.run(host="0.0.0.0", port=5000)

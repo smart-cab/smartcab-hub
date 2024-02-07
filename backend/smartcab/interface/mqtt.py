@@ -7,7 +7,7 @@ from smartcab.dev import DEVICES
 
 MQTTC = mqtt.Client()
 
-BROKER_URL = "192.168.43.107"
+BROKER_URL = "192.168.0.108"
 BROKER_PORT = 1883
 
 
