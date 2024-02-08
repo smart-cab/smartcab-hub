@@ -10927,6 +10927,11 @@ react-simple-keyboard@^3.7.73:
   resolved "https://registry.yarnpkg.com/react-simple-keyboard/-/react-simple-keyboard-3.7.78.tgz#137ce5442222b3eaabccab2a68f8456e38269f88"
   integrity sha512-ZmabFPE11pTfMS2MGbOzVjAsgzR6vRg4jBzBRSq6XlhOaRkdoFKN4NLpJ33pX5FQfgG8zgTtxf7S7WmFCyEKCw==
 
+react-timer-hook@^3.0.7:
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/react-timer-hook/-/react-timer-hook-3.0.7.tgz#ac42c43d0034b873cbf97b44eb34ccb2b11fe5e0"
+  integrity sha512-ATpNcU+PQRxxfNBPVqce2+REtjGAlwmfoNQfcEBMZFxPj0r3GYdKhyPHdStvqrejejEi0QvqaJZjy2lBlFvAsA==
+
 react-transition-group@^4.4.0, react-transition-group@^4.4.5:
   version "4.4.5"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.5.tgz#e53d4e3f3344da8521489fbef8f2581d42becdd1"

@@ -11,17 +11,6 @@ export default function Pin({ lockedView }) {
     const attemptsToBlock = 3;
     const blockForSeconds = 10;
 
-    const pinStyle = {
-        padding: 36,
-        width: "50%",
-        marginLeft: "3cm",
-        marginRight: "1cm",
-        userSelect: "none",
-        WebkitTapHighlightColor: "transparent",
-        opacity: 1.0,
-        pointerEvents: "auto",
-    };
-
     const pinView = useRef(null);
     const [enteredPin, setEnteredPin] = useState("");
     const [locked, setLocked] = useState(true);
@@ -34,12 +23,7 @@ export default function Pin({ lockedView }) {
     const blockTimer = useTimer({
         expiryTimestamp,
         autoStart: false,
-        onExpire: () => {
-            pinStyle.opacity = 1.0;
-            pinStyle.pointerEvents = "auto";
-            setBlocked(false);
-            console.log("TIMER STOPPED");
-        },
+        onExpire: () => setBlocked(false),
     });
 
     useEffect(() => {
@@ -52,10 +36,7 @@ export default function Pin({ lockedView }) {
                 pinView.current.clearAll();
                 setFailedAttempts(failedAttempts + 1);
                 if (failedAttempts + 1 >= attemptsToBlock) {
-                    pinStyle.opacity = 0.5;
-                    pinStyle.pointerEvents = "none";
                     blockTimer.restart(expiryTimestamp, true);
-                    console.log("timer started");
                     setFailedAttempts(0);
                     setBlocked(true);
                 }
@@ -65,12 +46,18 @@ export default function Pin({ lockedView }) {
 
     return (
         <>
-            <div className="TabPage">
-                {blockTimer.seconds} {blockTimer.totalSeconds}
-            </div>
             {locked ? (
                 <ReactNativePinView
-                    style={pinStyle}
+                    style={{
+                        padding: 36,
+                        width: "50%",
+                        marginLeft: "3cm",
+                        marginRight: "1cm",
+                        userSelect: "none",
+                        WebkitTapHighlightColor: "transparent",
+                        opacity: blocked ? 0.5 : 1.0,
+                        pointerEvents: blocked ? "none" : "auto",
+                    }}
                     inputSize={32}
                     ref={pinView}
                     pinLength={correctCode.length}
