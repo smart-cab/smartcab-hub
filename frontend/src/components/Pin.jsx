@@ -2,30 +2,47 @@ import "./Pin.scss";
 import React, { useEffect, useRef, useState } from "react";
 import { Text } from "react-native";
 import ReactNativePinView from "./PinView.jsx";
+import { useTimer } from "react-timer-hook";
 
 // Receives lockedView property which is a component to be shown when correct
 // pin is entered
 export default function Pin({ lockedView }) {
     const correctCode = "1234";
     const attemptsToBlock = 3;
-    const blockForSeconds = 60;
+    const blockForSeconds = 10;
+
+    const pinStyle = {
+        padding: 36,
+        width: "50%",
+        marginLeft: "3cm",
+        marginRight: "1cm",
+        userSelect: "none",
+        WebkitTapHighlightColor: "transparent",
+        opacity: 1.0,
+        pointerEvents: "auto",
+    };
 
     const pinView = useRef(null);
     const [enteredPin, setEnteredPin] = useState("");
     const [locked, setLocked] = useState(true);
     const [failedAttempts, setFailedAttempts] = useState(0);
     const [blocked, setBlocked] = useState(false);
-    const [blockedDate, setBlockedDate] = useState(Date.now());
+
+    const expiryTimestamp = new Date();
+    expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + blockForSeconds);
+
+    const blockTimer = useTimer({
+        expiryTimestamp,
+        autoStart: false,
+        onExpire: () => {
+            pinStyle.opacity = 1.0;
+            pinStyle.pointerEvents = "auto";
+            setBlocked(false);
+            console.log("TIMER STOPPED");
+        },
+    });
 
     useEffect(() => {
-        if (blocked) {
-            if ((Date.now() - blockedDate) / 1000 > blockForSeconds) {
-                setBlocked(false);
-                pinView.current.className = "";
-            } else {
-                setEnteredPin(enteredPin.substring(0, enteredPin.length - 1));
-            }
-        }
         if (enteredPin.length === correctCode.length) {
             if (enteredPin === correctCode) {
                 setLocked(false);
@@ -34,11 +51,13 @@ export default function Pin({ lockedView }) {
             } else {
                 pinView.current.clearAll();
                 setFailedAttempts(failedAttempts + 1);
-                if (failedAttempts >= attemptsToBlock) {
+                if (failedAttempts + 1 >= attemptsToBlock) {
+                    pinStyle.opacity = 0.5;
+                    pinStyle.pointerEvents = "none";
+                    blockTimer.restart(expiryTimestamp, true);
+                    console.log("timer started");
                     setFailedAttempts(0);
                     setBlocked(true);
-                    pinView.current.className = "blocked";
-                    setBlockedDate(Date.now());
                 }
             }
         }
@@ -46,16 +65,12 @@ export default function Pin({ lockedView }) {
 
     return (
         <>
+            <div className="TabPage">
+                {blockTimer.seconds} {blockTimer.totalSeconds}
+            </div>
             {locked ? (
                 <ReactNativePinView
-                    style={{
-                        padding: 36,
-                        width: "50%",
-                        marginLeft: "3cm",
-                        marginRight: "1cm",
-                        userSelect: "none",
-                        WebkitTapHighlightColor: "transparent",
-                    }}
+                    style={pinStyle}
                     inputSize={32}
                     ref={pinView}
                     pinLength={correctCode.length}
