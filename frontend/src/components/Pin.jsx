@@ -3,13 +3,16 @@ import React, { useEffect, useRef, useState } from "react";
 import { Text } from "react-native";
 import ReactNativePinView from "./PinView.jsx";
 import { useTimer } from "react-timer-hook";
+import { useLocation } from "react-router-dom";
 
 // Receives lockedView property which is a component to be shown when correct
 // pin is entered
 export default function Pin({ lockedView }) {
+    const location = useLocation();
     const correctCode = "1234";
     const attemptsToBlock = 3;
-    const blockForSeconds = 10;
+    const blockForSeconds = 60;
+    const unlockForSeconds = 60;
 
     const pinView = useRef(null);
     const [enteredPin, setEnteredPin] = useState("");
@@ -17,13 +20,26 @@ export default function Pin({ lockedView }) {
     const [failedAttempts, setFailedAttempts] = useState(0);
     const [blocked, setBlocked] = useState(false);
 
-    const expiryTimestamp = new Date();
-    expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + blockForSeconds);
+    const blockExpiryTimestamp = new Date();
+    blockExpiryTimestamp.setSeconds(
+        blockExpiryTimestamp.getSeconds() + blockForSeconds,
+    );
 
     const blockTimer = useTimer({
-        expiryTimestamp,
+        blockExpiryTimestamp,
         autoStart: false,
         onExpire: () => setBlocked(false),
+    });
+
+    const lockExpiryTimestamp = new Date();
+    lockExpiryTimestamp.setSeconds(
+        lockExpiryTimestamp.getSeconds() + unlockForSeconds,
+    );
+
+    const lockTimer = useTimer({
+        lockExpiryTimestamp,
+        autoStart: false,
+        onExpire: () => setLocked(true),
     });
 
     useEffect(() => {
@@ -32,17 +48,22 @@ export default function Pin({ lockedView }) {
                 setLocked(false);
                 setBlocked(false);
                 setFailedAttempts(0);
+                lockTimer.restart(blockExpiryTimestamp, true);
             } else {
                 pinView.current.clearAll();
                 setFailedAttempts(failedAttempts + 1);
                 if (failedAttempts + 1 >= attemptsToBlock) {
-                    blockTimer.restart(expiryTimestamp, true);
+                    blockTimer.restart(blockExpiryTimestamp, true);
                     setFailedAttempts(0);
                     setBlocked(true);
                 }
             }
         }
     }, [enteredPin]);
+
+    useEffect(() => {
+        setLocked(true);
+    }, [location]);
 
     return (
         <>
