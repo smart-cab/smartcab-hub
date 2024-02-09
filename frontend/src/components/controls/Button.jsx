@@ -1,23 +1,50 @@
 import React from "react";
-import Ripples from "react-ripples";
 import "./Button.scss";
-import { createRipples } from "react-ripples";
-
-const MyRipples = createRipples({
-    color: "#7da4b054",
-    during: 500,
-    borderRadius: "10px",
-});
+import Button from "@mui/material/Button";
 
 function MyButton({ text, button_type }) {
-    console.log(button_type);
-    return (
-        <MyRipples>
-            <button className={button_type}>
-                <p>{text}</p>
-            </button>
-        </MyRipples>
-    );
+    if (button_type == "ButtonRed") {
+        return (
+            <Button
+                style={{
+                    fontFamily: "montserratAlternates",
+                    height: "10%", 
+                    width: "7%", 
+                    fontSize: "0.85em",
+                    backgroundColor: "#f86f6f",
+                    borderColor: "#cf5237",
+                    color: "#000",
+                    borderRadius: "10px",
+                    borderWidth: "3px",
+                }}
+                variant="contained"
+                size="large"
+            >
+                {text}
+            </Button>
+        );
+    } else {
+        return (
+            <Button
+                style={{
+                    fontFamily: "montserratAlternates",
+                    height: "80%", 
+                    width: "90%", 
+                    fontSize: "0.85em",
+                    backgroundColor: "#a7dff0",
+                    borderColor: "#7da4b0",
+                    color: "#000",
+                    borderRadius: "15px",
+                    borderWidth: "55px",
+                }}
+                variant="contained"
+                size="large"
+            >
+                {text}
+            </Button>
+        );
+
+    }
 }
 
 export default MyButton;

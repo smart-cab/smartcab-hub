@@ -5,10 +5,10 @@ import Time from "./sensors/Time";
 
 const sidebarNavItems = [
     {
-        display: "Сценарии",
+        display: "Управление",
         icon: <i className="bx bx-home"></i>,
-        to: "/scenaries",
-        section: "scenaries",
+        to: "/control",
+        section: "control",
     },
     {
         display: "Оценка урока",
@@ -17,16 +17,16 @@ const sidebarNavItems = [
         section: "grade",
     },
     {
-        display: "Шторы",
+        display: "Пинкод",
         icon: <i className="bx bx-calendar"></i>,
         to: "/pin",
         section: "pin",
     },
     {
-        display: "Настройки",
+        display: "Статистика",
         icon: <i className="bx bx-user"></i>,
-        to: "/settings",
-        section: "settings",
+        to: "/statistics",
+        section: "statistics",
     },
 ];
 

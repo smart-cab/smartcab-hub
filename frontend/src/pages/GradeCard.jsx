@@ -112,8 +112,8 @@ function GradeCard() {
                 <div>
                     <Hiding layout="all" />
 
-                    <button className="CloseHiding" onClick={CloseHiding}>
-                        <img width="45px" src="close.svg" alt="close" />
+                    <button className="CloseHiding" onClick={CloseHiding} >
+                        <img width="45px" src="close2.png" alt="close2" />
                     </button>
 
                     {isFrozen && (
@@ -140,7 +140,7 @@ function GradeCard() {
                         }}
                         style={{ top: "80%" }}
                     >
-                        <Alert onClose={handleClose} severity="success">
+                        <Alert onClose={handleClose} severity="success" style={{ borderRadius: "30px" }}>
                             Спасибо! Ваш голос учтён
                         </Alert>
                     </Snackbar>

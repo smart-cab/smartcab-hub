@@ -5,11 +5,11 @@ import "./Switch.scss";
 import Ripples from "react-ripples";
 
 function useSocket(checked, event) {
-    let state
+    let state;
     if (checked) {
-        state = "ON"
+        state = "ON";
     } else {
-        state = "OFF"
+        state = "OFF";
     }
 
     axios

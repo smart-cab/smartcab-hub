@@ -26,6 +26,7 @@ class MQTT(Interface):
         from .mqtt import MQTTC
 
         query = f"{self.addr}/set" + ("" if field is None else f"/{field}")
+        # print("-------", query)
         MQTTC.publish(query, value)
 
     def update_data(self, data: dict):

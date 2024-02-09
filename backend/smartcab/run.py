@@ -61,7 +61,7 @@ def mqtt_publish(device_id):
 
 if __name__ == "__main__":
     db.global_init()
-    mqtt.init()
-    subscriber_client_thread = Thread(target=MQTTC.loop_forever)
-    subscriber_client_thread.start()
+    # mqtt.init()
+    # subscriber_client_thread = Thread(target=MQTTC.loop_forever)
+    # subscriber_client_thread.start()
     app.run(host="0.0.0.0", port=5000)

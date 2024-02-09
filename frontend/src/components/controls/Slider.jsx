@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import axios from "axios";
 import "./Slider.scss";
-import Slider from '@mui/material/Slider';
-import Button from '@mui/material/Button';
-
+import Slider from "@mui/material/Slider";
+import Button from "@mui/material/Button";
 
 function useRoller(_value, event) {
     axios
-        .post("/device/curtains_roller1", null, { params: { field: "position", value: _value} }) // TODO убрать заглушку
+        .post("/device/curtains_roller1", null, {
+            params: { field: "position", value: _value },
+            // params: { field: "state", value: "ON" },
+        }) // TODO убрать заглушку
         .then((response) => {
             console.log(response.data);
         })
@@ -16,12 +18,29 @@ function useRoller(_value, event) {
         });
 }
 
-
-function MySlider({ name, min, max, current_value = (max - min) / 2, step = 1 }) {
+function MySlider({
+    name,
+    min,
+    max,
+    current_value = (max - min) / 2,
+    step = 1,
+}) {
     const [value, setValue] = useState(50);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+        axios
+            .post("/device/curtains_roller1", null, {
+                params: { field: "position", value: newValue },
+                // params: { field: "state", value: "ON" },
+            }) // TODO убрать заглушку
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
     };
 
     return (
@@ -36,14 +55,10 @@ function MySlider({ name, min, max, current_value = (max - min) / 2, step = 1 })
                 min={0}
                 max={100}
                 valueLabelDisplay="auto"
-                style={{width: "7.5cm", color: "#7adff0"}} 
-                /> 
-            <br />
-            <Button variant="contained" size="small" style={{backgroundColor: "#a7dff0", color: "#000"}} onClick={() => useRoller(value)}>
-                Применить
-            </Button>
+                style={{ width: "7.3cm", height: "0.4cm", color: "#7adff0" }}
+            />
         </div>
-        );
-    }
+    );
+}
 
 export default MySlider;
