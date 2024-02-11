@@ -11,7 +11,7 @@ export default function Pin({ lockedView }) {
     const location = useLocation();
     const correctCode = "1234";
     const attemptsToBlock = 3;
-    const blockForSeconds = 60;
+    const blockForSeconds = 59;
     const unlockForSeconds = 60;
 
     const pinView = useRef(null);
@@ -48,7 +48,7 @@ export default function Pin({ lockedView }) {
                 setLocked(false);
                 setBlocked(false);
                 setFailedAttempts(0);
-                lockTimer.restart(blockExpiryTimestamp, true);
+                lockTimer.restart(lockExpiryTimestamp, true);
             } else {
                 pinView.current.clearAll();
                 setFailedAttempts(failedAttempts + 1);
@@ -63,10 +63,21 @@ export default function Pin({ lockedView }) {
 
     useEffect(() => {
         setLocked(true);
+        lockTimer.restart(lockExpiryTimestamp, false);
     }, [location]);
 
     return (
-        <>
+        <div
+            style={
+                locked
+                    ? {
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                      }
+                    : {}
+            }
+        >
             {locked ? (
                 <ReactNativePinView
                     style={{
@@ -110,7 +121,7 @@ export default function Pin({ lockedView }) {
                     customLeftButton=<Text
                         style={{ color: "#000", fontSize: 36 }}
                     >
-                        ↻
+                        {blockTimer.isRunning ? blockTimer.seconds : "↻"}
                     </Text>
                     customRightButton=<Text
                         style={{ color: "#000", fontSize: 36 }}
@@ -121,6 +132,6 @@ export default function Pin({ lockedView }) {
             ) : (
                 lockedView
             )}
-        </>
+        </div>
     );
 }
