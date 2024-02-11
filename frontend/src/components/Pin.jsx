@@ -85,10 +85,13 @@ export default function Pin({ lockedView }) {
                         width: "50%",
                         marginLeft: "3cm",
                         marginRight: "1cm",
+                        marginTop: "0.5cm",
                         userSelect: "none",
                         WebkitTapHighlightColor: "transparent",
                         opacity: blocked ? 0.5 : 1.0,
                         pointerEvents: blocked ? "none" : "auto",
+                        backgroundColor: "rgba(127, 127, 127, 0.15)",
+                        borderRadius: 20,
                     }}
                     inputSize={32}
                     ref={pinView}
@@ -109,6 +112,7 @@ export default function Pin({ lockedView }) {
                     }}
                     buttonTextStyle={{
                         color: "#000",
+                        fontSize: "28pt",
                     }}
                     onButtonPress={(key) => {
                         if (key === "custom_left") {
