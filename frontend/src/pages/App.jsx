@@ -13,7 +13,7 @@ function App() {
                     <Route path="/control" element=<ControlPage /> />
                     <Route path="/grade" element=<GradeCard /> />
                     <Route path="/pin" element=<Pin lockedView=<div /> /> />
-                    <Route path="/statistics" element={<Statistics />} />
+                    <Route path="/statistics" element={<div />} />
                 </Route>
             </Routes>
         </BrowserRouter>

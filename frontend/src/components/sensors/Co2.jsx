@@ -41,7 +41,7 @@ export default function Co2() {
                         style={{ style: 11, marginRight: 0.3 + "cm" }}
                     />
                 </div>
-                <h1 style={{ color: "black", zIndex: 11 }}>{co2}%</h1>
+                <h1 style={{ color: "black", zIndex: 11 }}>{co2}</h1>
             </div>
         );
     } else {

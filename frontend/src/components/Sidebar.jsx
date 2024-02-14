@@ -69,7 +69,7 @@ function Sidebar() {
                         alt="logo"
                         width="35%"
                         height="35%"
-                        style={{ marginTop: "10px", marginRight: "15px" }}
+                        style={{ marginTop: "10px", marginRight: "15px", paddingLeft: "20px"}}
                     />
                     <Time />
                 </div>
