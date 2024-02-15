@@ -4,7 +4,7 @@ import { Switch } from "antd";
 import "./Switch.scss";
 import Ripples from "react-ripples";
 
-function useSocket(checked, event) {
+function useSocket({checked, event, url}) {
     let state;
     if (checked) {
         state = "ON";
@@ -13,7 +13,7 @@ function useSocket(checked, event) {
     }
 
     axios
-        .post("/device/power_socket1", null, { params: { value: state } }) // TODO убрать заглушку
+        .post(url, null, { params: { value: state } }) // TODO убрать заглушку
         .then((response) => {
             console.log(response.data);
         })
@@ -22,10 +22,8 @@ function useSocket(checked, event) {
         });
 }
 
-function MySwitch() {
-    // const [state, setState] = useState(false);
-
-    return <Switch onChange={useSocket} className="MySwitch" />;
+function MySwitch({ url }) {
+    return <Switch onChange={(checked, event) => useSocket({checked, event, url})} className="MySwitch" />;
 }
 
 export default MySwitch;

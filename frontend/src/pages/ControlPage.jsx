@@ -35,7 +35,7 @@ function ControlPage() {
                     <Grid item xs={6}>
                         <Paper style={paperStyle}>
                             <p>Лампа LW204</p>
-                            <MySwitch />
+                            <MySwitch url="/device/power_socket1"/>
                         </Paper>
                     </Grid>
                     <Grid item xs={6}>
@@ -64,7 +64,7 @@ function ControlPage() {
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <Paper style={paperStyle}>
-                            <MySlider name="Шторы 1"/>
+                            <MySlider title="Шторы 1" url="/device/curtains_roller1"/>
                         </Paper>
                     </Grid>
                     <Grid item xs={6}>
@@ -77,7 +77,7 @@ function ControlPage() {
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <Paper style={paperStyle}>
-                            <MySlider name="Шторы 2"/>
+                            <MySlider title="Шторы 2"/>
                         </Paper>
                     </Grid>
                     <Grid item xs={6}>

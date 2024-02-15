@@ -4,22 +4,10 @@ import "./Slider.scss";
 import Slider from "@mui/material/Slider";
 import Button from "@mui/material/Button";
 
-function useRoller(_value, event) {
-    axios
-        .post("/device/curtains_roller1", null, {
-            params: { field: "position", value: _value },
-            // params: { field: "state", value: "ON" },
-        }) // TODO убрать заглушку
-        .then((response) => {
-            console.log(response.data);
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-}
 
 function MySlider({
-    name,
+    title,
+    url, 
     min,
     max,
     current_value = (max - min) / 2,
@@ -30,7 +18,7 @@ function MySlider({
     const handleChange = (event, newValue) => {
         setValue(newValue);
         axios
-            .post("/device/curtains_roller1", null, {
+            .post(url, null, {
                 params: { field: "position", value: newValue },
                 // params: { field: "state", value: "ON" },
             }) // TODO убрать заглушку
@@ -45,7 +33,7 @@ function MySlider({
 
     return (
         <div>
-            <p>{name}</p>
+            <p>{title}</p>
             <Slider
                 value={value}
                 defaultValue={50}
