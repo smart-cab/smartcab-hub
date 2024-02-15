@@ -1,4 +1,6 @@
 import { Pressable } from "react-native";
+import IconButton from '@mui/material/IconButton';
+
 
 export default function PinLockButton({ pinLocked, setPinLocked }) {
     return (
@@ -15,7 +17,22 @@ export default function PinLockButton({ pinLocked, setPinLocked }) {
                 }
             }}
         >
-            <span>{pinLocked ? "🔒" : "🔓"}</span>
+            {pinLocked
+                ? <IconButton aria-label="fingerprint" color="secondary" 
+                    style={{width: "60px", 
+                            height: "60px",
+                            color: "#6cbed8"}}>
+                    <img width="40px" src="/lock_close.png"/>
+                </ IconButton>
+                : <IconButton aria-label="fingerprint" color="secondary" 
+                    style={{width: "60px", 
+                            height: "60px",
+                            color: "#6cbed8"}}>
+                    <img width="40px" src="/lock_open.png"/>
+                </ IconButton>
+
+            }
+            
         </Pressable>
     );
 }
