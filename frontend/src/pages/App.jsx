@@ -12,7 +12,7 @@ function App() {
 
     useEffect(() => {
         const checkConnectionStatusInterval = setInterval(() => {
-            setConnectionStatus(true);
+            setConnectionStatus("ok");
             axios
                 .get("/status")
                 .catch((_) => setConnectionStatus("backend_down"));
