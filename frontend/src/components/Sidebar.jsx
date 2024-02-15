@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { Button } from "react-native";
 import { Link, useLocation } from "react-router-dom";
 import "./Sidebar.scss";
 import Time from "./sensors/Time";
+import PinLockButton from "./PinLockButton";
 
 const sidebarNavItems = [
     {
         display: "Управление",
         icon: <i className="bx bx-home"></i>,
-        to: "/control",
+        to: "/",
         section: "control",
     },
     {
@@ -31,7 +31,7 @@ const sidebarNavItems = [
     },
 ];
 
-function Sidebar() {
+function Sidebar({ pinLocked, setPinLocked }) {
     const [activeIndex, setActiveIndex] = useState(0);
     const [stepHeight, setStepHeight] = useState(0);
     const sidebarRef = useRef();
@@ -105,7 +105,10 @@ function Sidebar() {
                 </div>
             </div>
             <div className="icons">
-                <Button title="🔒" onPress={() => alert("Locked")} />
+                <PinLockButton
+                    pinLocked={pinLocked}
+                    setPinLocked={setPinLocked}
+                />
             </div>
         </div>
     );

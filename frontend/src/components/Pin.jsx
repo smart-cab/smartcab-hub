@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 
 // Receives lockedView property which is a component to be shown when correct
 // pin is entered
-export default function Pin({ lockedView }) {
+export default function Pin({ lockedView, locked, setLocked }) {
     const location = useLocation();
     const correctCode = "1234";
     const attemptsToBlock = 3;
@@ -16,7 +16,6 @@ export default function Pin({ lockedView }) {
 
     const pinView = useRef(null);
     const [enteredPin, setEnteredPin] = useState("");
-    const [locked, setLocked] = useState(true);
     const [failedAttempts, setFailedAttempts] = useState(0);
     const [blocked, setBlocked] = useState(false);
 
@@ -46,9 +45,6 @@ export default function Pin({ lockedView }) {
         if (enteredPin.length === correctCode.length) {
             if (enteredPin === correctCode) {
                 setLocked(false);
-                setBlocked(false);
-                setFailedAttempts(0);
-                lockTimer.restart(lockExpiryTimestamp, true);
             } else {
                 pinView.current.clearAll();
                 setFailedAttempts(failedAttempts + 1);
@@ -65,6 +61,14 @@ export default function Pin({ lockedView }) {
         setLocked(true);
         lockTimer.restart(lockExpiryTimestamp, false);
     }, [location]);
+
+    useEffect(() => {
+        if (!locked) {
+            setBlocked(false);
+            setFailedAttempts(0);
+            lockTimer.restart(lockExpiryTimestamp, true);
+        }
+    }, [locked]);
 
     return (
         <div
