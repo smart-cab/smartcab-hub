@@ -18,7 +18,7 @@ load_dotenv(find_dotenv())
 app = smartcab.make_app()
 
 
-@app.route("/status", method=["GET"])
+@app.route("/status", methods=["GET"])
 def status():
     return {"status": "ok"}
 

@@ -15,7 +15,7 @@ function App() {
             setConnectionStatus(true);
             axios
                 .get("/status")
-                .catch((error) => setConnectionStatus("backend_down"));
+                .catch((_) => setConnectionStatus("backend_down"));
             axios.get("/frontend_status").catch((error) => {
                 if (!error.response) setConnectionStatus("frontend_down");
             });
