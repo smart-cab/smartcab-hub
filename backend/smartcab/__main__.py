@@ -18,6 +18,11 @@ load_dotenv(find_dotenv())
 app = smartcab.make_app()
 
 
+@app.route("/status", method=["GET"])
+def status():
+    return {"status": "ok"}
+
+
 @app.route("/new_vote", methods=["GET", "POST"])
 def new_vote():
     vote = request.args.get("vote")
