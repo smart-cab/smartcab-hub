@@ -86,7 +86,7 @@ export default function Pin({ lockedView }) {
                         marginLeft: "3cm",
                         marginRight: "1cm",
                         marginTop: "1cm",
-                        marginBottom: "1cm",
+                        marginBottom: "2cm",
                         userSelect: "none",
                         WebkitTapHighlightColor: "transparent",
                         opacity: blocked ? 0.5 : 1.0,
