@@ -48,9 +48,7 @@ function App() {
                     action=<div />
                     style={{ borderRadius: "30px" }}
                 >
-                    Ошибка подключения к серверу (
-                    {connectionStatus == "frontend_down" ? "F" : ""}
-                    {connectionStatus == "backend_down" ? "B" : ""})
+                    Ошибка подключения к серверу
                 </Alert>
             </Snackbar>
         </>
