@@ -3,7 +3,6 @@ import "./App.scss";
 import AppLayout from "./AppLayout";
 import ControlPage from "./ControlPage";
 import GradeCard from "./GradeCard";
-import Pin from "../components/Pin";
 
 function App() {
     return (
@@ -12,7 +11,7 @@ function App() {
                 <Route path="/" element={<AppLayout />}>
                     <Route path="/control" element=<ControlPage /> />
                     <Route path="/grade" element=<GradeCard /> />
-                    <Route path="/pin" element=<Pin lockedView=<div /> /> />
+                    <Route path="/pin" element=<div /> />
                     {/* <Route path="/statistics" element={<Statistics />} /> */}
                 </Route>
             </Routes>

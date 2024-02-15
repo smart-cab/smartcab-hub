@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Button } from "react-native";
 import { Link, useLocation } from "react-router-dom";
 import "./Sidebar.scss";
 import Time from "./sensors/Time";
@@ -58,44 +59,53 @@ function Sidebar() {
 
     return (
         <div className="sidebar">
-            <div className="HeaderGroup">
-                <div
-                    className="HeaderElement"
-                    style={{ paddingBottom: "0.1cm" }}
-                >
-                    <img
-                        src="emblema_logo.png"
-                        className="Logo"
-                        alt="logo"
-                        width="35%"
-                        height="35%"
-                        style={{ marginTop: "10px", marginRight: "15px", paddingLeft: "20px"}}
-                    />
-                    <Time />
+            <div>
+                <div className="HeaderGroup">
+                    <div
+                        className="HeaderElement"
+                        style={{ paddingBottom: "0.1cm" }}
+                    >
+                        <img
+                            src="emblema_logo.png"
+                            className="Logo"
+                            alt="logo"
+                            width="35%"
+                            height="35%"
+                            style={{
+                                marginTop: "10px",
+                                marginRight: "15px",
+                                paddingLeft: "20px",
+                            }}
+                        />
+                        <Time />
+                    </div>
+                </div>
+                <div ref={sidebarRef} className="sidebar__menu">
+                    <div
+                        ref={indicatorRef}
+                        className="sidebar__menu__indicator"
+                        style={{
+                            transform: `translateX(-50%) translateY(${activeIndex * stepHeight}px)`,
+                        }}
+                    ></div>
+                    {sidebarNavItems.map((item, index) => (
+                        <Link to={item.to} key={index}>
+                            <div
+                                className={`sidebar__menu__item ${activeIndex === index ? "active" : ""}`}
+                            >
+                                <div className="sidebar__menu__item__icon">
+                                    {item.icon}
+                                </div>
+                                <div className="sidebar__menu__item__text">
+                                    {item.display}
+                                </div>
+                            </div>
+                        </Link>
+                    ))}
                 </div>
             </div>
-            <div ref={sidebarRef} className="sidebar__menu">
-                <div
-                    ref={indicatorRef}
-                    className="sidebar__menu__indicator"
-                    style={{
-                        transform: `translateX(-50%) translateY(${activeIndex * stepHeight}px)`,
-                    }}
-                ></div>
-                {sidebarNavItems.map((item, index) => (
-                    <Link to={item.to} key={index}>
-                        <div
-                            className={`sidebar__menu__item ${activeIndex === index ? "active" : ""}`}
-                        >
-                            <div className="sidebar__menu__item__icon">
-                                {item.icon}
-                            </div>
-                            <div className="sidebar__menu__item__text">
-                                {item.display}
-                            </div>
-                        </div>
-                    </Link>
-                ))}
+            <div className="icons">
+                <Button title="🔒" onPress={() => alert("Locked")} />
             </div>
         </div>
     );
