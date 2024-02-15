@@ -7,15 +7,17 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function App() {
-    const [connectionStatus, setConnectionStatus] = useState(true);
+    const [connectionStatus, setConnectionStatus] = useState("ok");
     const checkConnectionStatusMs = 5000;
 
     useEffect(() => {
         const checkConnectionStatusInterval = setInterval(() => {
-            setConnectionStatus(true);
-            axios.get("/status").catch((_) => setConnectionStatus(false));
+            setConnectionStatus("ok");
+            axios
+                .get("/status")
+                .catch((_) => setConnectionStatus("backend_down"));
             axios.get("/frontend_status").catch((error) => {
-                if (!error.response) setConnectionStatus(false);
+                if (!error.response) setConnectionStatus("frontend_down");
             });
         }, checkConnectionStatusMs);
         return () => clearInterval(checkConnectionStatusInterval);
@@ -46,7 +48,9 @@ function App() {
                     action=<div />
                     style={{ borderRadius: "30px" }}
                 >
-                    Ошибка подключения к серверу
+                    Ошибка подключения к серверу (
+                    {connectionStatus == "frontend_down" ? "F" : ""}
+                    {connectionStatus == "backend_down" ? "B" : ""})
                 </Alert>
             </Snackbar>
         </>
