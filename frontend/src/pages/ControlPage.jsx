@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ControlPage.scss";
 import { Grid, Paper } from "@mui/material";
 
@@ -7,6 +7,8 @@ import MySwitch from "../components/controls/Switch";
 import MyButton from "../components/controls/Button";
 import MySlider from "../components/controls/Slider";
 import Footer from "../components/Footer";
+import GradeCard from "./GradeCard";
+
 
 function ControlPage() {
     const paperStyle = {
@@ -27,8 +29,11 @@ function ControlPage() {
         gap: "10px",
     };
 
+    const [isShown, setIsShown] = useState(false);
+
     return (
         <div style={{ marginBottom: "5em" }}>
+            <GradeCard isShown={isShown} setIsShown={setIsShown}/>
             <Header />
             <div className="TabPage">
                 <Grid container spacing={2}>
@@ -83,8 +88,9 @@ function ControlPage() {
                     <Grid item xs={6}>
                         <Paper style={paperStyle}>
                             <MyButton
-                                text={"Закрыть кабинет"}
+                                text={"Оценить урок"}
                                 button_type={"ButtonBlue"}
+                                hook={() => setIsShown(true)}
                             />
                         </Paper>
                     </Grid>

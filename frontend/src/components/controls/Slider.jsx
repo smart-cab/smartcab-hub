@@ -5,6 +5,9 @@ import Slider from "@mui/material/Slider";
 import Button from "@mui/material/Button";
 
 
+let position_cache = {}
+
+
 function MySlider({
     title,
     url, 
@@ -16,6 +19,8 @@ function MySlider({
     const [value, setValue] = useState(50);
 
     const handleChange = (event, newValue) => {
+        position_cache[url] = newValue
+        
         setValue(newValue);
         axios
             .post(url, null, {
@@ -35,7 +40,7 @@ function MySlider({
         <div>
             <p>{title}</p>
             <Slider
-                value={value}
+                value={position_cache[url]}
                 defaultValue={50}
                 onChange={handleChange}
                 step={10}

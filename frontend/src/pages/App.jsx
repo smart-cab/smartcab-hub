@@ -10,7 +10,6 @@ function App() {
             <Routes>
                 <Route path="/" element={<AppLayout />}>
                     <Route path="/" element=<ControlPage /> />
-                    <Route path="/grade" element=<GradeCard /> />
                     <Route path="/pin" element=<div /> />
                     {/* <Route path="/statistics" element={<Statistics />} /> */}
                 </Route>

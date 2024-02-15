@@ -12,12 +12,6 @@ const sidebarNavItems = [
         section: "control",
     },
     {
-        display: "Оценка урока",
-        icon: <i className="bx bx-star"></i>,
-        to: "/grade",
-        section: "grade",
-    },
-    {
         display: "Пинкод",
         icon: <i className="bx bx-calendar"></i>,
         to: "/pin",

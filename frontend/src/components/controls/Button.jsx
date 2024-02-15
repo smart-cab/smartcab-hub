@@ -2,7 +2,7 @@ import React from "react";
 import "./Button.scss";
 import Button from "@mui/material/Button";
 
-function MyButton({ text, button_type }) {
+function MyButton({ text, button_type, hook }) {
     if (button_type == "ButtonRed") {
         return (
             <Button
@@ -19,6 +19,7 @@ function MyButton({ text, button_type }) {
                 }}
                 variant="contained"
                 size="large"
+                onClick={hook}
             >
                 {text}
             </Button>
@@ -39,6 +40,7 @@ function MyButton({ text, button_type }) {
                 }}
                 variant="contained"
                 size="large"
+                onClick={hook}
             >
                 {text}
             </Button>

@@ -77,8 +77,7 @@ function GradeButton({ left, top, icon, color, onClick }) {
     );
 }
 
-function GradeCard() {
-    const [isShown, setIsShown] = useState(true);
+function GradeCard({ isShown, setIsShown}) {
 
     const CloseHiding = (_) => {
         setIsShown(false);
