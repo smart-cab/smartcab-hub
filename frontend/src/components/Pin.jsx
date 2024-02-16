@@ -12,7 +12,7 @@ export default function Pin({ lockedView, locked, setLocked }) {
     const correctCode = "1234";
     const attemptsToBlock = 3;
     const blockForSeconds = 59;
-    const unlockForSeconds = 60;
+    const unlockForSeconds = 60000000;
 
     const pinView = useRef(null);
     const [enteredPin, setEnteredPin] = useState("");

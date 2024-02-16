@@ -36,7 +36,7 @@ function App() {
             </BrowserRouter>
             <Snackbar
                 open={connectionStatus != "ok"}
-                autoHideDuration={1000}
+                autoHideDuration={500}
                 anchorOrigin={{
                     vertical: "down",
                     horizontal: "center",

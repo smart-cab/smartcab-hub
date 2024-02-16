@@ -55,4 +55,8 @@ DEVICES = {
             ),
         ),
     ),
+    "pc1": Device(interfaces=(interface.SSH(addr=""),)),
+    "pc2": Device(interfaces=(interface.SSH(addr=""),)),
+    "pc3": Device(interfaces=(interface.SSH(addr=""),)),
+    "pc4": Device(interfaces=(interface.SSH(addr=""),)),
 }

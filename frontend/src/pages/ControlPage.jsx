@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./ControlPage.scss";
-import { Grid, Paper } from "@mui/material";
+import { Alert, Grid, Paper, Snackbar } from "@mui/material";
 
 import Header from "../components/Header";
 import MySwitch from "../components/controls/Switch";
@@ -8,6 +8,32 @@ import MyButton from "../components/controls/Button";
 import MySlider from "../components/controls/Slider";
 import Footer from "../components/Footer";
 import GradeCard from "./GradeCard";
+import axios from "axios";
+
+function turnComputersOff({ setAlertStatus, setAlertText }) {
+    const computersAmount = 3;
+    let requests = [];
+    for (let i = 1; i <= computersAmount; i++) {
+        requests.push(axios.get("/ssh/pc" + i + "?command=shutdown now"));
+    }
+    Promise.allSettled(requests)
+        .then(async (responses) => {
+            for (let i = 1; i <= responses.length; i++) {
+                let status = responses[i].value.data.status;
+                if (status == "ok") {
+                    setAlertStatus("success");
+                    setAlertText("Компьютер №" + i + " успешно выключен");
+                } else if (status == "error") {
+                    setAlertStatus("success");
+                    setAlertText("Компьютер №" + i + " не удалось выключить");
+                }
+            }
+        })
+        .catch((_) => {
+            setAlertStatus("error");
+            setAlertText("Произошла ошибка при попытке выключить компьютеры");
+        });
+}
 
 function ControlPage() {
     const paperStyle = {
@@ -29,12 +55,40 @@ function ControlPage() {
     };
 
     const [isShown, setIsShown] = useState(false);
+    const [alertStatus, setAlertStatus] = useState("info");
+    const [alertText, setAlertText] = useState("");
 
     return (
         <div style={{ marginBottom: "5em" }}>
             <GradeCard isShown={isShown} setIsShown={setIsShown} />
             <Header />
             <div className="TabPage">
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <Paper style={paperStyle}>
+                            <MyButton
+                                text={"Включить компы"}
+                                button_type={"ButtonBlue"}
+                                hook={() => 1}
+                            />
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Paper style={paperStyle}>
+                            <MyButton
+                                text={"Выключить компы"}
+                                button_type={"ButtonBlue"}
+                                hook={() =>
+                                    turnComputersOff({
+                                        setAlertStatus,
+                                        setAlertText,
+                                    })
+                                }
+                            />
+                        </Paper>
+                    </Grid>
+                </Grid>
+
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <Paper style={paperStyle}>
@@ -99,6 +153,24 @@ function ControlPage() {
                 </Grid>
             </div>
             <Footer />
+            <Snackbar
+                open={alertText != ""}
+                onClose={() => setAlertText("")}
+                autoHideDuration={3000}
+                anchorOrigin={{
+                    vertical: "down",
+                    horizontal: "center",
+                }}
+                style={{ top: "80%" }}
+            >
+                <Alert
+                    severity={alertStatus}
+                    action=<div />
+                    style={{ borderRadius: "30px" }}
+                >
+                    {alertText}
+                </Alert>
+            </Snackbar>
         </div>
     );
 }
