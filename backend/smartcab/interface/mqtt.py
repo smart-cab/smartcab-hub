@@ -1,9 +1,10 @@
 import json
+import logging
 
-from pprint import pprint
-import paho.mqtt.client as mqtt
 from smartcab import interface
+import paho.mqtt.client as mqtt
 from smartcab.dev import DEVICES
+from paho.mqtt import MQTTException
 
 MQTTC = mqtt.Client()
 
@@ -11,26 +12,30 @@ BROKER_URL = "192.168.43.107"
 BROKER_PORT = 1883
 
 
+class MQTTConnectionError(MQTTException):
+    pass
+
+
 def on_connect(client, userdata, flags, rc):
-    print(f"MQTT Connected With Result Code {rc}\nMQTT ", end='')
+    logging.info(f"MQTT Connected With Result Code {rc}")
     if rc == 0:
-        print("Connection successful!")
+        logging.info("MQTT Connection successful!")
     elif rc == 1:
-        print("Connection error – incorrect protocol version")
+        logging.error("MQTT Connection error – incorrect protocol version")
     elif rc == 2:
-        print("Connection error – invalid client identifier")
+        logging.error("MQTT Connection error – invalid client identifier")
     elif rc == 3:
-        print("Connection error – server unavailable")
+        logging.error("MQTT Connection error – server unavailable")
     elif rc == 4:
-        print("Connection error – bad username or password")
+        logging.error("MQTT Connection error – bad username or password")
     elif rc == 5:
-        print("Connection error – not authorised")
+        logging.error("MQTT Connection error – not authorised")
     else:
-        print("I don't know what happening...")
+        logging.error("MQTT Unknown result code recieved")
 
 
 def on_disconnect(client, userdata, rc):
-    print("Client successful disconnected")
+    logging.info("Client disconnected successfully")
 
 
 def on_message(client, userdata, message):
@@ -42,7 +47,7 @@ def on_message(client, userdata, message):
             continue
         mqtti.unpack_data(data)
 
-    pprint("MQTT Message Recieved: " + message.payload.decode())
+    logging.debug("MQTT Message Recieved: " + message.payload.decode())
 
 
 def setup_client_hooks():
@@ -57,8 +62,12 @@ def apply_subscriptions():
             continue
         MQTTC.subscribe(mqtti.addr)
 
+
 def connect_client():
-    MQTTC.connect(BROKER_URL, BROKER_PORT)
+    try:
+        MQTTC.connect(BROKER_URL, BROKER_PORT)
+    except OSError as e:
+        raise MQTTConnectionError(e)
 
 
 def init():

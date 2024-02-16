@@ -1,3 +1,4 @@
+import logging
 from threading import Thread
 
 from dotenv import find_dotenv, load_dotenv
@@ -10,7 +11,7 @@ from smartcab.data.eval_types import EvalType
 from smartcab.data.lessons import Lesson
 from smartcab.dev import DEVICES
 from smartcab.interface import mqtt
-from smartcab.interface.mqtt import MQTTC
+from smartcab.interface.mqtt import MQTTC, MQTTConnectionError
 
 
 load_dotenv(find_dotenv())
@@ -58,7 +59,6 @@ def mqtt_publish(device_id):
 
     field = request.args.get("field", None)
     value = request.args.get("value")
-    print(value, field)
 
     mqtti.set(value, field)
     return {"status": "ok"}
@@ -66,7 +66,12 @@ def mqtt_publish(device_id):
 
 if __name__ == "__main__":
     db.global_init()
-    mqtt.init()
+    try:
+        mqtt.init()
+    except MQTTConnectionError as e:
+        logging.error(
+            f"Failed to connect to MQTT-broker: {e}. MQTT related queries won't be processed"
+        )
     subscriber_client_thread = Thread(target=MQTTC.loop_forever)
     subscriber_client_thread.start()
     app.run(host="0.0.0.0", port=5000)
