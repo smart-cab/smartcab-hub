@@ -10,13 +10,14 @@ import Footer from "../components/Footer";
 import GradeCard from "./GradeCard";
 import axios from "axios";
 
-function turnComputersOff({ setAlertStatus, setAlertText }) {
-    const computersAmount = 3;
+async function turnComputersOff({ setAlertStatus, setAlertText }) {
+    const computersAmount = 4;
     let requests = [];
     for (let i = 1; i <= computersAmount; i++) {
         requests.push(axios.get("/ssh/pc" + i + "?command=shutdown now"));
     }
-    Promise.allSettled(requests)
+    await axios
+        .all(requests)
         .then(async (responses) => {
             for (let i = 1; i <= responses.length; i++) {
                 let status = responses[i].value.data.status;

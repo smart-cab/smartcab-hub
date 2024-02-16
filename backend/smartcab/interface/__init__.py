@@ -63,6 +63,7 @@ class SSH(Interface):
                 self.port,
                 self.username,
                 self.password,
+                key_filename="/home/mark/.ssh/hub",
             )
         except socket.gaierror as e:
             logging.error(f"SSH Failed to connect to {self.fulladdr}: {e}")
