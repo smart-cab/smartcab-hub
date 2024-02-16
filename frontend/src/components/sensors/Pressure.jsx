@@ -9,7 +9,7 @@ export default function Pressure() {
     useEffect(() => {
         var timer = setInterval(() => {
             axios
-                .get("/device/sensors1")
+                .get("/mqtt/sensors1")
                 .then((response) => {
                     var answer = response.data["pressure"];
                     if (answer == null) {

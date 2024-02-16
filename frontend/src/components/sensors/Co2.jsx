@@ -10,7 +10,7 @@ export default function Co2() {
     useEffect(() => {
         var timer = setInterval(() => {
             axios
-                .get("/device/sensors2")
+                .get("/mqtt/sensors2")
                 .then((response) => {
                     var answer = response.data["co2"];
                     if (answer == null) {

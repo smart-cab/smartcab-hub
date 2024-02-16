@@ -10,7 +10,7 @@ export default function Temp() {
     useEffect(() => {
         var timer = setInterval(() => {
             axios
-                .get("/device/sensors2")
+                .get("/mqtt/sensors2")
                 .then((response) => {
                     var answer = response.data["temperature"];
                     if (answer == null) {

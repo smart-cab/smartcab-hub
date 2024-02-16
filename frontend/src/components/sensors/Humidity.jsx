@@ -10,7 +10,7 @@ export default function Humidity() {
     useEffect(() => {
         var timer = setInterval(() => {
             axios
-                .get("/device/sensors2")
+                .get("/mqtt/sensors2")
                 .then((response) => {
                     var answer = response.data["humidity"];
                     if (answer == null) {

@@ -35,7 +35,7 @@ def new_vote():
     return {"status": "ok"}
 
 
-@app.route("/device/<device_id>", methods=["GET"])
+@app.route("/mqtt/<device_id>", methods=["GET"])
 def mqtt_get(device_id):
     device = DEVICES.get(device_id, None)
     if device is None:
@@ -48,7 +48,7 @@ def mqtt_get(device_id):
     return {"status": "ok"} | mqtti.get_data()
 
 
-@app.route("/device/<device_id>", methods=["POST"])
+@app.route("/mqtt/<device_id>", methods=["POST"])
 def mqtt_publish(device_id):
     device = DEVICES.get(device_id, None)
     if device is None:

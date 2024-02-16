@@ -9,7 +9,6 @@ import MySlider from "../components/controls/Slider";
 import Footer from "../components/Footer";
 import GradeCard from "./GradeCard";
 
-
 function ControlPage() {
     const paperStyle = {
         display: "flex",
@@ -33,14 +32,14 @@ function ControlPage() {
 
     return (
         <div style={{ marginBottom: "5em" }}>
-            <GradeCard isShown={isShown} setIsShown={setIsShown}/>
+            <GradeCard isShown={isShown} setIsShown={setIsShown} />
             <Header />
             <div className="TabPage">
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <Paper style={paperStyle}>
                             <p>Лампа LW204</p>
-                            <MySwitch url="/device/power_socket1"/>
+                            <MySwitch url="/mqtt/power_socket1" />
                         </Paper>
                     </Grid>
                     <Grid item xs={6}>
@@ -69,7 +68,10 @@ function ControlPage() {
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <Paper style={paperStyle}>
-                            <MySlider title="Шторы 1" url="/device/curtains_roller1"/>
+                            <MySlider
+                                title="Шторы 1"
+                                url="/mqtt/curtains_roller1"
+                            />
                         </Paper>
                     </Grid>
                     <Grid item xs={6}>
@@ -82,7 +84,7 @@ function ControlPage() {
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <Paper style={paperStyle}>
-                            <MySlider title="Шторы 2"/>
+                            <MySlider title="Шторы 2" />
                         </Paper>
                     </Grid>
                     <Grid item xs={6}>
