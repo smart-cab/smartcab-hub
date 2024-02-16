@@ -66,8 +66,8 @@ def mqtt_publish(device_id):
 
 
 @app.route("/ssh/<device_id>", methods=["GET"])
-@firewall.apply
-def ssh_execute(device_id):
+# @firewall.apply
+async def ssh_execute(device_id):
     device = DEVICES.get(device_id, None)
     if device is None:
         abort(404)
@@ -79,14 +79,12 @@ def ssh_execute(device_id):
         abort(404)
 
     try:
-        stdout, stderr = sshi.execute(command)
+        await sshi.execute(command)
     except SSHException:
         return {"status": "error", "error": "failed to execute ssh command"}
 
     return {
         "status": "ok",
-        "stdout": stdout,
-        "stderr": stderr,
     }
 
 

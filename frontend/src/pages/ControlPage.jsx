@@ -11,7 +11,7 @@ import GradeCard from "./GradeCard";
 import axios from "axios";
 
 async function turnComputersOff({ setAlertStatus, setAlertText }) {
-    const computersAmount = 4;
+    const computersAmount = 15;
     let requests = [];
     for (let i = 1; i <= computersAmount; i++) {
         requests.push(axios.get("/ssh/pc" + i + "?command=shutdown now"));

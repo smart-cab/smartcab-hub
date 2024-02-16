@@ -9,12 +9,13 @@ packages = [{include = "smartcab"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 paho-mqtt = "^1.6.1"
-flask = "^2.3.3"
+flask = {extras = ["async"], version = "^3.0.2"}
 flask-cors = "^4.0.0"
 python-dotenv = "^1.0.0"
 pyyaml = "^6.0.1"
 sqlalchemy = "^2.0.23"
 paramiko = "^3.4.0"
+asyncssh = "^2.14.2"
 
 
 [tool.poetry.group.dev.dependencies]

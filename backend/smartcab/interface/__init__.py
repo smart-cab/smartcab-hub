@@ -53,25 +53,17 @@ class SSH(Interface):
     def fulladdr(self):
         return f"{self.username}@{self.addr}:{self.port}"
 
-    def execute(self, command):
-        import socket
-        from .ssh import SSHC
+    async def execute(self, command):
+        import asyncssh
 
-        try:
-            SSHC.connect(
-                self.addr,
-                self.port,
-                self.username,
-                self.password,
-                key_filename="/home/mark/.ssh/hub",
-            )
-        except socket.gaierror as e:
-            logging.error(f"SSH Failed to connect to {self.fulladdr}: {e}")
-            raise SSHConnectionError
+        async with asyncssh.connect(
+            self.addr,
+            username="root",
+            known_hosts=None,
+            client_keys=["/home/mark/.ssh/hub"],
+        ) as conn:
+            result = await conn.run(command)
+            if result is None:
+                return "", ""
 
-        output = SSHC.exec_command(command)
-        stdout, stderr = map(lambda o: o.read().decode(errors="ignore"), output[1:])
-
-        SSHC.close()
-
-        return stdout, stderr
+        return result.stdout, result.stderr
