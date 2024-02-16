@@ -6,6 +6,7 @@ from flask import abort, request
 from paramiko import SSHException
 
 import smartcab
+import firewall
 from smartcab import interface
 from smartcab.data import db
 from smartcab.data.eval_types import EvalType
@@ -13,7 +14,6 @@ from smartcab.data.lessons import Lesson
 from smartcab.dev import DEVICES
 from smartcab.interface import mqtt
 from smartcab.interface.mqtt import MQTTC, MQTTConnectionError
-
 
 load_dotenv(find_dotenv())
 
@@ -66,6 +66,7 @@ def mqtt_publish(device_id):
 
 
 @app.route("/ssh/<device_id>", methods=["GET"])
+@firewall.apply
 def ssh_execute(device_id):
     device = DEVICES.get(device_id, None)
     if device is None:
