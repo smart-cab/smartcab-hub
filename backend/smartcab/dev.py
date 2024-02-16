@@ -1,7 +1,4 @@
-from copy import deepcopy
 from typing import Iterable, Optional
-
-from sqlalchemy.orm import interfaces
 
 from smartcab import interface
 
@@ -11,7 +8,9 @@ class Device:
         self.interfaces = interfaces
 
     def get_interface(self, cls) -> Optional[interface.Interface]:
-        return next(filter(lambda interface: type(interface) is cls, self.interfaces), None)
+        return next(
+            filter(lambda interface: type(interface) is cls, self.interfaces), None
+        )
 
 
 DEVICES = {
@@ -57,4 +56,3 @@ DEVICES = {
         ),
     ),
 }
-

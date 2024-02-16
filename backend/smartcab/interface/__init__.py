@@ -1,3 +1,8 @@
+import logging
+
+from smartcab.interface.ssh import SSHConnectionError
+
+
 class Interface:
     def __init__(self, addr):
         self.addr = addr
@@ -38,4 +43,34 @@ class WakeOnWifi(Interface):
 
 
 class SSH(Interface):
-    pass
+    def __init__(self, port=22, username="root", password=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.port = port
+        self.username = username
+        self.password = password
+
+    @property
+    def fulladdr(self):
+        return f"{self.username}@{self.addr}:{self.port}"
+
+    def execute(self, command):
+        import socket
+        from .ssh import SSHC
+
+        try:
+            SSHC.connect(
+                self.addr,
+                self.port,
+                self.username,
+                self.password,
+            )
+        except socket.gaierror as e:
+            logging.error(f"SSH Failed to connect to {self.fulladdr}: {e}")
+            raise SSHConnectionError
+
+        output = SSHC.exec_command(command)
+        stdout, stderr = map(lambda o: o.read().decode(errors="ignore"), output[1:])
+
+        SSHC.close()
+
+        return stdout, stderr

@@ -3,6 +3,7 @@ from threading import Thread
 
 from dotenv import find_dotenv, load_dotenv
 from flask import abort, request
+from paramiko import SSHException
 
 import smartcab
 from smartcab import interface
@@ -62,6 +63,30 @@ def mqtt_publish(device_id):
 
     mqtti.set(value, field)
     return {"status": "ok"}
+
+
+@app.route("/ssh/<device_id>", methods=["GET"])
+def ssh_execute(device_id):
+    device = DEVICES.get(device_id, None)
+    if device is None:
+        abort(404)
+
+    sshi = device.get_interface(interface.SSH)
+    command = request.args.get("command", None)
+
+    if sshi is None or command is None:
+        abort(404)
+
+    try:
+        stdout, stderr = sshi.execute(command)
+    except SSHException:
+        return {"status": "error", "error": "failed to execute ssh command"}
+
+    return {
+        "status": "ok",
+        "stdout": stdout,
+        "stderr": stderr,
+    }
 
 
 if __name__ == "__main__":
