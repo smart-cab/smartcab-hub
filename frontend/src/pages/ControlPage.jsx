@@ -65,63 +65,14 @@ function ControlPage() {
             <GradeCard isShown={isShown} setIsShown={setIsShown} />
             <Header />
             <div className="TabPage">
-                <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                        <Paper style={paperStyle}>
-                            <MyButton
-                                text={"Включить компы"}
-                                button_type={"ButtonBlue"}
-                                hook={() => 1}
-                            />
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Paper style={paperStyle}>
-                            <MyButton
-                                text={"Выключить компы"}
-                                button_type={"ButtonBlue"}
-                                hook={() =>
-                                    turnComputersOff({
-                                        setAlertStatus,
-                                        setAlertText,
-                                    })
-                                }
-                            />
-                        </Paper>
-                    </Grid>
-                </Grid>
 
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <Paper style={paperStyle}>
-                            <p>Лампа LW204</p>
+                            <p>Свет 1</p>
                             <MySwitch url="/mqtt/power_socket1" />
                         </Paper>
                     </Grid>
-                    <Grid item xs={6}>
-                        <Paper style={paperStyle}>
-                            <p>Свет 2</p>
-                            <MySwitch />
-                        </Paper>
-                    </Grid>
-                </Grid>
-                <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                        <Paper style={paperStyle}>
-                            <p>Свет 1</p>
-                            <MySwitch />
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Paper style={paperStyle}>
-                            <MyButton
-                                text={"Закрыть кабинет"}
-                                button_type={"ButtonBlue"}
-                            />
-                        </Paper>
-                    </Grid>
-                </Grid>
-                <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <Paper style={paperStyle}>
                             <MySlider
@@ -130,10 +81,20 @@ function ControlPage() {
                             />
                         </Paper>
                     </Grid>
+                </Grid> <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <Paper style={paperStyle}>
-                            <p>Свет 1</p>
+                            <p>Свет 2</p>
                             <MySwitch />
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Paper style={paperStyle}>
+                            <MyButton
+                                text={"Включить компы"}
+                                button_type={"ButtonBlue"}
+                                hook={() => 1}
+                            />
                         </Paper>
                     </Grid>
                 </Grid>
@@ -149,6 +110,28 @@ function ControlPage() {
                                 text={"Оценить урок"}
                                 button_type={"ButtonBlue"}
                                 hook={() => setIsShown(true)}
+                            />
+                        </Paper>
+                    </Grid>
+                </Grid>
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <Paper style={paperStyle}>
+                            <p>Свет 3</p>
+                            <MySwitch />
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Paper style={paperStyle}>
+                            <MyButton
+                                text={"Выключить компы"}
+                                button_type={"ButtonBlue"}
+                                hook={() =>
+                                    turnComputersOff({
+                                        setAlertStatus,
+                                        setAlertText,
+                                    })
+                                }
                             />
                         </Paper>
                     </Grid>
