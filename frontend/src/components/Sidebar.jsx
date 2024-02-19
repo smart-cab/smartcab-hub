@@ -7,15 +7,9 @@ import PinLockButton from "./PinLockButton";
 const sidebarNavItems = [
     {
         display: "Управление",
-        icon: <i className="bx bx-home"></i>,
+        icon: <i className="bx bx-user"></i>,
         to: "/",
         section: "control",
-    },
-    {
-        display: "Пинкод",
-        icon: <i className="bx bx-calendar"></i>,
-        to: "/pin",
-        section: "pin",
     },
     {
         display: "Статистика",
@@ -23,6 +17,12 @@ const sidebarNavItems = [
         to: "/statistics",
         section: "statistics",
     },
+    {
+        display: "Конференция",
+        icon: <i className="bx bx-user"></i>,
+        to: "/conference",
+        section: "conference",
+    }
 ];
 
 function Sidebar({ pinLocked, setPinLocked }) {

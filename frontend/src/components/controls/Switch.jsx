@@ -4,7 +4,7 @@ import { Switch } from "antd";
 import "./Switch.scss";
 import Ripples from "react-ripples";
 
-function useSocket({checked, event, url}) {
+function useSocket({ checked, event, url }) {
     let state;
     if (checked) {
         state = "ON";
@@ -23,7 +23,12 @@ function useSocket({checked, event, url}) {
 }
 
 function MySwitch({ url }) {
-    return <Switch onChange={(checked, event) => useSocket({checked, event, url})} className="MySwitch" />;
+    return (
+        <Switch
+            onChange={(checked, event) => useSocket({ checked, event, url })}
+            className="MySwitch"
+        />
+    );
 }
 
 export default MySwitch;

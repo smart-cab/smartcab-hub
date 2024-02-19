@@ -36,24 +36,25 @@ async function turnComputersOff({ setAlertStatus, setAlertText }) {
         });
 }
 
+const paperStyle = {
+    display: "flex",
+    backgroundColor: "rgba(202, 200, 200, 0.4)",
+    padding: "16",
+    textAlign: "center",
+    padding: "16px",
+    textAlign: "center",
+    marginTop: "0.8em",
+    height: "5.5em",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    borderRadius: "15px",
+    boxShadow: "0px 0px 0px 0px",
+    fontSize: "1.5em",
+    gap: "10px",
+};
+
 function ControlPage() {
-    const paperStyle = {
-        display: "flex",
-        backgroundColor: "rgba(202, 200, 200, 0.4)",
-        padding: "16",
-        textAlign: "center",
-        padding: "16px",
-        textAlign: "center",
-        marginTop: "0.8em",
-        height: "5.5em",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        borderRadius: "15px",
-        boxShadow: "0px 0px 0px 0px",
-        fontSize: "1.5em",
-        gap: "10px",
-    };
 
     const [isShown, setIsShown] = useState(false);
     const [alertStatus, setAlertStatus] = useState("info");

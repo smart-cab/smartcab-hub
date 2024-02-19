@@ -7,10 +7,9 @@ from paramiko import SSHException
 
 import smartcab
 import firewall
+from smartcab import use_db
 from smartcab import interface
 from smartcab.data import db
-from smartcab.data.eval_types import EvalType
-from smartcab.data.lessons import Lesson
 from smartcab.dev import DEVICES
 from smartcab.interface import mqtt
 from smartcab.interface.mqtt import MQTTC, MQTTConnectionError
@@ -27,11 +26,8 @@ def status():
 
 @app.route("/new_vote", methods=["GET", "POST"])
 def new_vote():
-    vote = request.args.get("vote")
-    with db.session() as db_sess:
-        type_id = db_sess.query(EvalType).filter(EvalType.eval_type == vote).first().id
-        db_sess.add(Lesson(eval_id=type_id))
-        db_sess.commit()
+    vote = str(request.args.get("vote"))
+    use_db.write_new_vote_to_db(vote)
     return {"status": "ok"}
 
 
@@ -90,6 +86,7 @@ async def ssh_execute(device_id):
 
 if __name__ == "__main__":
     db.global_init()
+    # use_db.get_grade_statistics()
     try:
         mqtt.init()
     except MQTTConnectionError as e:

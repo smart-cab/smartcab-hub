@@ -11,7 +11,8 @@ export default function Pressure() {
             axios
                 .get("/mqtt/sensors1")
                 .then((response) => {
-                    var answer = response.data["pressure"];
+                    // var answer = response.data["pressure"];
+                    var answer = 1013
                     if (answer == null) {
                         setPressure("- ");
                     } else {

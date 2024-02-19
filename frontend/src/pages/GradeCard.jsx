@@ -77,8 +77,7 @@ function GradeButton({ left, top, icon, color, onClick }) {
     );
 }
 
-function GradeCard({ isShown, setIsShown}) {
-
+function GradeCard({ isShown, setIsShown }) {
     const CloseHiding = (_) => {
         setIsShown(false);
     };
@@ -111,7 +110,7 @@ function GradeCard({ isShown, setIsShown}) {
                 <div>
                     <Hiding layout="all" />
 
-                    <button className="CloseHiding" onClick={CloseHiding} >
+                    <button className="CloseHiding" onClick={CloseHiding}>
                         <img width="45px" src="close2.png" alt="close2" />
                     </button>
 
@@ -139,7 +138,11 @@ function GradeCard({ isShown, setIsShown}) {
                         }}
                         style={{ top: "80%" }}
                     >
-                        <Alert onClose={handleClose} severity="success" style={{ borderRadius: "30px" }}>
+                        <Alert
+                            onClose={handleClose}
+                            severity="success"
+                            style={{ borderRadius: "30px" }}
+                        >
                             Спасибо! Ваш голос учтён
                         </Alert>
                     </Snackbar>

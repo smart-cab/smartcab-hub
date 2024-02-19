@@ -12,7 +12,8 @@ export default function Temp() {
             axios
                 .get("/mqtt/sensors2")
                 .then((response) => {
-                    var answer = response.data["temperature"];
+                    // var answer = response.data["temperature"];
+                    var answer = 24
                     if (answer == null) {
                         setTemp("- ");
                     } else {

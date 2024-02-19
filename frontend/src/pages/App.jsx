@@ -5,6 +5,7 @@ import ControlPage from "./ControlPage";
 import { Snackbar, Alert } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Statistics from "../components/Statstics";
 
 function App() {
     const [connectionStatus, setConnectionStatus] = useState("ok");
@@ -29,8 +30,9 @@ function App() {
                 <Routes>
                     <Route path="/" element={<AppLayout />}>
                         <Route path="/" element=<ControlPage /> />
-                        <Route path="/pin" element=<div /> />
                         <Route path="/frontend_status" element=<div /> />
+                        <Route path="/statistics" element=<Statistics /> />
+                        <Route path="/conference" element=<div /> />
                     </Route>
                 </Routes>
             </BrowserRouter>

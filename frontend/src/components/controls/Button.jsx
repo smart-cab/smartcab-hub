@@ -8,8 +8,8 @@ function MyButton({ text, button_type, hook }) {
             <Button
                 style={{
                     fontFamily: "montserratAlternates",
-                    height: "10%", 
-                    width: "7%", 
+                    height: "10%",
+                    width: "7%",
                     fontSize: "0.85em",
                     backgroundColor: "#f86f6f",
                     borderColor: "#cf5237",
@@ -29,8 +29,8 @@ function MyButton({ text, button_type, hook }) {
             <Button
                 style={{
                     fontFamily: "montserratAlternates",
-                    height: "80%", 
-                    width: "90%", 
+                    height: "80%",
+                    width: "90%",
                     fontSize: "0.85em",
                     backgroundColor: "#a7dff0",
                     borderColor: "#7da4b0",
@@ -45,7 +45,6 @@ function MyButton({ text, button_type, hook }) {
                 {text}
             </Button>
         );
-
     }
 }
 

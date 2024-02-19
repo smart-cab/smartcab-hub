@@ -4,13 +4,11 @@ import "./Slider.scss";
 import Slider from "@mui/material/Slider";
 import Button from "@mui/material/Button";
 
-
-let position_cache = {}
-
+let position_cache = {};
 
 function MySlider({
     title,
-    url, 
+    url,
     min,
     max,
     current_value = (max - min) / 2,
@@ -19,8 +17,8 @@ function MySlider({
     const [value, setValue] = useState(50);
 
     const handleChange = (event, newValue) => {
-        position_cache[url] = newValue
-        
+        position_cache[url] = newValue;
+
         setValue(newValue);
         axios
             .post(url, null, {
@@ -33,7 +31,6 @@ function MySlider({
             .catch((error) => {
                 console.error(error);
             });
-
     };
 
     return (
