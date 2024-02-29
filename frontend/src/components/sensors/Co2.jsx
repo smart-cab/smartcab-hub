@@ -12,8 +12,7 @@ export default function Co2() {
             axios
                 .get("/mqtt/sensors2")
                 .then((response) => {
-                    // var answer = response.data["co2"];
-                    var answer = 305;
+                    var answer = response.data["co2"];
                     if (answer == null) {
                         setCo2("- ");
                     } else {
