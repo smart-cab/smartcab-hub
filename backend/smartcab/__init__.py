@@ -3,6 +3,13 @@ import logging
 from flask import Flask
 from flask_cors import CORS
 from smartcab.data.db import get_db_url
+from smartcab.api import statistic, devices
+
+
+blueprints_modules = [
+    statistic, 
+    devices,
+]
 
 
 def get_secret_key():
@@ -13,7 +20,9 @@ def get_secret_key():
         return file.read().rstrip()
 
 
-import logging
+def registr_blueprints(app: Flask):
+    for module in blueprints_modules:
+        app.register_blueprint(module.blueprint)
 
 
 def make_app():

@@ -1,4 +1,4 @@
-from typing import Iterable, Optional
+from typing import Any, Iterable, Optional
 
 from smartcab import interface
 
@@ -7,7 +7,7 @@ class Device:
     def __init__(self, interfaces: Iterable[interface.Interface]):
         self.interfaces = interfaces
 
-    def get_interface(self, cls) -> Optional[interface.Interface]:
+    def get_interface(self, cls) -> Any:
         return next(
             filter(lambda interface: type(interface) is cls, self.interfaces), None
         )

@@ -1,6 +1,13 @@
+from flask import  request, Blueprint
 from smartcab.data import db
 from smartcab.data.eval_types import EvalType
 from smartcab.data.lessons import Lesson
+
+
+blueprint = Blueprint(
+    name="statistic", 
+    import_name=__name__
+)
 
 
 def write_new_vote_to_db(vote: str):
@@ -15,5 +22,8 @@ def write_new_vote_to_db(vote: str):
 #         print(db_sess.query(EvalType))
 
 
-
-
+@blueprint.route("/new_vote", methods=["GET", "POST"])
+def new_vote():
+    vote = str(request.args.get("vote"))
+    use_db.write_new_vote_to_db(vote)
+    return {"status": "ok"}
