@@ -22,7 +22,7 @@ const sidebarNavItems = [
         icon: <i className="bx bx-user"></i>,
         to: "/conference",
         section: "conference",
-    }
+    },
 ];
 
 function Sidebar({ pinLocked, setPinLocked }) {

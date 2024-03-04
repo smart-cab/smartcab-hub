@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native-web";
 import PinViewStyle from "./PinViewStyle.jsx";
 
 const ViewButton = ({

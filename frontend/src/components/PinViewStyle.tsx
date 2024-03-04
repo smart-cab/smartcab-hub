@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from "react-native-web";
 
 const style = StyleSheet.create({
     pinView: {

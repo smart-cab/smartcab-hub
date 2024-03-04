@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./GradeCard.scss";
 import Hiding from "../components/Hiding";
 import axios from "axios";

@@ -1,4 +1,4 @@
-import { Pressable } from "react-native";
+import { Pressable } from "react-native-web";
 import IconButton from "@mui/material/IconButton";
 
 export default function PinLockButton({ pinLocked, setPinLocked }) {

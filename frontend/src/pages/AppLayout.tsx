@@ -3,7 +3,7 @@ import Sidebar from "../components/Sidebar";
 import Pin from "../components/Pin";
 import { useState } from "react";
 
-const AppLayout = () => {
+export default function AppLayout() {
     const [pinLocked, setPinLocked] = useState(true);
 
     return (
@@ -16,6 +16,4 @@ const AppLayout = () => {
             />
         </div>
     );
-};
-
-export default AppLayout;
+}

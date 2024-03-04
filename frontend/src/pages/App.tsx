@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Statistics from "../components/Statstics";
 
-function App() {
+export default function App() {
     const [connectionStatus, setConnectionStatus] = useState("ok");
     const checkConnectionStatusMs = 5000;
 
@@ -40,7 +40,7 @@ function App() {
                 open={connectionStatus != "ok"}
                 autoHideDuration={500}
                 anchorOrigin={{
-                    vertical: "down",
+                    vertical: "bottom",
                     horizontal: "center",
                 }}
                 style={{ top: "80%" }}
@@ -56,5 +56,3 @@ function App() {
         </>
     );
 }
-
-export default App;

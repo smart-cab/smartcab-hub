@@ -3,9 +3,7 @@ import App from "./pages/App";
 import "./index.scss";
 import { createRoot } from "react-dom/client";
 
-const container = document.getElementById("root");
-const root = createRoot(container);
-root.render(
+createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
         <App />
     </React.StrictMode>,

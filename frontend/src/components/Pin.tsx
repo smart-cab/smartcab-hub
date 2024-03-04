@@ -1,6 +1,6 @@
 import "./Pin.scss";
 import React, { useEffect, useRef, useState } from "react";
-import { Text } from "react-native";
+import { Text } from "react-native-web";
 import ReactNativePinView from "./PinView.jsx";
 import { useTimer } from "react-timer-hook";
 import { useLocation } from "react-router-dom";
