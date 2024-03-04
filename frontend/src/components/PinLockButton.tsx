@@ -1,7 +1,14 @@
 import { Pressable } from "react-native-web";
 import IconButton from "@mui/material/IconButton";
+import React from "react";
 
-export default function PinLockButton({ pinLocked, setPinLocked }) {
+export default function PinLockButton({
+    pinLocked,
+    setPinLocked,
+}: {
+    pinLocked: boolean;
+    setPinLocked: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
     return (
         <Pressable
             style={{

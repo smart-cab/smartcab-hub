@@ -1,11 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./GradeCard.scss";
 import Hiding from "../components/Hiding";
 import axios from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
-function Voting(code) {
+function Voting(code: string) {
     axios
         .post("/new_vote", null, {
             params: {
@@ -88,10 +88,7 @@ function GradeCard({ isShown, setIsShown }) {
         setOpen(true);
     };
 
-    const handleClose = (event, reason) => {
-        if (reason === "clickaway") {
-            return;
-        }
+    const handleClose = (_: React.SyntheticEvent<Element, Event>) => {
         setOpen(false);
     };
 
@@ -133,7 +130,7 @@ function GradeCard({ isShown, setIsShown }) {
                         autoHideDuration={1000}
                         onClose={handleClose}
                         anchorOrigin={{
-                            vertical: "down",
+                            vertical: "bottom",
                             horizontal: "center",
                         }}
                         style={{ top: "80%" }}

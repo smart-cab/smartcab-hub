@@ -4,7 +4,7 @@ import Humidity from "./sensors/Humidity";
 import Pressure from "./sensors/Pressure";
 import "./Header.scss";
 
-function Header() {
+export default function Header() {
     return (
         <header className="Header">
             <div className="HeaderGroup" style={{ marginRight: "0cm" }}>
@@ -27,5 +27,3 @@ function Header() {
         </header>
     );
 }
-
-export default Header;

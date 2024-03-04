@@ -34,11 +34,16 @@ function Sidebar({ pinLocked, setPinLocked }) {
 
     useEffect(() => {
         setTimeout(() => {
-            const sidebarItem = sidebarRef.current.querySelector(
-                ".sidebar__menu__item",
-            );
-            indicatorRef.current.style.height = `${sidebarItem.clientHeight}px`;
-            setStepHeight(sidebarItem.clientHeight);
+            if (
+                sidebarRef.current !== undefined &&
+                indicatorRef.current !== undefined
+            ) {
+                const sidebarItem = sidebarRef.current.querySelector(
+                    ".sidebar__menu__item",
+                );
+                indicatorRef.current.style.height = `${sidebarItem.clientHeight}px`;
+                setStepHeight(sidebarItem.clientHeight);
+            }
         }, 50);
     }, []);
 

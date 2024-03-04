@@ -1,10 +1,8 @@
-import React from "react";
 import axios from "axios";
 import { Switch } from "antd";
 import "./Switch.scss";
-import Ripples from "react-ripples";
 
-function useSocket({ checked, event, url }) {
+function useSocket({ checked, url }: { checked: boolean; url: string }) {
     let state;
     if (checked) {
         state = "ON";
@@ -13,7 +11,7 @@ function useSocket({ checked, event, url }) {
     }
 
     axios
-        .post(url, null, { params: { value: state } }) // TODO убрать заглушку
+        .post(url, null, { params: { value: state } })
         .then((response) => {
             console.log(response.data);
         })
@@ -22,10 +20,10 @@ function useSocket({ checked, event, url }) {
         });
 }
 
-function MySwitch({ url }) {
+function MySwitch({ url }: { url: string }) {
     return (
         <Switch
-            onChange={(checked, event) => useSocket({ checked, event, url })}
+            onChange={(checked, _event) => useSocket({ checked, url })}
             className="MySwitch"
         />
     );

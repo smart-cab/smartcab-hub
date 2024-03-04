@@ -1,30 +1,28 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import "./Slider.scss";
 import Slider from "@mui/material/Slider";
-import Button from "@mui/material/Button";
 
-let position_cache = {};
+let position_cache = new Map();
 
-function MySlider({
-    title,
-    url,
-    min,
-    max,
-    current_value = (max - min) / 2,
-    step = 1,
-}) {
-    const [value, setValue] = useState(50);
+function MySlider({ title, url }: { title: string; url: string }) {
+    const [_value, setValue] = useState(50);
 
-    const handleChange = (event, newValue) => {
-        position_cache[url] = newValue;
+    const handleChange = (
+        _event: Event,
+        newValue: number | number[],
+        _number: number,
+    ) => {
+        if (Array.isArray(newValue)) {
+            return;
+        }
+
+        position_cache.set(url, newValue);
 
         setValue(newValue);
         axios
             .post(url, null, {
                 params: { field: "position", value: newValue },
-                // params: { field: "state", value: "ON" },
-            }) // TODO убрать заглушку
+            })
             .then((response) => {
                 console.log(response.data);
             })
@@ -37,7 +35,7 @@ function MySlider({
         <div>
             <p>{title}</p>
             <Slider
-                value={position_cache[url]}
+                value={position_cache.get(url)}
                 defaultValue={50}
                 onChange={handleChange}
                 step={10}

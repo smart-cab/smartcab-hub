@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import UPDATE_INTERVAL from "../config";
 import "./Sensor.scss";
 
 export default function Pressure() {
-    const [pressure, setPressure] = useState(0);
+    const [pressure, setPressure] = useState("- ");
 
     useEffect(() => {
         var timer = setInterval(() => {
@@ -15,7 +15,7 @@ export default function Pressure() {
                     if (answer == null) {
                         setPressure("- ");
                     } else {
-                        setPressure(Math.round(answer));
+                        setPressure(Math.round(answer).toString());
                     }
                 })
                 .catch((err) => console.log(err));

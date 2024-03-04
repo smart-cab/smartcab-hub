@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import UPDATE_INTERVAL from "../config";
 import "./Sensor.scss";
 import SensorWarning from "./SensorWarning";
 
 export default function Humidity() {
-    const [humidity, setHumidity] = useState(0);
+    const [humidity, setHumidity] = useState("- ");
 
     useEffect(() => {
         var timer = setInterval(() => {
@@ -16,7 +16,7 @@ export default function Humidity() {
                     if (answer == null) {
                         setHumidity("- ");
                     } else {
-                        setHumidity(Math.round(answer));
+                        setHumidity(Math.round(answer).toString());
                     }
                     // setHumidity(29)
                 })
@@ -28,7 +28,7 @@ export default function Humidity() {
         };
     });
 
-    if (humidity < 30) {
+    if (Number(humidity) < 30) {
         return (
             <div className="sensor">
                 <SensorWarning width="8%" />

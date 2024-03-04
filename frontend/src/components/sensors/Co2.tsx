@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import UPDATE_INTERVAL from "../config";
 import "./Sensor.scss";
 import SensorWarning from "./SensorWarning";
 
 export default function Co2() {
-    const [co2, setCo2] = useState(0);
+    const [co2, setCo2] = useState("- ");
 
     useEffect(() => {
         var timer = setInterval(() => {
@@ -16,7 +16,7 @@ export default function Co2() {
                     if (answer == null) {
                         setCo2("- ");
                     } else {
-                        setCo2(Math.round(answer));
+                        setCo2(Math.round(answer).toString());
                     }
                 })
                 .catch((err) => console.log(err));
@@ -27,7 +27,7 @@ export default function Co2() {
         };
     });
 
-    if (co2 > 400) {
+    if (Number(co2) > 400) {
         return (
             <div className="sensor">
                 <SensorWarning width="12%" />
@@ -38,7 +38,7 @@ export default function Co2() {
                         alt="co2"
                         width="55cm"
                         height="55cm"
-                        style={{ style: 11, marginRight: 0.3 + "cm" }}
+                        style={{ marginRight: 0.3 + "cm" }}
                     />
                 </div>
                 <h1 style={{ color: "black", zIndex: 11 }}>{co2}</h1>

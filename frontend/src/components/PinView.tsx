@@ -13,6 +13,17 @@ const ViewButton = ({
     accessibilityLabel,
     disabled,
     customTextStyle,
+}: {
+    activeOpacity: number;
+    onButtonPress: () => void;
+    buttonSize: number;
+    text: string;
+    customComponent: React.Component;
+    customViewStyle: object;
+    accessible: boolean;
+    accessibilityLabel: string;
+    disabled: boolean;
+    customTextStyle: string;
 }) => {
     return (
         <Pressable
@@ -57,6 +68,14 @@ const ViewInput = ({
     text,
     inputFilledStyle = { backgroundColor: "#000" },
     inputEmptyStyle = { backgroundColor: "#FFF" },
+}: {
+    showInputText: boolean;
+    inputTextStyle: object;
+    size: number;
+    customStyle: object;
+    text: string;
+    inputFilledStyle: object;
+    inputEmptyStyle: object;
 }) => {
     if (showInputText) {
         return (
@@ -155,7 +174,7 @@ const PinView = React.forwardRef(
             },
         };
 
-        const onButtonPressHandle = (key, value) => {
+        const onButtonPressHandle = (key: string, value: string) => {
             onButtonPress(key);
             if (input.length < pinLength) {
                 setInput(input + "" + value);
@@ -287,8 +306,8 @@ const PinView = React.forwardRef(
                             customViewStyle={customLeftButtonViewStyle}
                             customComponent={customLeftButton}
                             buttonSize={
-                                customRightButtonSize
-                                    ? customRightButtonSize
+                                customLeftButtonSize
+                                    ? customLeftButtonSize
                                     : buttonSize
                             }
                         />

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import UPDATE_INTERVAL from "../config";
 import "./Sensor.scss";
 import SensorWarning from "./SensorWarning";
 
 export default function Temp() {
-    const [temp, setTemp] = useState(0);
+    const [temp, setTemp] = useState("- ");
 
     useEffect(() => {
         var timer = setInterval(() => {
@@ -16,7 +16,7 @@ export default function Temp() {
                     if (answer == null) {
                         setTemp("- ");
                     } else {
-                        setTemp(Math.round(answer));
+                        setTemp(Math.round(answer).toString());
                     }
                 })
                 .catch((err) => console.log(err));
@@ -27,7 +27,7 @@ export default function Temp() {
         };
     });
 
-    if (temp > 24 || temp < 17) {
+    if (Number(temp) > 24 || Number(temp) < 17) {
         return (
             <div className="sensor">
                 <SensorWarning width="9%" />

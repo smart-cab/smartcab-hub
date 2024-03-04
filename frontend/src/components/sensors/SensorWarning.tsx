@@ -1,9 +1,6 @@
-// HighlightOverlay.js
+import "./SensorWarning.scss";
 
-import React from "react";
-import "./SensorWarning.scss"; // Создайте файл стилей для компонента
-
-function SensorWarning({ width }) {
+function SensorWarning({ width }: { width: string }) {
     return (
         <div
             className="sensor-warning"
