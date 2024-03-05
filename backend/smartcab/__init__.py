@@ -33,7 +33,7 @@ def get_secret_key():
         return file.read().rstrip()
 
 
-def registr_blueprints(app: Flask):
+def register_blueprints(app: Flask):
     for module in blueprints_modules:
         app.register_blueprint(module.blueprint)
 
