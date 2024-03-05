@@ -5,16 +5,12 @@ from flask import abort, request, Blueprint
 from paramiko import SSHException
 
 
-blueprint = Blueprint(
-    name="devices", 
-    import_name=__name__
-)
+blueprint = Blueprint(name="devices", import_name=__name__)
 
 
 @blueprint.route("/status", methods=["GET"])
 def status():
     return {"status": "ok"}
-
 
 
 @blueprint.route("/mqtt/<device_id>", methods=["GET"])
@@ -67,4 +63,3 @@ async def ssh_execute(device_id):
     return {
         "status": "ok",
     }
-

@@ -1,8 +1,10 @@
+import os
 import logging
 import smartcab
 import multiprocessing
 
 import gunicorn.app.base
+from smartcab import PROD
 from smartcab.data import db
 from threading import Thread
 from smartcab.interface import mqtt
@@ -32,7 +34,7 @@ class WSGIApplication(gunicorn.app.base.BaseApplication):
 def main() -> None:
     load_dotenv(find_dotenv())
 
-    app = smartcab.make_app()
+    logging.getLogger().setLevel(logging.DEBUG)
 
     db.global_init()
 
@@ -43,18 +45,26 @@ def main() -> None:
             f"Failed to connect to MQTT-broker: {e}. MQTT related queries won't be processed"
         )
 
-    smartcab.register_blueprints(app)
-
     mqttct = Thread(target=MQTTC.loop_forever)
     mqttct.daemon = True
     mqttct.start()
 
     WORKERS = (multiprocessing.cpu_count() * 2) + 1
 
-    WSGIApplication(
-        smartcab.make_app(),
-        {"bind": f"0.0.0.0:5000", "workers": WORKERS},
-    ).run()
+    app = smartcab.make_app()
+
+    if PROD:
+        logging.info("Running in production-mode - gunicorn server will be used")
+        WSGIApplication(
+            app,
+            {
+                "bind": f"0.0.0.0:5000",
+                "workers": WORKERS,
+            },
+        ).run()
+    else:
+        logging.info("Running in development-mode - flask standard server will be used")
+        app.run(host="0.0.0.0", port=5000, debug=True)
 
 
 if __name__ == "__main__":

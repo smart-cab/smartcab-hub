@@ -6,11 +6,9 @@ from flask_cors import CORS
 from smartcab.data.db import get_db_url
 from smartcab.api import statistic, devices
 
+PROD = os.getenv("PROD", "false") == "true"
 
-blueprints_modules = [
-    statistic,
-    devices,
-]
+BLUEPRINT_MODULES = {statistic, devices}
 
 
 def running_within_docker() -> bool:
@@ -33,39 +31,26 @@ def get_secret_key():
         return file.read().rstrip()
 
 
-def register_blueprints(app: Flask):
-    for module in blueprints_modules:
+def apply_blueprints(app: Flask):
+    for module in BLUEPRINT_MODULES:
         app.register_blueprint(module.blueprint)
 
 
 def make_app():
-    # Create app
     app = Flask(__name__)
-
-    # Set headings for API handels
-    CORS(app)
-
-    # Definition app mode
-    match os.getenv("FLASK_MODE"):
-        case "development":
-            debug = False
-        case "production":
-            debug = True
-        case _:
-            logging.warning("In .env file don't set FLASK_MODE")
-            debug = False
-
-    # set app config
+    app.logger.setLevel(logging.INFO)
     app.config.update(
         dict(
-            DEBUG=debug,
+            DEBUG=not PROD,
             DATABASE=get_db_url(),
             SECRET_KEY=get_secret_key(),
             ERROR_404_HELP=False,
         )
     )
-    app.logger.setLevel(logging.INFO)
-    logging.getLogger().setLevel(logging.DEBUG)
+
+    CORS(app)
+    apply_blueprints(app)
 
     logging.info("Application was created successfully")
+
     return app

@@ -33,8 +33,12 @@ services:
       - source: secret_key
     ports:
       - 5000:5000
+    environment:
+      - PROD=false
     networks:
       - default
+    volumes:
+      - "./backend:/app"
     stop_grace_period: 1s
 
   frontend:

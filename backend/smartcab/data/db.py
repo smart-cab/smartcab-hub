@@ -31,9 +31,11 @@ def global_init():
     if factory:
         return
 
-    init_filling = not os.path.isfile(f"{os.getenv('DB_FOLDER')}/{os.getenv('DB_NAME')}")
+    init_filling = not os.path.isfile(
+        f"{os.getenv('DB_FOLDER')}/{os.getenv('DB_NAME')}"
+    )
 
-    logging.info(f"db_url: {get_db_url()}")
+    logging.info(f"sqlite3_db_url: {get_db_url()}")
     engine = sa.create_engine(get_db_url(), echo=False)
     engine.update_execution_options(connect_args={"connect_timeout": 5})
     factory = orm.sessionmaker(bind=engine)
@@ -46,8 +48,9 @@ def global_init():
         from smartcab.data.eval_types import init_base_types
 
         init_base_types()
-        logging.info("Was created base eval types: beast, thinking, sleep, headboom")
+        logging.info("Base eval types were created: beast, thinking, sleep, headboom")
 
+    logging.info("SqLite3 database connection was initialized successfully")
 
 
 def remove():
