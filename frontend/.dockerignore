@@ -1,1 +1,8 @@
-node_modules
+*
+!public
+!src
+!index.html
+!package.json
+!tsconfig*
+!vite.config.ts
+!yarn.lock

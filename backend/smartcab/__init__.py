@@ -1,22 +1,35 @@
 import os
 import logging
 from flask import Flask
+from pathlib import Path
 from flask_cors import CORS
 from smartcab.data.db import get_db_url
 from smartcab.api import statistic, devices
 
 
 blueprints_modules = [
-    statistic, 
+    statistic,
     devices,
 ]
 
 
-def get_secret_key():
-    if not os.getenv("SECRET_KEY_FILE"):
-        logging.warning("In .env file don't set SECRET_KEY_FILE")
+def running_within_docker() -> bool:
+    cgroup = Path("/proc/self/cgroup")
+    return (
+        Path("/.dockerenv").is_file()
+        or cgroup.is_file()
+        and "docker" in cgroup.read_text()
+    )
 
-    with open(os.getenv("SECRET_KEY_FILE", "/run/secrets/secret_key")) as file:
+
+def get_secret_key():
+    if running_within_docker():
+        with open("/run/secrets/secret_key") as file:
+            return file.read().rstrip()
+
+    DEFAULT_PATH = ".secrets/secret_key"
+
+    with open(os.getenv("SECRET_KEY_FILE", DEFAULT_PATH)) as file:
         return file.read().rstrip()
 
 
