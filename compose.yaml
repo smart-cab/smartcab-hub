@@ -26,7 +26,7 @@ services:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
 
   backend:
-    container_name: hub-backend
+    container_name: backend
     build:
       context: ./backend
     secrets:
@@ -42,7 +42,7 @@ services:
     stop_grace_period: 1s
 
   frontend:
-    container_name: hub-frontend
+    container_name: frontend
     build:
       context: ./frontend
     ports:
