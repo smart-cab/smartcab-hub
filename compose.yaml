@@ -25,6 +25,13 @@ services:
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
 
+  redis:
+    container_name: redis
+    image: redis/redis-stack:latest
+    ports:
+      - 6379:6379 # Redis Stack port
+      - 8001:8001 # RedisInsight port
+
   backend:
     container_name: backend
     build:
@@ -38,7 +45,7 @@ services:
     networks:
       - default
     volumes:
-      - "./backend:/app"
+      - ./backend:/app
     stop_grace_period: 1s
 
   frontend:
@@ -50,8 +57,8 @@ services:
     networks:
       - default
     volumes:
-      - "./frontend:/app"
-      - "/app/node_modules"
+      - ./frontend:/app
+      - /app/node_modules
 
 secrets:
   secret_key:
