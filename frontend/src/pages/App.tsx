@@ -9,13 +9,13 @@ import Statistics from "../components/Statstics";
 
 export default function App() {
     const [connectionStatus, setConnectionStatus] = useState("ok");
-    const checkConnectionStatusMs = 5000;
+    const checkConnectionStatusMs = 500;
 
     useEffect(() => {
         const checkConnectionStatusInterval = setInterval(() => {
             setConnectionStatus("ok");
             axios
-                .get("/status")
+                .get("/api/status")
                 .catch((_) => setConnectionStatus("backend_down"));
             axios.get("/frontend_status").catch((error) => {
                 if (!error.response) setConnectionStatus("frontend_down");

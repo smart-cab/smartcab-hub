@@ -1,7 +1,7 @@
 {
     "name": "frontend_refactored",
-    "proxy": "http://127.0.0.1:5000/",
     "private": true,
+    "proxy": "http://backend:5000/",
     "version": "0.0.0",
     "type": "module",
     "scripts": {

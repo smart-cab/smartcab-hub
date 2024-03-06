@@ -6,6 +6,7 @@ import multiprocessing
 import gunicorn.app.base
 from smartcab import PROD
 from smartcab.data import db
+from smartcab.api.statistic import _get_statistic_by_group
 from threading import Thread
 from smartcab.dev import devmap
 from smartcab.interface import mqtt
@@ -51,8 +52,7 @@ def main() -> None:
             f"Failed to connect to MQTT-broker: {e}. MQTT related queries won't be processed"
         )
 
-    mqttct = Thread(target=MQTTC.loop_forever)
-    mqttct.daemon = True
+    mqttct = Thread(target=MQTTC.loop_forever, daemon=True)
     mqttct.start()
 
     WORKERS = (multiprocessing.cpu_count() * 2) + 1
@@ -70,6 +70,7 @@ def main() -> None:
         ).run()
     else:
         logging.info("Running in development-mode - flask standard server will be used")
+        # _get_statistic_by_group("all")
         app.run(host="0.0.0.0", port=5000, debug=True)
 
 

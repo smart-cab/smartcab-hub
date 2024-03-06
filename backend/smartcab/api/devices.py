@@ -10,6 +10,7 @@ blueprint = Blueprint(name="devices", import_name=__name__)
 
 @blueprint.route("/status", methods=["GET"])
 def status():
+    print("000000000000000000000")
     return {"status": "ok"}
 
 

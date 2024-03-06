@@ -1,6 +1,12 @@
 import { PieChart } from "@mui/x-charts/PieChart";
+import { BarChart } from '@mui/x-charts/BarChart';
+import { LineChart } from '@mui/x-charts/LineChart';
 import { Paper } from "@mui/material";
 import Header from "./Header";
+
+// function addColorToStatisticData(colorSettings) {
+//     for (const [key, value] of colorSettings)
+// }
 
 const paperStyle = {
     display: "flex",
@@ -33,7 +39,7 @@ export default function Statistics() {
                 }}
             >
                 <Paper style={paperStyle}>
-                    <h3>Оценки урока</h3>
+                    <h3>За всё время</h3>
                     <PieChart
                         series={[
                             {
@@ -73,6 +79,41 @@ export default function Statistics() {
                         ]}
                         width={400}
                         height={300}
+                    />
+                </Paper>
+                <Paper style={paperStyle}>
+                    <h3>Последние 3 дня</h3>
+                    <BarChart
+                        xAxis={[{ scaleType: 'band', data: ['group A', 'group B', 'group C' ] }]}
+                      series={[{ data: [4, 3, 5] }, { data: [9, 1, 6] }, { data: [2, 5, 6] }, { data: [2, 5, 6] }]}
+                      width={500}
+                      height={300}
+                    />
+                </Paper>
+                <Paper style={paperStyle}>
+                    <h3>Неделю</h3>
+                    <LineChart
+                      xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }]}
+                      series={[
+                        {
+                          data: [2, 3, 5.5, 8.5, 1.5, 5, 1, 4, 3, 8],
+                          showMark: ({ index }) => index % 2 === 0,
+                        },
+                        {
+                          data: [9, 3, 8.5, 7.5, 1.5, 5, 2, 9, 3, 2],
+                          showMark: ({ index }) => index % 2 === 0,
+                        },
+                        {
+                          data: [5, 6, 8.5, 9.5, 5.5, 4, 3, 9, 3, 2],
+                          showMark: ({ index }) => index % 2 === 0,
+                        },
+                        {
+                          data: [1, 1, 2.5, 3.5, 4.5, 5, 7, 8, 9, 2],
+                          showMark: ({ index }) => index % 2 === 0,
+                        },
+                      ]}
+                      width={500}
+                      height={300}
                     />
                 </Paper>
             </div>

@@ -11,13 +11,6 @@ export default defineConfig({
         port: 3000,
         watch: {
             usePolling: true,
-        },
-        proxy: {
-            "/api": {
-                target: "https://backend:5000",
-                changeOrigin: false,
-                secure: false,
-            },
-        },
+        }
     },
 });
