@@ -7,6 +7,7 @@ import gunicorn.app.base
 from smartcab import PROD
 from smartcab.data import db
 from threading import Thread
+from smartcab.dev import devmap
 from smartcab.interface import mqtt
 from dotenv import find_dotenv, load_dotenv
 from smartcab.interface.mqtt import MQTTC, MQTTConnectionError
@@ -31,10 +32,15 @@ class WSGIApplication(gunicorn.app.base.BaseApplication):
         return self.application
 
 
+DEVMAP_FILE_PATH = os.path.join(os.getcwd(), "devmap.yaml")
+
+
 def main() -> None:
     load_dotenv(find_dotenv())
 
     logging.getLogger().setLevel(logging.DEBUG)
+
+    devmap.append_from_file(DEVMAP_FILE_PATH)
 
     db.global_init()
 

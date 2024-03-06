@@ -1,73 +1,43 @@
-from typing import Any, Iterable, Optional
+import yaml
+import json
 
-from smartcab import interface
+from redis import Redis
 
-
-class Device:
-    def __init__(self, interfaces: Iterable[interface.Interface]):
-        self.interfaces = interfaces
-
-    def get_interface(self, cls) -> Any:
-        return next(
-            filter(lambda interface: type(interface) is cls, self.interfaces), None
-        )
+from smartcab.interface import MQTT, SSH
 
 
-DEVICES = {
-    "sensors1": Device(
-        interfaces=(
-            interface.MQTT(
-                addr="zigbee2mqtt/0x54ef441000779c83",
-                subscribe=True,
-                data_unpacker=lambda data: {
-                    "battery": int(data["battery"]),
-                    "temperature": int(data["temperature"]),
-                    "humidity": int(data["humidity"]),
-                    "pressure": int(data["pressure"]),
-                },
-            ),
-        ),
-    ),
-    "sensors2": Device(
-        interfaces=(
-            interface.MQTT(
-                addr="zigbee2mqtt/0xa4c138971597b830",
-                subscribe=True,
-                data_unpacker=lambda data: {
-                    "co2": int(data["co2"]),
-                    "temperature": int(data["temperature"]),
-                    "humidity": int(data["humidity"]),
-                },
-            ),
-        ),
-    ),
-    "power_socket1": Device(
-        interfaces=(
-            interface.MQTT(
-                addr="zigbee2mqtt/0xa4c1382d21ae8016",
-            ),
-        ),
-    ),
-    "curtains_roller1": Device(
-        interfaces=(
-            interface.MQTT(
-                addr="zigbee2mqtt/0x54ef441000841506",
-            ),
-        ),
-    ),
-    "pc1": Device(interfaces=(interface.SSH(addr="192.168.1.180"),)),
-    "pc2": Device(interfaces=(interface.SSH(addr="192.168.2.13"),)),
-    "pc3": Device(interfaces=(interface.SSH(addr="192.168.1.176"),)),
-    "pc4": Device(interfaces=(interface.SSH(addr="192.168.1.174"),)),
-    "pc5": Device(interfaces=(interface.SSH(addr="192.168.1.186"),)),
-    "pc6": Device(interfaces=(interface.SSH(addr="192.168.1.187"),)),
-    "pc7": Device(interfaces=(interface.SSH(addr="192.168.1.183"),)),
-    "pc8": Device(interfaces=(interface.SSH(addr="192.168.1.184"),)),
-    "pc9": Device(interfaces=(interface.SSH(addr="192.168.1.190"),)),
-    "pc10": Device(interfaces=(interface.SSH(addr="192.168.1.201"),)),
-    "pc11": Device(interfaces=(interface.SSH(addr="192.168.1.178"),)),
-    "pc12": Device(interfaces=(interface.SSH(addr="192.168.1.185"),)),
-    "pc13": Device(interfaces=(interface.SSH(addr="192.168.1.189"),)),
-    "pc14": Device(interfaces=(interface.SSH(addr="192.168.1.177"),)),
-    "pc15": Device(interfaces=(interface.SSH(addr="192.168.1.193"),)),
-}
+_INTERFACE_MAPPINGS = {"mqtt": MQTT, "ssh": SSH}
+
+
+class DeviceMap:
+    def __init__(self):
+        self._db = Redis(host="redis", port=6379, decode_responses=True)
+
+    def append_from_file(self, path):
+        with open(path) as file:
+            object = yaml.load(file, Loader=yaml.Loader)
+            for key, value in object.items():
+                self._db.hset(key, mapping=value)
+                self._db.hset(key, "data", "{}")
+
+    def get_data(self, device_id, interface_id):
+        name = f"{device_id}/{interface_id}"
+        return json.loads(self._db.hget(name, "data"))
+
+    def update_data(self, device_id, interface_name, data):
+        name = f"{device_id}/{interface_name}"
+        self._db.hset(name, "data", json.dumps(data, indent=None))
+
+    def _get_interface(self, name):
+        return _INTERFACE_MAPPINGS[name.split("/")[1]](**self._db.hgetall(name))
+
+    def get_interface(self, device_id, interface_name):
+        name = f"{device_id}/{interface_name}"
+        return self._get_interface(name)
+
+    def interfaces(self, interface_name):
+        for name in self._db.keys(f"*/{interface_name}"):
+            yield self._get_interface(name)
+
+
+devmap = DeviceMap()

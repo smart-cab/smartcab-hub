@@ -1,0 +1,40 @@
+sensors1/mqtt:
+  addr: zigbee2mqtt/0x54ef441000779c83
+  flags: subscribe
+sensors2/mqtt:
+  addr: zigbee2mqtt/0xa4c138971597b830
+  flags: subscribe
+power_sockets1/mqtt:
+  addr: zigbee2mqtt/0xa4c1382d21ae8016
+curtains_roller1/mqtt:
+  addr: zigbee2mqtt/0x54ef441000841506
+pc1/ssh:
+  addr: 192.168.1.180
+pc2/ssh:
+  addr: 192.168.2.13
+pc3/ssh:
+  addr: 192.168.1.176
+pc4/ssh:
+  addr: 192.168.1.174
+pc5/ssh:
+  addr: 192.168.1.186
+pc6/ssh:
+  addr: 192.168.1.187
+pc7/ssh:
+  addr: 192.168.1.183
+pc8/ssh:
+  addr: 192.168.1.184
+pc9/ssh:
+  addr: 192.168.1.190
+pc10/ssh:
+  addr: 192.168.1.201
+pc11/ssh:
+  addr: 192.168.1.178
+pc12/ssh:
+  addr: 192.168.1.185
+pc13/ssh:
+  addr: 192.168.1.189
+pc14/ssh:
+  addr: 192.168.1.177
+pc15/ssh:
+  addr: 192.168.1.193

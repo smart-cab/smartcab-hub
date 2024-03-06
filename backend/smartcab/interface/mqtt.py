@@ -1,14 +1,13 @@
 import json
 import logging
 
-from smartcab import interface
+from smartcab.dev import devmap
 import paho.mqtt.client as mqtt
-from smartcab.dev import DEVICES
 from paho.mqtt import MQTTException
 
 MQTTC = mqtt.Client()
 
-BROKER_URL = "192.168.43.107"
+BROKER_URL = "mosquitto"
 BROKER_PORT = 1883
 
 
@@ -41,8 +40,7 @@ def on_disconnect(client, userdata, rc):
 def on_message(client, userdata, message):
     data = json.loads(message.payload.decode())
 
-    for device in DEVICES.values():
-        mqtti = device.get_interface(interface.MQTT)
+    for mqtti in devmap.interfaces("mqtt"):
         if mqtti is None or mqtti.addr != message.topic:
             continue
         mqtti.unpack_data(data)
@@ -56,8 +54,7 @@ def setup_client_hooks():
 
 
 def apply_subscriptions():
-    for device in DEVICES.values():
-        mqtti = device.get_interface(interface.MQTT)
+    for mqtti in devmap.interfaces("mqtt"):
         if mqtti is None or not mqtti.subscribe:
             continue
         MQTTC.subscribe(mqtti.addr)

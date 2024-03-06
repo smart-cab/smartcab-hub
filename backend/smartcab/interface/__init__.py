@@ -1,45 +1,28 @@
-import logging
-
-from smartcab.interface.ssh import SSHConnectionError
+import json
 
 
 class Interface:
-    def __init__(self, addr):
+    def __init__(self, addr, data):
+        if data is None:
+            self._data = {}
+        elif data is dict:
+            self._data = data
+        elif data is str:
+            self._data = json.loads(data)
         self.addr = addr
-        self._data = {}
-
-    def get_data(self):
-        return self._data
-
-    def update_data(self, data: dict):
-        self._data = data
 
 
 class MQTT(Interface):
-    def __init__(
-        self, data_unpacker=lambda data: data, subscribe=False, *args, **kwargs
-    ):
+    def __init__(self, flags=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._data = {}
-        self._data_unpacker = data_unpacker
-        self.subscribe = subscribe
-
-    def unpack_data(self, data):
-        self._data = self._data_unpacker(data)
+        self.flags = set() if flags is None else flags.split(",")
+        self.subscribe = "subscribe" in self.flags
 
     def set(self, value, field=None):
         from .mqtt import MQTTC
 
         query = f"{self.addr}/set" + ("" if field is None else f"/{field}")
         MQTTC.publish(query, value)
-
-    def update_data(self, data: dict):
-        for field, value in data.items():
-            self.set(field, value)
-
-
-class WakeOnWifi(Interface):
-    pass
 
 
 class SSH(Interface):

@@ -2,7 +2,6 @@
 #
 # This one is located inside a special Docker container runned by Docker Compose.
 
-
 # allow new devices to join
 permit_join: true
 
@@ -17,7 +16,7 @@ mqtt:
   base_topic: zigbee2mqtt
 
   # MQTT server URL
-  server: mqtt://localhost
+  server: mqtt://mosquitto
 
 # Serial settings
 serial:

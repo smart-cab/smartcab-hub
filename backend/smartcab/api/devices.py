@@ -1,5 +1,5 @@
 # import firewall
-from smartcab.dev import DEVICES
+from smartcab.dev import devmap
 from smartcab import interface
 from flask import abort, request, Blueprint
 from paramiko import SSHException
@@ -15,27 +15,12 @@ def status():
 
 @blueprint.route("/mqtt/<device_id>", methods=["GET"])
 def mqtt_get(device_id):
-    device = DEVICES.get(device_id, None)
-    if device is None:
-        abort(404)
-
-    mqtti = device.get_interface(interface.MQTT)
-    if mqtti is None:
-        abort(404)
-
-    return {"status": "ok"} | mqtti.get_data()
+    return {"status": "ok"} | devmap.get_data(device_id, "mqtt")
 
 
 @blueprint.route("/mqtt/<device_id>", methods=["POST"])
 def mqtt_publish(device_id):
-    device = DEVICES.get(device_id, None)
-    if device is None:
-        abort(404)
-
-    mqtti = device.get_interface(interface.MQTT)
-    if mqtti is None:
-        abort(404)
-
+    mqtti = devmap.get_interface(device_id, "mqtt")
     field = request.args.get("field", None)
     value = request.args.get("value")
     mqtti.set(value, field)
@@ -45,11 +30,7 @@ def mqtt_publish(device_id):
 # @firewall.apply
 @blueprint.route("/ssh/<device_id>", methods=["GET"])
 async def ssh_execute(device_id):
-    device = DEVICES.get(device_id, None)
-    if device is None:
-        abort(404)
-
-    sshi = device.get_interface(interface.SSH)
+    sshi = devmap.get_interface(device_id, "ssh")
     command = request.args.get("command", None)
 
     if sshi is None or command is None:
