@@ -15,7 +15,8 @@ export default function App() {
         const checkConnectionStatusInterval = setInterval(() => {
             setConnectionStatus("ok");
             axios
-                .get("/api/status")
+                .get("http://localhost:5000/status")
+                .then((r) => console.log(r))
                 .catch((_) => setConnectionStatus("backend_down"));
             axios.get("/frontend_status").catch((error) => {
                 if (!error.response) setConnectionStatus("frontend_down");
