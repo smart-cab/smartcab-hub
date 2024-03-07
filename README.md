@@ -15,19 +15,10 @@ git clone https://hub.mos.ru/smartcab-team/smartcab-hub
 ```bash
 cd smartcab-hub
 ```
-Теперь нужно будет поднять два сервиса: backend, frontend
-3. Запуск frontend-а (из корневой директории проекта):
+
+3. Запуск всех сервисов через Docker Compose (из корневой директории проекта):
 ```bash
-cd frontend
-yarn install
-yarn start dev
+docker compose up
 ```
-4. Запуск backend-а (из корневой директории проекта):
-```bash
-cd backend
-poetry install
-poetry run python smartcab
-```
-Но перед тем как выполнит эти команды нужно настроить и запустить zigbee2mqtt, это вы можете делать следуя [этой](https://www.zigbee2mqtt.io/guide/getting-started/) инструкции. А затем передать необхоимые поля в конфигурацию хаба
 
 
