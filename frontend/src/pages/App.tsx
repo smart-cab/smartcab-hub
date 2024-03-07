@@ -6,6 +6,7 @@ import { Snackbar, Alert } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Statistics from "../components/Statstics";
+import ConferenceManager from "../components/ConferenceManager";
 
 export default function App() {
     const [connectionStatus, setConnectionStatus] = useState("ok");
@@ -33,7 +34,10 @@ export default function App() {
                         <Route path="/" element=<ControlPage /> />
                         <Route path="/frontend_status" element=<div /> />
                         <Route path="/statistics" element=<Statistics /> />
-                        <Route path="/conference" element=<div /> />
+                        <Route
+                            path="/conference"
+                            element=<ConferenceManager />
+                        />
                     </Route>
                 </Routes>
             </BrowserRouter>
