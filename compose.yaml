@@ -31,14 +31,14 @@ services:
 
   redis:
     container_name: redis
-    image: redis:alpine3.17
+    image: redis:alpine3.18
     networks:
       - default
     ports:
       - 6379:6379
 
   backend:
-    container_name: backend
+    container_name: schub-backend
     build:
       context: ./backend
     secrets:
@@ -54,7 +54,7 @@ services:
     stop_grace_period: 1s
 
   frontend:
-    container_name: frontend
+    container_name: schub-frontend
     build:
       context: ./frontend
     ports:
@@ -72,3 +72,4 @@ secrets:
 networks:
   default:
     driver: bridge
+    name: smartcab
