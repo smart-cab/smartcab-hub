@@ -1,9 +1,10 @@
 from datetime import datetime
 import sqlalchemy as sa
+from sqlalchemy_serializer import SerializerMixin
 from .db import SqlAlchemyBase
 
 
-class Backup(SqlAlchemyBase):
+class Backup(SqlAlchemyBase, SerializerMixin):
     __tablename__ = "backups"
 
     id = sa.Column(sa.Integer, primary_key=True)

@@ -6,7 +6,6 @@ import multiprocessing
 import gunicorn.app.base
 from smartcab import PROD
 from smartcab.data import db
-from smartcab.api.statistic import _get_statistic_by_group
 from threading import Thread
 from smartcab.dev import devmap
 from smartcab.interface import mqtt

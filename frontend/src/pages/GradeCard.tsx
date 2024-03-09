@@ -6,9 +6,8 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
 function Voting(code: string) {
-    console.log(code);
     axios
-        .post("/new_vote", {
+        .post("http://localhost:5000/new_vote", {
             params: {
                 vote: code,
             },

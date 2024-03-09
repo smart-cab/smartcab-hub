@@ -1,9 +1,10 @@
 import sqlalchemy as sa
+from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.orm import relationship
 from .db import SqlAlchemyBase
 
 
-class Indicator(SqlAlchemyBase):
+class Indicator(SqlAlchemyBase, SerializerMixin):
     __tablename__ = "indicators"
 
     id = sa.Column(sa.Integer, primary_key=True)
