@@ -43,7 +43,7 @@ def get_statistic_grouping_by_category() -> dict:
                     return {"status": "error: invalid period in get lesson grade group by cagtegory"}
             result[eval_type.label] = grade_entries.count()
 
-    return {"status": "ok"} | result
+    return {"status": "ok"} | {"data": result}
 
 
 # @blueprint.route("/get_statistic/lesson_grade/group_by_category_on_time_slot")

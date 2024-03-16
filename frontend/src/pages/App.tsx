@@ -17,7 +17,7 @@ export default function App() {
             setConnectionStatus("ok");
             axios
                 .get("http://localhost:5000/status")
-                .then((r) => console.log(r))
+                // .then((_) => console.log(""))
                 .catch((_) => setConnectionStatus("backend_down"));
             axios.get("/frontend_status").catch((error) => {
                 if (!error.response) setConnectionStatus("frontend_down");
