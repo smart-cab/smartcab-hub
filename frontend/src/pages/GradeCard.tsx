@@ -127,7 +127,7 @@ function GradeCard({ isShown, setIsShown }) {
 
                     <Snackbar
                         open={open}
-                        autoHideDuration={1000}
+                        autoHideDuration={10000000}
                         onClose={handleClose}
                         anchorOrigin={{
                             vertical: "bottom",
@@ -138,7 +138,12 @@ function GradeCard({ isShown, setIsShown }) {
                         <Alert
                             onClose={handleClose}
                             severity="success"
-                            style={{ borderRadius: "30px" }}
+                            style={{
+                                flexDirection: "row",
+                                borderRadius: "30px",
+                                height: "50px",
+                                width: "300px",
+                            }}
                         >
                             Спасибо! Ваш голос учтён
                         </Alert>
