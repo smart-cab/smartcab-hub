@@ -1,6 +1,9 @@
 import datetime
-from flask import  request, Blueprint
-from sqlalchemy_serializer.serializer import logging
+import logging
+import os
+from pandas import ExcelWriter, read_sql
+from flask import  Response, request, Blueprint, send_file
+from sqlalchemy import inspect, create_engine
 from smartcab.data import db
 from smartcab.data.eval_types import EvalType
 from smartcab.data.lessons import Lesson
@@ -10,7 +13,6 @@ blueprint = Blueprint(
     name="statistic", 
     import_name=__name__
 )
-
 
 @blueprint.route("/new_vote", methods=["GET", "POST"])
 def new_vote():
@@ -25,6 +27,19 @@ def new_vote():
         db_sess.commit()
         
     return {"status": "ok"}
+
+
+@blueprint.route("/export_statistics")
+def export_statistics() -> Response:
+    engine = create_engine(db.get_db_url())
+    table_names = inspect(engine).get_table_names()
+    excel_file_path = 'db/dump.xlsx'
+    with ExcelWriter(excel_file_path) as writer:
+        for table_name in table_names:
+            query = f"SELECT * FROM {table_name}"
+            df = read_sql(query, engine)
+            df.to_excel(writer, sheet_name=table_name, index=False)
+    return send_file(f"../{excel_file_path}", as_attachment=True)
 
 
 @blueprint.route("/get_statistic/lesson_grade/group_by_category")
@@ -44,6 +59,7 @@ def get_statistic_grouping_by_category() -> dict:
             result[eval_type.label] = grade_entries.count()
 
     return {"status": "ok"} | {"data": result}
+
 
 
 # @blueprint.route("/get_statistic/lesson_grade/group_by_category_on_time_slot")

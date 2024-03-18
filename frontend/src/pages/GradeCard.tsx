@@ -96,9 +96,7 @@ function GradeCard({ isShown, setIsShown }) {
 
     const freezePage = () => {
         setFrozen(true);
-        setTimeout(() => {
-            setFrozen(false);
-        }, 2000);
+        setTimeout(() => {setFrozen(false)}, 2000);
     };
 
     return (
@@ -127,7 +125,7 @@ function GradeCard({ isShown, setIsShown }) {
 
                     <Snackbar
                         open={open}
-                        autoHideDuration={10000000}
+                        autoHideDuration={2100}
                         onClose={handleClose}
                         anchorOrigin={{
                             vertical: "bottom",
