@@ -68,6 +68,7 @@ function CallCard({ isShown, setIsShown }) {
 
 export default function SOSButton() {
     const [isShown, setIsShown] = useState(false);
+    //
     return (
         <>
             <CallCard isShown={isShown} setIsShown={setIsShown} />
