@@ -18,6 +18,7 @@
         "react-dom": "^18.2.0",
         "react-native-web": "^0.19.10",
         "react-router-dom": "^6.22.2",
+        "react-sip": "^0.8.1",
         "react-timer-hook": "^3.0.7"
     },
     "devDependencies": {
