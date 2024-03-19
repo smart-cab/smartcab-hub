@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 // pin is entered
 export default function Pin({ lockedView, locked, setLocked }) {
     const location = useLocation();
-    const correctCode = "1234";
+    const correctCode = "1";
     const attemptsToBlock = 3;
     const blockForSeconds = 59;
     const unlockForSeconds = 60000000;
