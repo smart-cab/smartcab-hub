@@ -26,18 +26,27 @@ function call(endpoint: string) {
         },
         failed: function (e) {
             console.log("call failed with cause: " + e.data.cause);
-            socket.disconnect();
+            ua.terminateSessions();
             ua.stop();
+            socket.disconnect();
         },
         ended: function (e) {
             console.log("call ended with cause: " + e.data.cause);
-            socket.disconnect();
+            ua.terminateSessions();
             ua.stop();
+            socket.disconnect();
         },
         confirmed: function (e) {
             console.log("call confirmed");
         },
+        addstream: (e) => {
+            console.log("Add stream (event handlers)");
+            audio.srcObject = e.stream;
+            audio.play();
+        },
     };
+
+    const audio = new window.Audio();
 
     let options = {
         eventHandlers: eventHandlers,
@@ -45,7 +54,43 @@ function call(endpoint: string) {
     };
 
     let session = ua.call(endpoint, options);
-    console.log(session);
+
+    if (session.connection) {
+        console.log("Connection is valid");
+
+        session.connection.addEventListener("addstream", (e) => {
+            console.log("Add stream");
+            audio.srcObject = e.stream;
+            audio.play();
+        });
+
+        session.on("addstream", function (e) {
+            // set remote audio stream (to listen to remote audio)
+            // remoteAudio is <audio> element on page
+            const remoteAudio = audio;
+            remoteAudio.src = window.URL.createObjectURL(e.stream);
+            remoteAudio.play();
+        });
+        session.connection.addEventListener("peerconnection", (e) => {
+            console.log("Peer connection");
+            audio.srcObject = e.stream;
+            audio.play();
+        });
+    } else {
+        console.log("Connection is null");
+    }
+
+    ua.on("newRTCSession", (data) => {
+        console.log("New RTC Session");
+        const session = data.session;
+        session.on("addstream", function (e) {
+            // set remote audio stream (to listen to remote audio)
+            // remoteAudio is <audio> element on page
+            const remoteAudio = audio;
+            remoteAudio.src = window.URL.createObjectURL(e.stream);
+            remoteAudio.play();
+        });
+    });
 
     return { session: session, ua: ua, socket: socket };
 }
@@ -76,7 +121,7 @@ function CallCard({ isShown, setIsShown, callContext }) {
                 setIsShown(false);
             }
         }
-    }, [callContext.session]);
+    });
 
     return (
         isShown && (
