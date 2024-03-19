@@ -1,26 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Hiding from "./Hiding";
 import MyButton from "./controls/Button";
 import * as JsSIP from "jssip";
+import { Box, CircularProgress, LinearProgress, Button } from "@mui/material";
 import "./VoIP.scss";
 
-function call() {
-    // Create our JsSIP instance and run it:
-    var socket = new JsSIP.WebSocketInterface(
+function call(endpoint: string) {
+    let socket = new JsSIP.WebSocketInterface(
         "wss://192.168.0.51:8089/asterisk/ws",
     );
-    var configuration = {
+
+    let configuration = {
         sockets: [socket],
         uri: "sip:103@192.168.0.51",
         password: "NnBJeGFVUU5KSU09",
     };
 
-    var ua = new JsSIP.UA(configuration);
+    let ua = new JsSIP.UA(configuration);
 
     ua.start();
 
-    // Register callbacks to desired call events
-    var eventHandlers = {
+    let eventHandlers = {
         progress: function (e) {
             console.log("call is in progress");
         },
@@ -35,47 +35,95 @@ function call() {
         },
     };
 
-    var options = {
+    let options = {
         eventHandlers: eventHandlers,
         mediaConstraints: { audio: true, video: false },
     };
 
-    var session = ua.call("100", options);
-    console.log("YAY!");
+    let session = ua.call(endpoint, options);
+
+    return session;
 }
 
-function CallCard({ isShown, setIsShown }) {
-    const CloseHiding = () => {
-        setIsShown(false);
+function CallCard({ isShown, setIsShown, session }) {
+    const callStatusHumanMap = {
+        unset: "Звонок не начат",
+        progress: "Звоним...",
+        established: "Говорите!",
+        ended: "Звонок завершен",
     };
+    const [callStatus, setCallStatus] = useState("unset"); // unset | progress | established | ended
+
+    useEffect(() => {
+        if (session == null) {
+            setCallStatus("unset");
+        } else {
+            if (session.isInProgress()) {
+                setCallStatus("progress");
+            } else if (session.isEstablished()) {
+                setCallStatus("established");
+            } else if (session.isEnded()) {
+                setCallStatus("ended");
+                setIsShown(false);
+            }
+        }
+    }, [session]);
 
     return (
-        <div>
-            {isShown && (
-                <div>
-                    <Hiding layout="all" />
+        isShown && (
+            <div>
+                <Hiding layout="all" />
 
-                    <button className="CloseHiding" onClick={CloseHiding}>
-                        <img width="45px" src="close2.png" alt="close2" />
-                    </button>
-
-                    <div className="card">Test</div>
+                <div className="card">
+                    <div className="card-content">
+                        <h1 className="callStatus">
+                            {callStatusHumanMap[callStatus]}
+                        </h1>
+                        <div className="progress">
+                            {callStatus == "progress" && <CircularProgress />}
+                            {callStatus == "established" && (
+                                <Box sx={{ width: "100%" }}>
+                                    <LinearProgress />
+                                </Box>
+                            )}
+                        </div>
+                        <div className="controllers">
+                            <Button
+                                variant="outlined"
+                                onClick={() => {
+                                    setIsShown(false);
+                                    if (session != null) {
+                                        session.terminate();
+                                    }
+                                }}
+                            >
+                                Завершить звонок
+                            </Button>
+                        </div>
+                    </div>
                 </div>
-            )}
-        </div>
+            </div>
+        )
     );
 }
 
 export default function SOSButton() {
     const [isShown, setIsShown] = useState(false);
-    //
+    const [session, setSession] = useState(null);
     return (
         <>
-            <CallCard isShown={isShown} setIsShown={setIsShown} />
+            <CallCard
+                isShown={isShown}
+                setIsShown={setIsShown}
+                session={session}
+            />
             <MyButton
                 text={"SOS"}
                 button_type={"ButtonRed"}
-                hook={() => setIsShown(true)}
+                hook={() => {
+                    setIsShown(true);
+                    setSession(call("100"));
+                }}
             />
         </>
     );

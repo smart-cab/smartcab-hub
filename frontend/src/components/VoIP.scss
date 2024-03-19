@@ -2,22 +2,19 @@
     position: fixed;
     background-color: #ffffff00;
     border-width: 0;
-    z-index: 500;
+    z-index: 50;
     left: 96.5%;
     top: 0.9%;
 }
 
 .card {
-    display: flex;
-    justify-content: center;
-
     position: fixed;
     left: 50%;
     top: 50%;
-    z-index: 500;
+    z-index: 50;
     transform: translate(-50%, -50%);
-    width: 90%;
-    height: 90%;
+    width: 40%;
+    height: 40%;
 
     background-color: white;
     color: #272727;
@@ -27,5 +24,23 @@
     border-color: tomato;
     border-style: solid;
     transition: 200ms;
-    // max-width: 380px;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+}
+
+.progress {
+    // transform: scale(3);
+    display: flex;
+    margin-top: 25px;
+    justify-content: center;
+}
+
+.controllers {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
 }
