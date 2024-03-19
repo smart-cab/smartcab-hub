@@ -1,43 +1,81 @@
+import { useState } from "react";
+import Hiding from "./Hiding";
 import MyButton from "./controls/Button";
-import { SipProvider } from "react-sip";
+import * as JsSIP from "jssip";
+import "./VoIP.scss";
+
+function call() {
+    // Create our JsSIP instance and run it:
+    var socket = new JsSIP.WebSocketInterface(
+        "wss://192.168.0.51:8089/asterisk/ws",
+    );
+    var configuration = {
+        sockets: [socket],
+        uri: "sip:103@192.168.0.51",
+        password: "NnBJeGFVUU5KSU09",
+    };
+
+    var ua = new JsSIP.UA(configuration);
+
+    ua.start();
+
+    // Register callbacks to desired call events
+    var eventHandlers = {
+        progress: function (e) {
+            console.log("call is in progress");
+        },
+        failed: function (e) {
+            console.log("call failed with cause: " + e.data.cause);
+        },
+        ended: function (e) {
+            console.log("call ended with cause: " + e.data.cause);
+        },
+        confirmed: function (e) {
+            console.log("call confirmed");
+        },
+    };
+
+    var options = {
+        eventHandlers: eventHandlers,
+        mediaConstraints: { audio: true, video: false },
+    };
+
+    var session = ua.call("100", options);
+    console.log("YAY!");
+}
+
+function CallCard({ isShown, setIsShown }) {
+    const CloseHiding = () => {
+        setIsShown(false);
+    };
+
+    return (
+        <div>
+            {isShown && (
+                <div>
+                    <Hiding layout="all" />
+
+                    <button className="CloseHiding" onClick={CloseHiding}>
+                        <img width="45px" src="close2.png" alt="close2" />
+                    </button>
+
+                    <div className="card">Test</div>
+                </div>
+            )}
+        </div>
+    );
+}
 
 export default function SOSButton() {
+    const [isShown, setIsShown] = useState(false);
     return (
-        <SipProvider
-            host="192.168.0.51"
-            port={8089}
-            pathname="/asterisk/ws" // Path in socket URI (e.g. wss://sip.example.com:7443/ws); "" by default
-            user="103"
-            password="NnBJeGFVUU5KSU09" // usually required (e.g. from ENV or props)
-            autoRegister={true} // true by default, see jssip.UA option register
-            autoAnswer={false} // automatically answer incoming calls; false by default
-            iceRestart={false} // force ICE session to restart on every WebRTC call; false by default
-            sessionTimersExpires={120} // value for Session-Expires header; 120 by default
-            /* extraHeaders={
-             *     {
-             *         // optional sip headers to send
-             *         register: ["X-Foo: foo", "X-Bar: bar"],
-             *         invite: ["X-Foo: foo2", "X-Bar: bar2"],
-             *     }
-             * } */
-            /* iceServers={[
-             *     // optional
-             *     { urls: ["stun:a.example.com", "stun:b.example.com"] },
-             *     {
-             *         urls: "turn:example.com",
-             *         username: "foo",
-             *         credential: "1234",
-             *     },
-             * ]} */
-            debug={false} // whether to output events to console; false by default
-        >
+        <>
+            <CallCard isShown={isShown} setIsShown={setIsShown} />
             <MyButton
                 text={"SOS"}
                 button_type={"ButtonRed"}
-                hook={() => {
-                    SipProvider.prototype.getChildContext().startCall("103");
-                }}
+                hook={() => setIsShown(true)}
             />
-        </SipProvider>
+        </>
     );
 }

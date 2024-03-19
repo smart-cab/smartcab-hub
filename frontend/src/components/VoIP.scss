@@ -1,0 +1,31 @@
+.CloseHiding {
+    position: fixed;
+    background-color: #ffffff00;
+    border-width: 0;
+    z-index: 500;
+    left: 96.5%;
+    top: 0.9%;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 500;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 90%;
+
+    background-color: white;
+    color: #272727;
+    padding: 20px;
+    border-radius: 10px;
+    border: 0px;
+    border-color: tomato;
+    border-style: solid;
+    transition: 200ms;
+    // max-width: 380px;
+}
