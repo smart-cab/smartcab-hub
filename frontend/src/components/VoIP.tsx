@@ -26,9 +26,13 @@ function call(endpoint: string) {
         },
         failed: function (e) {
             console.log("call failed with cause: " + e.data.cause);
+            socket.disconnect();
+            ua.stop();
         },
         ended: function (e) {
             console.log("call ended with cause: " + e.data.cause);
+            socket.disconnect();
+            ua.stop();
         },
         confirmed: function (e) {
             console.log("call confirmed");
@@ -41,11 +45,16 @@ function call(endpoint: string) {
     };
 
     let session = ua.call(endpoint, options);
+    console.log(session);
 
-    return session;
+    return { session: session, ua: ua, socket: socket };
 }
 
-function CallCard({ isShown, setIsShown, session }) {
+function CallCard({ isShown, setIsShown, callContext }) {
+    if (callContext == null) {
+        return <></>;
+    }
+
     const callStatusHumanMap = {
         unset: "Звонок не начат",
         progress: "Звоним...",
@@ -55,19 +64,19 @@ function CallCard({ isShown, setIsShown, session }) {
     const [callStatus, setCallStatus] = useState("unset"); // unset | progress | established | ended
 
     useEffect(() => {
-        if (session == null) {
+        if (callContext == null) {
             setCallStatus("unset");
         } else {
-            if (session.isInProgress()) {
+            if (callContext.session.isInProgress()) {
                 setCallStatus("progress");
-            } else if (session.isEstablished()) {
+            } else if (callContext.session.isEstablished()) {
                 setCallStatus("established");
-            } else if (session.isEnded()) {
+            } else if (callContext.session.isEnded()) {
                 setCallStatus("ended");
                 setIsShown(false);
             }
         }
-    }, [session]);
+    }, [callContext.session]);
 
     return (
         isShown && (
@@ -92,8 +101,10 @@ function CallCard({ isShown, setIsShown, session }) {
                                 variant="outlined"
                                 onClick={() => {
                                     setIsShown(false);
-                                    if (session != null) {
-                                        session.terminate();
+                                    if (callContext != null) {
+                                        callContext.ua.terminateSessions();
+                                        callContext.ua.stop();
+                                        callContext.socket.disconnect();
                                     }
                                 }}
                             >
@@ -109,20 +120,20 @@ function CallCard({ isShown, setIsShown, session }) {
 
 export default function SOSButton() {
     const [isShown, setIsShown] = useState(false);
-    const [session, setSession] = useState(null);
+    const [callContext, setCallContext] = useState(null);
     return (
         <>
             <CallCard
                 isShown={isShown}
                 setIsShown={setIsShown}
-                session={session}
+                callContext={callContext}
             />
             <MyButton
                 text={"SOS"}
                 button_type={"ButtonRed"}
                 hook={() => {
                     setIsShown(true);
-                    setSession(call("100"));
+                    setCallContext(call("100"));
                 }}
             />
         </>
