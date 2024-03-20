@@ -3904,7 +3904,7 @@ jsonfile@^4.0.0:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-jssip@^3.2.15:
+jssip@^3.10.1:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/jssip/-/jssip-3.10.1.tgz#eccecf2cfabfed5a5578e3bb4f69b0451ccf6ec0"
   integrity sha512-V82JW6fZF02VInHMKgTO9oEXbkZwqezGj9SNaQPh+btriC16FfSPsRBnD+i9IhU9C86JA9le6Z8AZirYnbKi2g==
@@ -5204,14 +5204,6 @@ react-shallow-renderer@^16.15.0:
   dependencies:
     object-assign "^4.1.1"
     react-is "^16.12.0 || ^17.0.0 || ^18.0.0"
-
-react-sip@^0.8.1:
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/react-sip/-/react-sip-0.8.1.tgz#e198ec6ddd56b8f397fe5138fdd7ff0241e9e51c"
-  integrity sha512-mkuxsg8RJlipUMcPDAKVk34Yx6aJxVuC5PMtdIBE6/GdPKp7UqU1+/NDQB+4gc3spinHY49L9JqWmJTDI49w+Q==
-  dependencies:
-    jssip "^3.2.15"
-    prop-types "^15.6.2"
 
 react-timer-hook@^3.0.7:
   version "3.0.7"
