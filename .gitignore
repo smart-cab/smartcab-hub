@@ -3,6 +3,8 @@
 *.sqlite
 *.sqlite3
 *.db
+backend/db
+backend/db/*
 backend/db/dump.xlsx
 __pycache__
 .idea

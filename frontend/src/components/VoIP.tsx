@@ -128,7 +128,7 @@ function CallCard({ isShown, setIsShown, callContext }) {
             <div>
                 <Hiding layout="all" />
 
-                <div className="card">
+                <div className="voip-card">
                     <div className="card-content">
                         <h1 className="callStatus">
                             {callStatusHumanMap[callStatus]}
