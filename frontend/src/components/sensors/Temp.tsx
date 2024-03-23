@@ -18,6 +18,7 @@ export default function Temp() {
                     } else {
                         setTemp(Math.round(answer).toString());
                     }
+                    // setTemp(22);
                 })
                 .catch((err) => console.log(err));
         }, UPDATE_INTERVAL);

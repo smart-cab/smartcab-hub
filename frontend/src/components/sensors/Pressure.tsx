@@ -17,6 +17,7 @@ export default function Pressure() {
                     } else {
                         setPressure(Math.round(answer).toString());
                     }
+                    // setPressure(1012)
                 })
                 .catch((err) => console.log(err));
         }, UPDATE_INTERVAL);

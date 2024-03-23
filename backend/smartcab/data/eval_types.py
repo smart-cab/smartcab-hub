@@ -1,6 +1,5 @@
 import sqlalchemy as sa
 from sqlalchemy_serializer import SerializerMixin
-from sqlalchemy.orm import relationship
 from smartcab.data import db
 
 from .db import SqlAlchemyBase

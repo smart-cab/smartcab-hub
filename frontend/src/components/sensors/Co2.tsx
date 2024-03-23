@@ -18,6 +18,7 @@ export default function Co2() {
                     } else {
                         setCo2(Math.round(answer).toString());
                     }
+                    // setCo2(305)
                 })
                 .catch((err) => console.log(err));
         }, UPDATE_INTERVAL);

@@ -166,7 +166,12 @@ export default function ControlPage() {
                     <Alert
                         severity={alertStatus}
                         action=<div />
-                        style={{ borderRadius: "30px" }}
+                        style={{ 
+                            display: "flex", 
+                            flexDirection: "row",
+                            borderRadius: "30px", 
+                            width: "410px", 
+                            height: "70px" }}
                     >
                         {alertText}
                     </Alert>

@@ -29,7 +29,7 @@ def new_vote():
     return {"status": "ok"}
 
 
-@blueprint.route("/export_statistics")
+@blueprint.route("/export_statistics", methods=["GET"])
 def export_statistics() -> Response:
     engine = create_engine(db.get_db_url())
     table_names = inspect(engine).get_table_names()
@@ -42,7 +42,7 @@ def export_statistics() -> Response:
     return send_file(f"../{excel_file_path}", as_attachment=True)
 
 
-@blueprint.route("/get_statistic/lesson_grade/group_by_category")
+@blueprint.route("/get_statistic/lesson_grade/group_by_category", methods=["GET"])
 def get_statistic_grouping_by_category() -> dict:
     period = str(request.args.get("period"))
     result = {}

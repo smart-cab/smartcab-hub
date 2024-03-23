@@ -4,11 +4,15 @@ from flask import Flask
 from pathlib import Path
 from flask_cors import CORS
 from smartcab.data.db import get_db_url
-from smartcab.api import statistic, devices
+from smartcab.api import statistic, devices, schedule
 
 PROD = os.getenv("PROD", "false") == "true"
 
-BLUEPRINT_MODULES = {statistic, devices}
+BLUEPRINT_MODULES = {
+    statistic, 
+    devices, 
+    schedule,
+}
 
 
 def running_within_docker() -> bool:

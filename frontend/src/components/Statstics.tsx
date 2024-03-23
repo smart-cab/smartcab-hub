@@ -1,7 +1,7 @@
 import { PieChart } from "@mui/x-charts/PieChart";
 import React, { useState, useEffect } from "react";
-// import { BarChart } from "@mui/x-charts/BarChart";
-// import { LineChart } from "@mui/x-charts/LineChart";
+import { BarChart } from "@mui/x-charts/BarChart";
+import { LineChart } from "@mui/x-charts/LineChart";
 import { Paper } from "@mui/material";
 import Header from "./Header";
 import axios from "axios";
@@ -117,10 +117,18 @@ export default function Statistics() {
                         value={groupByCategoryPeriod}
                         onChange={handelSetGroupByCategryPeriod}
                     >
-                        <MenuItem value={1}><b>За день</b></MenuItem>
-                        <MenuItem value={7}><b>За неделю</b></MenuItem>
-                        <MenuItem value={30}><b>За месяц</b></MenuItem>
-                        <MenuItem value={"*"}><b>За всё время</b></MenuItem>
+                        <MenuItem value={1}>
+                            <b>За день</b>
+                        </MenuItem>
+                        <MenuItem value={7}>
+                            <b>За неделю</b>
+                        </MenuItem>
+                        <MenuItem value={30}>
+                            <b>За месяц</b>
+                        </MenuItem>
+                        <MenuItem value={"*"}>
+                            <b>За всё время</b>
+                        </MenuItem>
                     </Select>
                     {statisticsData && (
                         <MyPieChart
@@ -128,7 +136,7 @@ export default function Statistics() {
                         />
                     )}
                 </Paper>
-                {/*
+                
                 <Paper style={paperStyle}>
                     <h3>Последние 3 дня</h3>
                     <BarChart
@@ -174,7 +182,7 @@ export default function Statistics() {
                         height={300}
                     />
                 </Paper>
-                */}
+                
             </div>
         </div>
     );

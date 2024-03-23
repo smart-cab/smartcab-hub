@@ -5,6 +5,7 @@ import axios from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
+
 function Voting(code: string) {
     axios
         .post("http://localhost:5000/new_vote", {
@@ -96,7 +97,9 @@ function GradeCard({ isShown, setIsShown }) {
 
     const freezePage = () => {
         setFrozen(true);
-        setTimeout(() => {setFrozen(false)}, 2000);
+        setTimeout(() => {
+            setFrozen(false);
+        }, 2000);
     };
 
     return (
