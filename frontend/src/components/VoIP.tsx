@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Hiding from "./Hiding";
 import MyButton from "./controls/Button";
 import * as JsSIP from "jssip";
 import { Box, CircularProgress, LinearProgress, Button } from "@mui/material";
+import Webcam from "react-webcam";
 import "./VoIP.scss";
 
 function call(endpoint: string) {
@@ -119,10 +120,21 @@ function CallCard({ isShown, setIsShown, callContext }) {
                 setCallStatus("established");
             } else if (callContext.session.isEnded()) {
                 setCallStatus("ended");
-                setIsShown(false);
+                /* setIsShown(false); */
             }
         }
     });
+
+    const webcamRef = useRef(null);
+
+    const [shotSrc, setShotSrc] = useState(null);
+
+    const captureWebcamShot = useCallback(() => {
+        const shotSrc = webcamRef.current.getScreenshot();
+        setShotSrc(shotSrc);
+    }, [webcamRef]);
+
+    useEffect(() => isShown && captureWebcamShot(), isShown);
 
     return (
         isShown && (
@@ -141,6 +153,10 @@ function CallCard({ isShown, setIsShown, callContext }) {
                                     <LinearProgress />
                                 </Box>
                             )}
+                        </div>
+                        <img src={shotSrc} alt="webcamShot" />
+                        <div className="webcam">
+                            <Webcam height={200} width={200} ref={webcamRef} />
                         </div>
                         <div className="controllers">
                             <Button

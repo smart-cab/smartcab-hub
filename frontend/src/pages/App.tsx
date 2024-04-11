@@ -15,10 +15,9 @@ export default function App() {
     useEffect(() => {
         const checkConnectionStatusInterval = setInterval(() => {
             setConnectionStatus("ok");
-            axios
-                .get("http://localhost:5000/status")
-                // .then((_) => console.log(""))
-                .catch((_) => setConnectionStatus("backend_down"));
+            axios.get("http://localhost:5000/status");
+            // .then((_) => console.log(""))
+            // .catch((_) => setConnectionStatus("backend_down"));
             axios.get("/frontend_status").catch((error) => {
                 if (!error.response) setConnectionStatus("frontend_down");
             });
