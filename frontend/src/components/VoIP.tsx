@@ -114,6 +114,7 @@ function CallCard({ isShown, setIsShown, callContext }) {
         } else {
             if (callContext.session.isInProgress()) {
                 setCallStatus("progress");
+                setCallStatus("established");
             } else if (callContext.session.isEstablished()) {
                 setCallStatus("established");
             } else if (callContext.session.isEnded()) {

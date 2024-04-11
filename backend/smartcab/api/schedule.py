@@ -44,10 +44,12 @@ def export_schedule():
 
 @blueprint.route("/get_schedule", methods=["GET"])
 def get_schedule():
-    print("-------------")
+    result = []
     with db.session() as db_sess:
-        print("0000000000000", 
-        db_sess.query(Schedule).all()
-        )
-    return {}
+        for lesson in db_sess.query(Schedule).all():
+            result.append(
+                {"start": f"{lesson.lesson_start}", 
+                 "end": f"{lesson.lesson_end}"}
+            )
+    return {"status": "ok"} | {"data": result}
         

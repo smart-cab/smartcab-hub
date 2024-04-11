@@ -18,7 +18,7 @@ export default function Humidity() {
                     } else {
                         setHumidity(Math.round(answer).toString());
                     }
-                    // setHumidity(29)
+                    setHumidity(29)
                 })
                 .catch((err) => console.log(err));
         }, UPDATE_INTERVAL);
