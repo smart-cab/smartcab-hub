@@ -9,7 +9,6 @@ __pycache__
 .idea
 .vscode
 node_modules
-poetry.lock
 venv
 /.pnp
 .pnp.js
