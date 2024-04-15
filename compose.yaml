@@ -14,6 +14,7 @@ services:
     devices:
       # Location of CC2531 USB sniffer
       - /dev/tty0:/dev/ttyACM0
+    restart: always
 
   mosquitto:
     container_name: mosquitto
@@ -26,6 +27,7 @@ services:
       - 9001:9001
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+    restart: always
 
   redis:
     container_name: redis
@@ -34,6 +36,7 @@ services:
       - default
     ports:
       - 6379:6379
+    restart: always
 
   backend:
     container_name: schub-backend
@@ -50,6 +53,7 @@ services:
     volumes:
       - ./backend:/app
     stop_grace_period: 1s
+    restart: always
 
   frontend:
     container_name: schub-frontend
@@ -62,6 +66,7 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+    restart: always
 
 secrets:
   secret_key:
