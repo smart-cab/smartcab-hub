@@ -19,8 +19,9 @@ function parseTimeFromString(time: string) {
     return lessonTime;
 }
 
-export default function AppLayout({ pinLocked, setPinLocked }) {
+export default function AppLayout() {
     const [schedule, setSchedule] = useState([]);
+    const [pinLocked, setPinLocked] = useState(true);
     const [isShown, setIsShown] = useState(false);
     const scheduleActivated = useRef(false);
 
@@ -81,15 +82,14 @@ export default function AppLayout({ pinLocked, setPinLocked }) {
 
     return (
         <div style={{ paddingLeft: 250 }}>
-            <Header />
             <Sidebar pinLocked={pinLocked} setPinLocked={setPinLocked} />
-            {/* <Pin
+            <Header />
+            <GradeCard isShown={isShown} setIsShown={setIsShown} />
+            <Pin
                 locked={pinLocked}
                 setLocked={setPinLocked}
                 lockedView=<Outlet />
-            /> */}
-            <Outlet />
-            <GradeCard isShown={isShown} setIsShown={setIsShown} />
+            />
         </div>
     );
 }

@@ -8,7 +8,6 @@ import { BACKADDR } from "../const";
 import axios from "axios";
 import Statistics from "../components/Statstics";
 import ConferenceManager from "../components/ConferenceManager";
-import Pin from "../components/Pin";
 
 export default function App() {
     const [connectionStatus, setConnectionStatus] = useState("ok");
@@ -27,40 +26,18 @@ export default function App() {
         return () => clearInterval(checkConnectionStatusInterval);
     }, []);
 
-    const [pinLocked, setPinLocked] = useState(true);
-
     return (
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <AppLayout
-                                pinLocked={pinLocked}
-                                setPinLocked={setPinLocked}
-                            />
-                        }
-                    >
-                        <Route
-                            path="/"
-                            element=<Pin
-                                locked={pinLocked}
-                                setLocked={setPinLocked}
-                                lockedView=<ControlPage />
-                            />
-                        />
+                    <Route path="/" element={<AppLayout />}>
+                        <Route path="/" element=<ControlPage /> />
+                        <Route path="/frontend_status" element=<div /> />
                         <Route path="/statistics" element=<Statistics /> />
                         <Route
                             path="/conference"
-                            element=<Pin
-                                locked={pinLocked}
-                                setLocked={setPinLocked}
-                                lockedView=<ConferenceManager />
-                            />
+                            element=<ConferenceManager />
                         />
-
-                        <Route path="/frontend_status" element=<div /> />
                     </Route>
                 </Routes>
             </BrowserRouter>
