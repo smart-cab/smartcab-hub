@@ -18,11 +18,10 @@ blueprint = Blueprint(
 def new_vote():
     vote = request.get_json()["params"]["vote"]
     with db.session() as db_sess:
-        try:
-            type_id = db_sess.query(EvalType).filter(EvalType.label == vote).first().id
-        except AttributeError:
+        if not (eval_type := db_sess.query(EvalType).filter(EvalType.label == vote).first()):
             logging.error(f"Not find '{vote}' in eval_types table when doing new vote")
             return {"status": "error: incorrect evaluation type"}
+        type_id = eval_type.id
         db_sess.add(Lesson(eval_id=type_id))
         db_sess.commit()
         

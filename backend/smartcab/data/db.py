@@ -9,6 +9,8 @@ import sqlalchemy.ext.declarative as dec
 import sqlalchemy.orm as orm
 from sqlalchemy.orm import Session
 
+from smartcab.utils import get_default_eval_types
+
 
 SqlAlchemyBase = dec.declarative_base()
 
@@ -46,9 +48,14 @@ def global_init():
 
     if init_filling:
         from smartcab.data.eval_types import init_base_types
+        from smartcab.data.hub_password import init_base_password
 
         init_base_types()
-        logging.info("Base eval types were created: beast, thinking, sleep, headboom")
+        if (base_type := get_default_eval_types()):
+            logging.info(f"Base eval types were created: {', '.join(base_type)[:-2]}")
+
+        init_base_password()
+        logging.info(f"Base was set: {os.getenv("INIT_PASSWORD")}")
 
     logging.info("SqLite3 database connection was initialized successfully")
 

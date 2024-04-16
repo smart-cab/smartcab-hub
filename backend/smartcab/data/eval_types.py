@@ -1,5 +1,6 @@
 import sqlalchemy as sa
 from sqlalchemy_serializer import SerializerMixin
+from smartcab.utils import get_default_eval_types
 from smartcab.data import db
 
 from .db import SqlAlchemyBase
@@ -13,14 +14,8 @@ class EvalType(SqlAlchemyBase, SerializerMixin):
 
 
 def init_base_types():
-    beast = EvalType(label="beast")
-    thinking = EvalType(label="thinking")
-    sleep = EvalType(label="sleep")
-    headboom = EvalType(label="headboom")
-
     with db.session() as db_sess:
-        db_sess.add(beast)
-        db_sess.add(thinking)
-        db_sess.add(sleep)
-        db_sess.add(headboom)
+        for type_label in get_default_eval_types():
+            eval_type = EvalType(label=type_label)
+            db_sess.add(eval_type)
         db_sess.commit()
