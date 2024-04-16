@@ -76,13 +76,21 @@ export default function Pin({ lockedView, locked, setLocked }) {
         }
     }, [enteredPin]);
 
+    const [pathSkipped, setPathSkipped] = useState(false);
+
     useEffect(() => {
+        if (location.pathname == "/statistics") {
+            setLocked(false);
+            setPathSkipped(true);
+            return;
+        }
         setLocked(true);
+        setPathSkipped(false);
         lockTimer.restart(lockExpiryTimestamp, false);
     }, [location]);
 
     useEffect(() => {
-        if (!locked) {
+        if (!locked && !pathSkipped) {
             setBlocked(false);
             setFailedAttempts(0);
             lockTimer.restart(lockExpiryTimestamp, true);
