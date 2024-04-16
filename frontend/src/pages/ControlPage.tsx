@@ -83,42 +83,20 @@ export default function ControlPage() {
                     <Grid container spacing={2}>
                         <Grid item xs={6}>
                             <Paper>
-                                <p>Свет 1</p>
+                                <p>Свет</p>
                                 <MySwitch url="/mqtt/power_socket1" />
                             </Paper>
                         </Grid>
                         <Grid item xs={6}>
                             <Paper>
                                 <MySlider
-                                    title="Шторы 1"
+                                    title="Шторы"
                                     url="/mqtt/curtains_roller1"
-                                />
-                            </Paper>
-                        </Grid>
-                    </Grid>{" "}
-                    <Grid container spacing={2}>
-                        <Grid item xs={6}>
-                            <Paper>
-                                <p>Свет 2</p>
-                                <MySwitch url="" />
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Paper>
-                                <MyButton
-                                    text={"Включить компы"}
-                                    button_type={"ButtonBlue"}
-                                    hook={() => 1}
                                 />
                             </Paper>
                         </Grid>
                     </Grid>
                     <Grid container spacing={2}>
-                        <Grid item xs={6}>
-                            <Paper>
-                                <MySlider title="Шторы 2" url="" />
-                            </Paper>
-                        </Grid>
                         <Grid item xs={6}>
                             <Paper>
                                 <MyButton
@@ -126,14 +104,6 @@ export default function ControlPage() {
                                     button_type={"ButtonBlue"}
                                     hook={() => setIsShown(true)}
                                 />
-                            </Paper>
-                        </Grid>
-                    </Grid>
-                    <Grid container spacing={2}>
-                        <Grid item xs={6}>
-                            <Paper>
-                                <p>Свет 3</p>
-                                <MySwitch url="" />
                             </Paper>
                         </Grid>
                         <Grid item xs={6}>
@@ -166,12 +136,13 @@ export default function ControlPage() {
                     <Alert
                         severity={alertStatus}
                         action=<div />
-                        style={{ 
-                            display: "flex", 
+                        style={{
+                            display: "flex",
                             flexDirection: "row",
-                            borderRadius: "30px", 
-                            width: "410px", 
-                            height: "70px" }}
+                            borderRadius: "30px",
+                            width: "410px",
+                            height: "70px",
+                        }}
                     >
                         {alertText}
                     </Alert>
