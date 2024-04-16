@@ -5,7 +5,14 @@ import * as JsSIP from "jssip";
 import { Box, CircularProgress, LinearProgress, Button } from "@mui/material";
 import "./VoIP.scss";
 
-function call(ip: string, endpoint: string, password: string) {
+const callStatusHumanMap = {
+    unset: "Звонок не начат",
+    progress: "Звоним...",
+    established: "Говорите!",
+    ended: "Звонок завершен",
+};
+
+function call({ ip, endpoint, password, setCallStatus, setIsShown }) {
     let socket = new JsSIP.WebSocketInterface(`wss://${ip}:8089/asterisk/ws`);
 
     let configuration = {
@@ -21,21 +28,27 @@ function call(ip: string, endpoint: string, password: string) {
     let eventHandlers = {
         progress: function (e) {
             console.log("call is in progress");
+            setCallStatus("progress");
         },
         failed: function (e) {
-            console.log("call failed with cause: " + e.data.cause);
+            console.log("call failed with cause:", e.cause);
             ua.terminateSessions();
             ua.stop();
             socket.disconnect();
+            setCallStatus("unset");
+            setIsShown(false);
         },
         ended: function (e) {
-            console.log("call ended with cause: " + e.data.cause);
+            console.log("call ended with cause:", e.cause);
             ua.terminateSessions();
             ua.stop();
             socket.disconnect();
+            setCallStatus("unset");
+            setIsShown(false);
         },
         confirmed: function (e) {
             console.log("call confirmed");
+            setCallStatus("established");
         },
         addstream: (e) => {
             console.log("Add stream (event handlers)");
@@ -93,34 +106,7 @@ function call(ip: string, endpoint: string, password: string) {
     return { session: session, ua: ua, socket: socket };
 }
 
-function CallCard({ isShown, setIsShown, callContext }) {
-    if (callContext == null) {
-        return <></>;
-    }
-
-    const callStatusHumanMap = {
-        unset: "Звонок не начат",
-        progress: "Звоним...",
-        established: "Говорите!",
-        ended: "Звонок завершен",
-    };
-    const [callStatus, setCallStatus] = useState("unset"); // unset | progress | established | ended
-
-    useEffect(() => {
-        if (callContext == null) {
-            setCallStatus("unset");
-        } else {
-            if (callContext.session.isInProgress()) {
-                setCallStatus("progress");
-            } else if (callContext.session.isEstablished()) {
-                setCallStatus("established");
-            } else if (callContext.session.isEnded()) {
-                setCallStatus("ended");
-                setIsShown(false);
-            }
-        }
-    });
-
+function CallCard({ isShown, setIsShown, callContext, callStatus }) {
     return (
         isShown && (
             <div>
@@ -134,7 +120,7 @@ function CallCard({ isShown, setIsShown, callContext }) {
                         <div className="progress">
                             {callStatus == "progress" && <CircularProgress />}
                             {callStatus == "established" && (
-                                <Box sx={{ width: "100%" }}>
+                                <Box sx={{ width: 180 }}>
                                     <LinearProgress />
                                 </Box>
                             )}
@@ -164,8 +150,9 @@ function CallCard({ isShown, setIsShown, callContext }) {
 export default function SOSButton() {
     const [isShown, setIsShown] = useState(false);
     const [callContext, setCallContext] = useState(null);
+    const [callStatus, setCallStatus] = useState("unset");
 
-    const ip = "192.168.1.97";
+    const ip = "192.168.200.14";
     const endpoint = "100";
     const password = "LzJxci8yWnV4Z1k9";
 
@@ -175,13 +162,22 @@ export default function SOSButton() {
                 isShown={isShown}
                 setIsShown={setIsShown}
                 callContext={callContext}
+                callStatus={callStatus}
             />
             <MyButton
                 text={"SOS"}
                 button_type={"ButtonRed"}
                 hook={() => {
                     setIsShown(true);
-                    setCallContext(call(ip, endpoint, password));
+                    setCallContext(
+                        call({
+                            ip,
+                            endpoint,
+                            password,
+                            setCallStatus,
+                            setIsShown,
+                        }),
+                    );
                 }}
             />
         </>
