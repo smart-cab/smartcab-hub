@@ -4,7 +4,6 @@ import { BarChart } from "@mui/x-charts/BarChart";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { Paper } from "@mui/material";
 import { BACKADDR } from "../const";
-import Header from "./Header";
 import axios from "axios";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
@@ -100,7 +99,6 @@ export default function Statistics() {
 
     return (
         <div>
-            <Header />
             <div
                 style={{
                     display: "flex",

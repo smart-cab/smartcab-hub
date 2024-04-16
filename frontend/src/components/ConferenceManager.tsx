@@ -1,9 +1,6 @@
-import Header from "./Header";
-
-export default function Statistics() {
+export default function ConferenceManager() {
     return (
         <div>
-            <Header />
             <div
                 style={{
                     display: "flex",

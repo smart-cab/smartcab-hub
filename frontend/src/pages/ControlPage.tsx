@@ -8,8 +8,6 @@ import {
     ThemeProvider,
     createTheme,
 } from "@mui/material";
-
-import Header from "../components/Header";
 import MySwitch from "../components/controls/Switch";
 import MyButton from "../components/controls/Button";
 import MySlider from "../components/controls/Slider";
@@ -78,7 +76,6 @@ export default function ControlPage() {
         <ThemeProvider theme={theme}>
             <div style={{ marginBottom: "5em" }}>
                 <GradeCard isShown={isShown} setIsShown={setIsShown} />
-                <Header />
                 <div className="TabPage">
                     <Grid container spacing={2}>
                         <Grid item xs={6}>

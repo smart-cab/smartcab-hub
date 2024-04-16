@@ -5,6 +5,7 @@ import Pin from "../components/Pin";
 import { useState, useRef, useEffect } from "react";
 import GradeCard from "./GradeCard";
 import { BACKADDR } from "../const";
+import Header from "../components/Header";
 
 const GRADE_CARD_LIFETIME = 1;
 const GRADE_CARD_START_DELTA = 1;
@@ -82,6 +83,7 @@ export default function AppLayout() {
     return (
         <div style={{ paddingLeft: 250 }}>
             <Sidebar pinLocked={pinLocked} setPinLocked={setPinLocked} />
+            <Header />
             <GradeCard isShown={isShown} setIsShown={setIsShown} />
             <Pin
                 locked={pinLocked}
