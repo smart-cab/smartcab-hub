@@ -49,13 +49,17 @@ def global_init():
     if init_filling:
         from smartcab.data.eval_types import init_base_types
         from smartcab.data.hub_password import init_base_password
+        from smartcab.data.admins import init_admins
 
         init_base_types()
         if (base_type := get_default_eval_types()):
-            logging.info(f"Base eval types were created: {', '.join(base_type)[:-2]}")
+            logging.info(f"Base eval types were created: {', '.join(base_type)}")
 
         init_base_password()
-        logging.info(f"Base was set: {os.getenv("INIT_PASSWORD")}")
+        logging.info(f"Base password was set: {os.getenv("INIT_PASSWORD")}")
+
+        added_admins = init_admins()
+        logging.info(f"Admins was set: {", ".join(added_admins)}")
 
     logging.info("SqLite3 database connection was initialized successfully")
 

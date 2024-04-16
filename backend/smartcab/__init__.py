@@ -9,6 +9,7 @@ from smartcab.api import (
     devices, 
     schedule, 
     hub_password,
+    admission,
 )
 
 PROD = os.getenv("PROD", "false") == "true"
@@ -18,6 +19,7 @@ BLUEPRINT_MODULES = {
     devices, 
     schedule,
     hub_password,
+    admission,
 }
 
 def running_within_docker() -> bool:
