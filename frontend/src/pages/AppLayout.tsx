@@ -35,7 +35,7 @@ export default function AppLayout() {
                 "http://localhost:5000/get_schedule",
                 { params: { } },
             );
-            console.log(response.data.data)
+            // console.log(response.data.data)
             setSchedule(response.data.data);
         } catch (error) {
             console.error("Error fetching data:", error);

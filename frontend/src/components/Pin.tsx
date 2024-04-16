@@ -1,4 +1,5 @@
 import "./Pin.scss";
+import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Text } from "react-native-web";
 import ReactNativePinView from "./PinView.jsx";
@@ -9,7 +10,7 @@ import { useLocation } from "react-router-dom";
 // pin is entered
 export default function Pin({ lockedView, locked, setLocked }) {
     const location = useLocation();
-    const correctCode = "1";
+    const [correctCode, setCorrectCode] = useState("1");
     const attemptsToBlock = 3;
     const blockForSeconds = 59;
     const unlockForSeconds = 60000000;
@@ -18,6 +19,24 @@ export default function Pin({ lockedView, locked, setLocked }) {
     const [enteredPin, setEnteredPin] = useState("");
     const [failedAttempts, setFailedAttempts] = useState(0);
     const [blocked, setBlocked] = useState(false);
+
+    const passwordSync = async () => {
+        try {
+            const response = await axios.get(
+                "http://localhost:5000/get_password",
+                { params: {} },
+            );
+            // console.log(response.data.password)
+            setCorrectCode(response.data.password);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    }
+
+    setTimeout(passwordSync, 1000)
+    useEffect(() => {
+          passwordSync();
+    }, []);
 
     const blockExpiryTimestamp = new Date();
     blockExpiryTimestamp.setSeconds(
