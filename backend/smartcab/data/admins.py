@@ -18,7 +18,7 @@ def init_admins() -> list[str]:
     was_added = []
     with db.session() as db_sess:
         while (phone := os.getenv(f"ADMINS_PHONE_{id}")):
-            new_admin = AdminsPhone(phone=phone)
+            new_admin = Admin(phone=phone)
             db_sess.add(new_admin)
             db_sess.commit()
             was_added.append(phone)
