@@ -1,9 +1,8 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Hiding from "./Hiding";
 import MyButton from "./controls/Button";
 import * as JsSIP from "jssip";
 import { Box, CircularProgress, LinearProgress, Button } from "@mui/material";
-import Webcam from "react-webcam";
 import "./VoIP.scss";
 
 function call(ip: string, endpoint: string, password: string) {
@@ -11,7 +10,7 @@ function call(ip: string, endpoint: string, password: string) {
 
     let configuration = {
         sockets: [socket],
-        uri: `sip:${endpoint}@192.168.1.97`,
+        uri: `sip:${endpoint}@${ip}`,
         password: password,
     };
 
@@ -113,7 +112,6 @@ function CallCard({ isShown, setIsShown, callContext }) {
         } else {
             if (callContext.session.isInProgress()) {
                 setCallStatus("progress");
-                setCallStatus("established");
             } else if (callContext.session.isEstablished()) {
                 setCallStatus("established");
             } else if (callContext.session.isEnded()) {
@@ -122,17 +120,6 @@ function CallCard({ isShown, setIsShown, callContext }) {
             }
         }
     });
-
-    const webcamRef = useRef(null);
-
-    const [shotSrc, setShotSrc] = useState(null);
-
-    const captureWebcamShot = useCallback(() => {
-        const shotSrc = webcamRef.current.getScreenshot();
-        setShotSrc(shotSrc);
-    }, [webcamRef]);
-
-    useEffect(() => isShown && captureWebcamShot(), isShown);
 
     return (
         isShown && (
