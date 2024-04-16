@@ -4,6 +4,7 @@ import AppLayout from "./AppLayout";
 import ControlPage from "./ControlPage";
 import { Snackbar, Alert } from "@mui/material";
 import { useEffect, useState } from "react";
+import { BACKADDR } from "../const";
 import axios from "axios";
 import Statistics from "../components/Statstics";
 import ConferenceManager from "../components/ConferenceManager";
@@ -15,7 +16,7 @@ export default function App() {
     useEffect(() => {
         const checkConnectionStatusInterval = setInterval(() => {
             setConnectionStatus("ok");
-            axios.get("http://localhost:5000/status");
+            axios.get(`${BACKADDR}/status`);
             // .then((_) => console.log(""))
             // .catch((_) => setConnectionStatus("backend_down"));
             axios.get("/frontend_status").catch((error) => {

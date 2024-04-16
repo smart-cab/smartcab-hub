@@ -4,10 +4,10 @@ import Sidebar from "../components/Sidebar";
 import Pin from "../components/Pin";
 import { useState, useRef, useEffect } from "react";
 import GradeCard from "./GradeCard";
+import { BACKADDR } from "../const";
 
-
-const GRADE_CARD_LIFETIME = 1
-const GRADE_CARD_START_DELTA = 1
+const GRADE_CARD_LIFETIME = 1;
+const GRADE_CARD_START_DELTA = 1;
 
 function parseTimeFromString(time: string) {
     const [hours, minutes] = time.split(":");
@@ -15,9 +15,8 @@ function parseTimeFromString(time: string) {
     lessonTime.setHours(parseInt(hours));
     lessonTime.setMinutes(parseInt(minutes));
 
-    return lessonTime
+    return lessonTime;
 }
-
 
 export default function AppLayout() {
     const [schedule, setSchedule] = useState([]);
@@ -26,15 +25,15 @@ export default function AppLayout() {
     const scheduleActivated = useRef(false);
 
     // const schedule = [
-    //     {start: "08:30", end: "15:55"}, 
-    //     {start: "11:46", end: "13:47"}, 
+    //     {start: "08:30", end: "15:55"},
+    //     {start: "11:46", end: "13:47"},
     // ]
     const fetchSchedule = async () => {
         try {
-            const response = await axios.get(
-                "http://localhost:5000/get_schedule",
-                { params: { } },
-            );
+            BACKADDR;
+            const response = await axios.get(`${BACKADDR}/get_schedule`, {
+                params: {},
+            });
             // console.log(response.data.data)
             setSchedule(response.data.data);
         } catch (error) {
@@ -45,34 +44,40 @@ export default function AppLayout() {
     function doStuff() {
         for (const lesson of schedule) {
             const now = new Date();
-            const lessonTime = parseTimeFromString(lesson["end"]) 
+            const lessonTime = parseTimeFromString(lesson["end"]);
 
-            const beforeLessonTime = new Date(lessonTime)
-            beforeLessonTime.setMinutes(lessonTime.getMinutes() - GRADE_CARD_START_DELTA)
+            const beforeLessonTime = new Date(lessonTime);
+            beforeLessonTime.setMinutes(
+                lessonTime.getMinutes() - GRADE_CARD_START_DELTA,
+            );
 
-            const afterLessonTime = new Date(lessonTime)
-            afterLessonTime.setMinutes(lessonTime.getMinutes() + GRADE_CARD_LIFETIME)
+            const afterLessonTime = new Date(lessonTime);
+            afterLessonTime.setMinutes(
+                lessonTime.getMinutes() + GRADE_CARD_LIFETIME,
+            );
 
-            if (now.getHours() == beforeLessonTime.getHours() && 
+            if (
+                now.getHours() == beforeLessonTime.getHours() &&
                 now.getMinutes() == beforeLessonTime.getMinutes() &&
-                !scheduleActivated.current) {
-                console.log("start")
+                !scheduleActivated.current
+            ) {
+                console.log("start");
                 setIsShown(true);
                 scheduleActivated.current = true;
-            } else if (now.getHours() == afterLessonTime.getHours() && 
-               now.getMinutes() == afterLessonTime.getMinutes()) {
-                console.log("end")
+            } else if (
+                now.getHours() == afterLessonTime.getHours() &&
+                now.getMinutes() == afterLessonTime.getMinutes()
+            ) {
+                console.log("end");
                 setIsShown(false);
                 scheduleActivated.current = false;
             }
         }
-        
     }
     setInterval(doStuff, 1000);
     useEffect(() => {
-          fetchSchedule();
+        fetchSchedule();
     }, []);
-
 
     return (
         <div style={{ paddingLeft: 250 }}>

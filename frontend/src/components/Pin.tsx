@@ -5,6 +5,7 @@ import { Text } from "react-native-web";
 import ReactNativePinView from "./PinView.jsx";
 import { useTimer } from "react-timer-hook";
 import { useLocation } from "react-router-dom";
+import { BACKADDR } from "../const";
 
 // Receives lockedView property which is a component to be shown when correct
 // pin is entered
@@ -22,20 +23,19 @@ export default function Pin({ lockedView, locked, setLocked }) {
 
     const passwordSync = async () => {
         try {
-            const response = await axios.get(
-                "http://localhost:5000/get_password",
-                { params: {} },
-            );
+            const response = await axios.get(`${BACKADDR}/get_password`, {
+                params: {},
+            });
             // console.log(response.data.password)
             setCorrectCode(response.data.password);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
-    }
+    };
 
-    setTimeout(passwordSync, 1000)
+    setTimeout(passwordSync, 1000);
     useEffect(() => {
-          passwordSync();
+        passwordSync();
     }, []);
 
     const blockExpiryTimestamp = new Date();

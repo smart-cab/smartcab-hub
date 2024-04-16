@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { Paper } from "@mui/material";
+import { BACKADDR } from "../const";
 import Header from "./Header";
 import axios from "axios";
 import Select from "@mui/material/Select";
@@ -81,7 +82,7 @@ export default function Statistics() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    "http://localhost:5000/get_statistic/lesson_grade/group_by_category",
+                    `${BACKADDR}/get_statistic/lesson_grade/group_by_category`,
                     { params: { period: groupByCategoryPeriod } },
                 );
                 setStatisticsData(response.data);
