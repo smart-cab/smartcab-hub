@@ -6,15 +6,13 @@ import { Box, CircularProgress, LinearProgress, Button } from "@mui/material";
 import Webcam from "react-webcam";
 import "./VoIP.scss";
 
-function call(endpoint: string) {
-    let socket = new JsSIP.WebSocketInterface(
-        "wss://192.168.0.51:8089/asterisk/ws",
-    );
+function call(ip: string, endpoint: string, password: string) {
+    let socket = new JsSIP.WebSocketInterface(`wss://${ip}:8089/asterisk/ws`);
 
     let configuration = {
         sockets: [socket],
-        uri: "sip:103@192.168.0.51",
-        password: "NnBJeGFVUU5KSU09",
+        uri: `sip:${endpoint}@192.168.1.97`,
+        password: password,
     };
 
     let ua = new JsSIP.UA(configuration);
@@ -120,7 +118,7 @@ function CallCard({ isShown, setIsShown, callContext }) {
                 setCallStatus("established");
             } else if (callContext.session.isEnded()) {
                 setCallStatus("ended");
-                /* setIsShown(false); */
+                setIsShown(false);
             }
         }
     });
@@ -154,10 +152,6 @@ function CallCard({ isShown, setIsShown, callContext }) {
                                 </Box>
                             )}
                         </div>
-                        <img src={shotSrc} alt="webcamShot" />
-                        <div className="webcam">
-                            <Webcam height={200} width={200} ref={webcamRef} />
-                        </div>
                         <div className="controllers">
                             <Button
                                 variant="outlined"
@@ -183,6 +177,11 @@ function CallCard({ isShown, setIsShown, callContext }) {
 export default function SOSButton() {
     const [isShown, setIsShown] = useState(false);
     const [callContext, setCallContext] = useState(null);
+
+    const ip = "192.168.1.97";
+    const endpoint = "100";
+    const password = "LzJxci8yWnV4Z1k9";
+
     return (
         <>
             <CallCard
@@ -195,7 +194,7 @@ export default function SOSButton() {
                 button_type={"ButtonRed"}
                 hook={() => {
                     setIsShown(true);
-                    setCallContext(call("100"));
+                    setCallContext(call(ip, endpoint, password));
                 }}
             />
         </>
