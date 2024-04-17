@@ -222,7 +222,7 @@ export default function SOSButton() {
     const [callContext, setCallContext] = useState(null);
     const [callStatus, setCallStatus] = useState("unset");
 
-    const ip = "192.168.200.14";
+    const ip = "192.168.200.7";
     const endpoint = "100";
     const password = "LzJxci8yWnV4Z1k9";
 
