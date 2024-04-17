@@ -24,7 +24,7 @@ export default function ConferenceManager() {
                         borderRadius: "10px",
                         border: "none",
                     }}
-                    src="http://127.0.0.1:8787"
+                    src="http://127.0.0.1:8787?token=12345678"
                 ></iframe>
             </div>
         </div>

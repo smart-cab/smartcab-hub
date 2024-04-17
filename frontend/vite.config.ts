@@ -14,9 +14,5 @@ export default defineConfig({
         watch: {
             usePolling: true,
         },
-        https: {
-            cert: fs.readFileSync("ssl/smartcab.sch1357.ru.crt"),
-            key: fs.readFileSync("ssl/device.key"),
-        },
     },
 });
