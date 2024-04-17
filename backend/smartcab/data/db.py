@@ -47,7 +47,6 @@ def global_init():
     SqlAlchemyBase.metadata.create_all(engine)
 
     if init_filling:
-        print("0000000000000000")
         from smartcab.data.eval_types import init_base_types
         from smartcab.data.hub_password import init_base_password
         from smartcab.data.admins import init_admins
