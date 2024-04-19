@@ -13,12 +13,21 @@ const callStatusHumanMap = {
     ended: "Звонок завершен",
 };
 
-function call({ ip, endpoint, password, setCallStatus, setIsShown }) {
-    let socket = new JsSIP.WebSocketInterface(`wss://${ip}:8089/asterisk/ws`);
+function call({
+    station_ip,
+    station_port,
+    endpoint,
+    password,
+    setCallStatus,
+    setIsShown,
+}) {
+    let socket = new JsSIP.WebSocketInterface(
+        `wss://${station_ip}:${station_port}/asterisk/ws`,
+    );
 
     let configuration = {
         sockets: [socket],
-        uri: `sip:${endpoint}@${ip}`,
+        uri: `sip:${endpoint}@${station_ip}`,
         password: password,
     };
 
@@ -210,7 +219,6 @@ async function getHubLocalIP() {
 
 function captureWebcam() {
     getHubLocalIP().then((ip) => {
-        console.log("IP: ", ip);
         axios.get(`https://${ip}:5050/capture`).catch((e) => {
             console.log("Failed to capture webcam: ", e);
         });
@@ -222,9 +230,10 @@ export default function SOSButton() {
     const [callContext, setCallContext] = useState(null);
     const [callStatus, setCallStatus] = useState("unset");
 
-    const ip = "192.168.200.7";
-    const endpoint = "100";
-    const password = "LzJxci8yWnV4Z1k9";
+    const station_ip = import.meta.env.VITE_PBX_STATION_IP;
+    const station_port = import.meta.env.VITE_PBX_STATION_PORT;
+    const endpoint = import.meta.env.VITE_PBX_ENDPOINT;
+    const password = import.meta.env.VITE_PBX_PASSWORD;
 
     return (
         <>
@@ -242,7 +251,8 @@ export default function SOSButton() {
                     setIsShown(true);
                     setCallContext(
                         call({
-                            ip,
+                            station_ip,
+                            station_port,
                             endpoint,
                             password,
                             setCallStatus,
