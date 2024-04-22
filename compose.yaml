@@ -68,10 +68,6 @@ services:
       - /app/node_modules
     restart: always
 
-secrets:
-  secret_key:
-    file: .secrets/secret_key
-
 networks:
   default:
     driver: bridge
