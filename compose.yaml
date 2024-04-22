@@ -42,8 +42,6 @@ services:
     container_name: schub-backend
     build:
       context: ./backend
-    secrets:
-      - source: secret_key
     ports:
       - 5000:5000
     environment:
