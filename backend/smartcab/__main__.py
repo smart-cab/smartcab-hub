@@ -65,11 +65,12 @@ def main() -> None:
             {
                 "bind": f"0.0.0.0:5000",
                 "workers": WORKERS,
+                "certfile": "./certs/sch1357.ru.crt",
+                "keyfile": "./certs/sch1357.ru.key",
             },
         ).run()
     else:
         logging.info("Running in development-mode - flask standard server will be used")
-        # _get_statistic_by_group("all")
         app.run(host="0.0.0.0", port=5000, debug=True)
 
 

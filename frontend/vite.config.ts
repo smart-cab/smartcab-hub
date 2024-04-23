@@ -14,5 +14,9 @@ export default defineConfig({
         watch: {
             usePolling: true,
         },
+        https: {
+            cert: fs.readFileSync("certs/sch1357.ru.crt"),
+            key: fs.readFileSync("certs/sch1357.ru.key"),
+        },
     },
 });

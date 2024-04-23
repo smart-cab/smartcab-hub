@@ -8,5 +8,7 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
+ADD https://github.com/smart-cab/certs.git ./certs
+
 CMD ["yarn", "start"]
 EXPOSE 3000
