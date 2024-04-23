@@ -246,7 +246,7 @@ export default function SOSButton() {
             <MyButton
                  style={{
                     left: "-5cm",
-                    top: "13cm",
+                    top: "12cm",
                 }}
                 text={"SOS"}
                 button_type={"ButtonRed"}
