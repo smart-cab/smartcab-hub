@@ -5,10 +5,12 @@ export default function MyButton({
     text,
     button_type,
     hook,
+    style,
 }: {
     text: string;
     button_type: string;
     hook?: () => void;
+    style: object;
 }) {
     const buttonStyle =
         button_type == "ButtonRed"
@@ -36,7 +38,7 @@ export default function MyButton({
               };
     return (
         <Button
-            style={buttonStyle}
+            style={{...buttonStyle, ...style}}
             variant="contained"
             size="large"
             onClick={hook}

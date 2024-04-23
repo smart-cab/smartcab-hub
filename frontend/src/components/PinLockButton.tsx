@@ -27,7 +27,7 @@ export default function PinLockButton({
                 <IconButton
                     aria-label="fingerprint"
                     color="secondary"
-                    style={{ width: "60px", height: "60px", color: "#6cbed8" }}
+                    style={{ width: "60px", height: "60px", color: "#6cbed8", bottom: "0.2cm" }}
                 >
                     <img width="40px" src="/lock_close.png" />
                 </IconButton>
@@ -35,7 +35,7 @@ export default function PinLockButton({
                 <IconButton
                     aria-label="fingerprint"
                     color="secondary"
-                    style={{ width: "60px", height: "60px", color: "#6cbed8" }}
+                    style={{ width: "60px", height: "60px", color: "#6cbed8", bottom: "0.2cm"}}
                 >
                     <img width="40px" src="/lock_open.png" />
                 </IconButton>

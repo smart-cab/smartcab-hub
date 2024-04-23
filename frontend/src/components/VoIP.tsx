@@ -46,7 +46,7 @@ function call({
             ua.stop();
             socket.disconnect();
             setCallStatus("unset");
-            setIsShown(false);
+            // setIsShown(false);
         },
         ended: function (e) {
             console.log("call ended with cause:", e.cause);
@@ -54,7 +54,7 @@ function call({
             ua.stop();
             socket.disconnect();
             setCallStatus("unset");
-            setIsShown(false);
+            // setIsShown(false);
         },
         confirmed: function (e) {
             console.log("call confirmed");
@@ -236,7 +236,7 @@ export default function SOSButton() {
     const password = import.meta.env.VITE_PBX_PASSWORD;
 
     return (
-        <>
+        <div>
             <CallCard
                 isShown={isShown}
                 setIsShown={setIsShown}
@@ -244,8 +244,11 @@ export default function SOSButton() {
                 callStatus={callStatus}
             />
             <MyButton
+                 style={{
+                    left: "-5cm",
+                    top: "15cm",
+                }}
                 text={"SOS"}
-                style={{height: "50px"}}
                 button_type={"ButtonRed"}
                 hook={() => {
                     captureWebcam();
@@ -262,6 +265,6 @@ export default function SOSButton() {
                     );
                 }}
             />
-        </>
+        </div>
     );
 }

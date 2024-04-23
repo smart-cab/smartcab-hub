@@ -6,6 +6,7 @@ import { useState, useRef, useEffect } from "react";
 import GradeCard from "./GradeCard";
 import { BACKADDR } from "../const";
 import Header from "../components/Header";
+import SOSButton from "../components/VoIP";
 
 const GRADE_CARD_LIFETIME = 1;
 const GRADE_CARD_START_DELTA = 1;
@@ -84,6 +85,7 @@ export default function AppLayout() {
             <Sidebar pinLocked={pinLocked} setPinLocked={setPinLocked} />
             <Header />
             <GradeCard isShown={isShown} setIsShown={setIsShown} />
+            <SOSButton />
             <Pin
                 locked={pinLocked}
                 setLocked={setPinLocked}

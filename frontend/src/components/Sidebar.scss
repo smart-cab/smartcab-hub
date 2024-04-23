@@ -4,8 +4,11 @@ hr {
 }
 
 .icons {
-    padding: 36px;
     display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-start;
+    padding-bottom: 20px;
 }
 
 .sidebar {
@@ -56,7 +59,7 @@ hr {
             width: calc(100% - 40px);
             border-radius: 10px;
             background-color: #6cbed8;
-            z-index: -1;
+            z-index: 99;
             transform: translateX(-50%);
             transition: 0.3s ease-in-out;
         }
