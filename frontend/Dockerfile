@@ -1,5 +1,7 @@
 FROM node:21-alpine3.18
 
+RUN apk upgrade --no-cache && apk add --no-cache git
+
 WORKDIR /app
 
 COPY package.json yarn.lock ./

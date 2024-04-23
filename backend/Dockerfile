@@ -10,7 +10,7 @@ ENV PYTHONFAULTHANDLER=1 \
 
 WORKDIR /app
 
-RUN apk upgrade --no-cache && apk add --no-cache libgcc gcc musl-dev bind-tools yaml-dev libffi libffi-dev
+RUN apk upgrade --no-cache && apk add --no-cache libgcc gcc musl-dev bind-tools yaml-dev libffi libffi-dev git
 
 RUN pip install --no-cache-dir "poetry==$POETRY_VERSION"
 
