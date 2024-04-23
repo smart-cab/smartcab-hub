@@ -2,10 +2,10 @@ import { useState } from "react";
 import axios from "axios";
 import Slider from "@mui/material/Slider";
 
-let position_cache = new Map();
 
 function MySlider({ title, url }: { title: string; url: string }) {
     const [_value, setValue] = useState(50);
+    let position_cache = new Map();
 
     const handleChange = (
         _event: Event,
