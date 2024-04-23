@@ -246,10 +246,10 @@ export default function SOSButton() {
             <MyButton
                  style={{
                     position: "fixed",
-                    left: "10%",
+                    left: "9%",
                     top: "91%",
                     height: "7%",
-                    width: "10%"
+                    width: "9%"
                 }}
                 text={"SOS"}
                 button_type={"ButtonRed"}
