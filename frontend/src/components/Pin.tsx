@@ -112,11 +112,12 @@ export default function Pin({ lockedView, locked, setLocked }) {
             {locked ? (
                 <ReactNativePinView
                     style={{
-                        padding: 24,
-                        width: "50%",
+                        padding: "0.2cm",
+                        width: "10cm",
+                        height: "13cm",
                         marginLeft: "3cm",
                         marginRight: "1cm",
-                        marginTop: "0.5cm",
+                        marginTop: "0.3cm",
                         userSelect: "none",
                         WebkitTapHighlightColor: "transparent",
                         opacity: blocked ? 0.5 : 1.0,
@@ -124,7 +125,7 @@ export default function Pin({ lockedView, locked, setLocked }) {
                         backgroundColor: "rgba(127, 127, 127, 0.15)",
                         borderRadius: 20,
                     }}
-                    inputSize={32}
+                    inputSize={30}
                     ref={pinView}
                     pinLength={correctCode.length}
                     buttonSize={90}
