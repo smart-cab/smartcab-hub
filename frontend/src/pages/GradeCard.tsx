@@ -4,11 +4,11 @@ import Hiding from "../components/Hiding";
 import axios from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-
+import { BACKADDR } from "../const";
 
 function Voting(code: string) {
     axios
-        .post("http://localhost:5000/new_vote", {
+        .post(`${BACKADDR}/new_vote`, {
             params: {
                 vote: code,
             },
