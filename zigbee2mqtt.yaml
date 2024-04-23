@@ -15,3 +15,5 @@ device_options:
 devices:
   '0x54ef441000779c83':
     friendly_name: '0x54ef441000779c83'
+  '0xa4c138971597b830':
+    friendly_name: '0xa4c138971597b830'

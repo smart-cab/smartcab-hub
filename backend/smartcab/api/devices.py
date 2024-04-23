@@ -15,7 +15,6 @@ def status():
 @blueprint.route("/mqtt/<device_id>", methods=["GET"])
 def mqtt_get(device_id):
     data = devmap.get_data(device_id, "mqtt")
-    print(data)
     return {"status": "ok"} | data
 
 

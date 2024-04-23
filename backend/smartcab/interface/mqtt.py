@@ -43,7 +43,8 @@ def on_message(client, userdata, message):
     for mqtti in devmap.interfaces("mqtt"):
         if mqtti is None or mqtti.addr != message.topic:
             continue
-        devmap.update_data(mqtti.name, "mqtt", data)
+        if data != {}:
+            devmap.update_data(mqtti.name, "mqtt", data)
 
     logging.debug("MQTT Message Recieved: " + message.payload.decode())
 
