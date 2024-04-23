@@ -109,7 +109,7 @@ function Sidebar({ pinLocked, setPinLocked }) {
                     pinLocked={pinLocked}
                     setPinLocked={setPinLocked}
                 />
-                <SOSButton />
+                <SOSButton style={{height: "50px"}}/>
             </div>
         </div>
     );

@@ -245,6 +245,7 @@ export default function SOSButton() {
             />
             <MyButton
                 text={"SOS"}
+                style={{height: "50px"}}
                 button_type={"ButtonRed"}
                 hook={() => {
                     captureWebcam();
