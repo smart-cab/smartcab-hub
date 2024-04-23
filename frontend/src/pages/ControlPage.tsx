@@ -120,7 +120,6 @@ export default function ControlPage() {
                         </Grid>
                     </Grid>
                 </div>
-                <Footer />
                 <Snackbar
                     open={alertText != ""}
                     onClose={() => setAlertText("")}
