@@ -64,7 +64,7 @@ function MyPieChart(statisticsData) {
                     paddingAngle: 5,
                     cornerRadius: 5,
                     startAngle: -90,
-                    endAngle: 180,
+                    endAngle: 240,
                 },
             ]}
             width={400}

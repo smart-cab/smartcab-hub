@@ -13,7 +13,6 @@ export default function Humidity() {
             axios
                 .get(`${BACKADDR}/mqtt/sensors2`)
                 .then((response) => {
-                    console.log(response.data)
                     var answer = response.data["humidity"];
                     if (answer == null) {
                         setHumidity("- ");

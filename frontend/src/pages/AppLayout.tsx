@@ -62,7 +62,6 @@ export default function AppLayout() {
                 now.getMinutes() == beforeLessonTime.getMinutes() &&
                 !scheduleActivated.current
             ) {
-                console.log("start");
                 setIsShown(true);
                 scheduleActivated.current = true;
             } else if (
