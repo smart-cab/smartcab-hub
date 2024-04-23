@@ -31,7 +31,8 @@ services:
 
   redis:
     container_name: redis
-    image: redis:alpine3.18
+    build:
+      context: ./redis
     networks:
       - default
     ports:

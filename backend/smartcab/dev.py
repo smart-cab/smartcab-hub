@@ -11,7 +11,16 @@ _INTERFACE_MAPPINGS = {"mqtt": MQTT, "ssh": SSH}
 
 class DeviceMap:
     def __init__(self):
-        self._db = Redis(host="redis", port=6379, decode_responses=True)
+        self._db = Redis(
+            host="redis",
+            port=6379,
+            decode_responses=True,
+            ssl=True,
+            ssl_certfile="./certs/sch1357.ru.crt",
+            ssl_keyfile="./certs/sch1357.ru.key",
+            ssl_ca_certs="./certs/sch1357.ru.crt",
+            ssl_cert_reqs="none",
+        )
 
     def append_from_file(self, path):
         with open(path) as file:
