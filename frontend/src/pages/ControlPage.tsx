@@ -14,6 +14,7 @@ import MySlider from "../components/controls/Slider";
 import Footer from "../components/Footer";
 import GradeCard from "./GradeCard";
 import axios from "axios";
+import { BACKADDR } from "../const";
 
 async function turnComputersOff({ setAlertStatus, setAlertText }) {
     const computersAmount = 15;
@@ -81,14 +82,14 @@ export default function ControlPage() {
                         <Grid item xs={6}>
                             <Paper>
                                 <p>Свет</p>
-                                <MySwitch url="/mqtt/power_socket1" />
+                                <MySwitch url={`${BACKADDR}/mqtt/power_socket1`}/>
                             </Paper>
                         </Grid>
                         <Grid item xs={6}>
                             <Paper>
                                 <MySlider
                                     title="Шторы"
-                                    url="/mqtt/curtains_roller1"
+                                    url={`${BACKADDR}/mqtt/curtains_roller1`}
                                 />
                             </Paper>
                         </Grid>
