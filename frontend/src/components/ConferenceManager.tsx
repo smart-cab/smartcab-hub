@@ -1,3 +1,5 @@
+import { CONFCAM_BACKADDR } from "../const";
+
 export default function ConferenceManager() {
     return (
         <div>
@@ -24,7 +26,7 @@ export default function ConferenceManager() {
                         borderRadius: "10px",
                         border: "none",
                     }}
-                    src="http://127.0.0.1:8787?token=12345678"
+                    src={`${CONFCAM_BACKADDR}?token=12345678`}
                 ></iframe>
             </div>
         </div>

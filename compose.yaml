@@ -13,7 +13,7 @@ services:
       - TZ=Europe/Moscow
     devices:
       # Location of CC2531 USB sniffer
-      - /dev/ttyACM0:/dev/ttyACM0
+      - /dev/tty0:/dev/ttyACM0
     restart: always
 
   mosquitto:
