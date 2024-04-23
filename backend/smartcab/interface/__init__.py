@@ -2,13 +2,14 @@ import json
 
 
 class Interface:
-    def __init__(self, addr, data):
+    def __init__(self, name=None, addr=None, data=None):
         if data is None:
             self._data = {}
         elif data is dict:
             self._data = data
         elif data is str:
             self._data = json.loads(data)
+        self.name = name
         self.addr = addr
 
 

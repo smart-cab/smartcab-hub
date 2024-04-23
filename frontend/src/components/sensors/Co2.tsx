@@ -3,6 +3,7 @@ import axios from "axios";
 import UPDATE_INTERVAL from "../config";
 import "./Sensor.scss";
 import SensorWarning from "./SensorWarning";
+import { BACKADDR } from "../../const";
 
 export default function Co2() {
     const [co2, setCo2] = useState("- ");
@@ -10,7 +11,7 @@ export default function Co2() {
     useEffect(() => {
         var timer = setInterval(() => {
             axios
-                .get("/mqtt/sensors2")
+                .get(`${BACKADDR}/mqtt/sensors2`)
                 .then((response) => {
                     var answer = response.data["co2"];
                     if (answer == null) {
@@ -18,7 +19,7 @@ export default function Co2() {
                     } else {
                         setCo2(Math.round(answer).toString());
                     }
-                    setCo2(305)
+                    // setCo2(305)
                 })
                 .catch((err) => console.log(err));
         }, UPDATE_INTERVAL);

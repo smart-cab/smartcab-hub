@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import UPDATE_INTERVAL from "../config";
 import "./Sensor.scss";
+import { BACKADDR } from "../../const";
 
 export default function Pressure() {
     const [pressure, setPressure] = useState("- ");
@@ -9,7 +10,7 @@ export default function Pressure() {
     useEffect(() => {
         var timer = setInterval(() => {
             axios
-                .get("/mqtt/sensors1")
+                .get(`${BACKADDR}/mqtt/sensors1`)
                 .then((response) => {
                     var answer = response.data["pressure"];
                     if (answer == null) {
@@ -17,7 +18,7 @@ export default function Pressure() {
                     } else {
                         setPressure(Math.round(answer).toString());
                     }
-                    setPressure(1012)
+                    // setPressure(1012)
                 })
                 .catch((err) => console.log(err));
         }, UPDATE_INTERVAL);

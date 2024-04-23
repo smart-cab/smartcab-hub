@@ -12,3 +12,6 @@ advanced:
   legacy_availability_payload: false
 device_options:
   legacy: false
+devices:
+  '0x54ef441000779c83':
+    friendly_name: '0x54ef441000779c83'

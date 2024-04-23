@@ -3,6 +3,7 @@ import axios from "axios";
 import UPDATE_INTERVAL from "../config";
 import "./Sensor.scss";
 import SensorWarning from "./SensorWarning";
+import { BACKADDR } from "../../const";
 
 export default function Humidity() {
     const [humidity, setHumidity] = useState("- ");
@@ -10,15 +11,16 @@ export default function Humidity() {
     useEffect(() => {
         var timer = setInterval(() => {
             axios
-                .get("/mqtt/sensors2")
+                .get(`${BACKADDR}/mqtt/sensors2`)
                 .then((response) => {
+                    console.log(response.data)
                     var answer = response.data["humidity"];
                     if (answer == null) {
                         setHumidity("- ");
                     } else {
                         setHumidity(Math.round(answer).toString());
                     }
-                    setHumidity(29)
+                    // setHumidity(29)
                 })
                 .catch((err) => console.log(err));
         }, UPDATE_INTERVAL);

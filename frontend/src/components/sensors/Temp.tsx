@@ -3,6 +3,7 @@ import axios from "axios";
 import UPDATE_INTERVAL from "../config";
 import "./Sensor.scss";
 import SensorWarning from "./SensorWarning";
+import { BACKADDR } from "../../const";
 
 export default function Temp() {
     const [temp, setTemp] = useState("- ");
@@ -10,7 +11,7 @@ export default function Temp() {
     useEffect(() => {
         var timer = setInterval(() => {
             axios
-                .get("/mqtt/sensors2")
+                .get(`${BACKADDR}/mqtt/sensors2`)
                 .then((response) => {
                     var answer = response.data["temperature"];
                     if (answer == null) {
@@ -18,7 +19,7 @@ export default function Temp() {
                     } else {
                         setTemp(Math.round(answer).toString());
                     }
-                    setTemp(22);
+                    // setTemp(22);
                 })
                 .catch((err) => console.log(err));
         }, UPDATE_INTERVAL);

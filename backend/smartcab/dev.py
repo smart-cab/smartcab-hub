@@ -19,6 +19,7 @@ class DeviceMap:
             for key, value in object.items():
                 key = f"device:{key}"
                 self._db.hset(key, mapping=value)
+                self._db.hset(key, "name", key)
                 self._db.hset(key, "data", "{}")
 
     def get_data(self, device_id, interface_id):
@@ -26,8 +27,7 @@ class DeviceMap:
         return json.loads(self._db.hget(name, "data"))
 
     def update_data(self, device_id, interface_name, data):
-        name = f"device:{device_id}/{interface_name}"
-        self._db.hset(name, "data", json.dumps(data, indent=None))
+        self._db.hset(device_id, "data", json.dumps(data))
 
     def _get_interface(self, name):
         return _INTERFACE_MAPPINGS[name.split("/")[1]](**self._db.hgetall(name))
