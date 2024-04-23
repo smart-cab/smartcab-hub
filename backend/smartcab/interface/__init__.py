@@ -44,7 +44,7 @@ class SSH(Interface):
             self.addr,
             username="root",
             known_hosts=None,
-            client_keys=["./certs/hub"],
+            client_keys=["/app/certs/hub"],
         ) as conn:
             result = await conn.run(command)
             if result is None:

@@ -20,7 +20,9 @@ async function turnComputersOff({ setAlertStatus, setAlertText }) {
     const computersAmount = 15;
     let requests = [];
     for (let i = 1; i <= computersAmount; i++) {
-        requests.push(axios.get("/ssh/pc" + i + "?command=shutdown now"));
+        requests.push(
+            axios.get(`${BACKADDR}/ssh/pc` + i + "?command=shutdown now"),
+        );
     }
     await axios
         .all(requests)
@@ -82,7 +84,9 @@ export default function ControlPage() {
                         <Grid item xs={6}>
                             <Paper>
                                 <p>Свет</p>
-                                <MySwitch url={`${BACKADDR}/mqtt/power_socket1`}/>
+                                <MySwitch
+                                    url={`${BACKADDR}/mqtt/power_socket1`}
+                                />
                             </Paper>
                         </Grid>
                         <Grid item xs={6}>
