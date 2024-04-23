@@ -4,7 +4,7 @@ sensors1/mqtt:
 sensors2/mqtt:
   addr: zigbee2mqtt/0xa4c138971597b830
   flags: subscribe
-power_sockets1/mqtt:
+power_socket1/mqtt:
   addr: zigbee2mqtt/0xa4c1382d21ae8016
 curtains_roller1/mqtt:
   addr: zigbee2mqtt/0x54ef441000841506
