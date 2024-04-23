@@ -14,6 +14,11 @@
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
+    touch-action: none;
+    -ms-touch-action: none;
+    zoom: reset;
+    touch-zooming: none;
+    user-zoom: fixed;
 }
 
 body {
