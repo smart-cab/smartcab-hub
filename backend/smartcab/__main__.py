@@ -27,6 +27,7 @@ class WSGIApplication(gunicorn.app.base.BaseApplication):
         }
         for key, value in config.items():
             self.cfg.set(key.lower(), value)
+        self.cfg.set("cert_reqs", 0)
 
     def load(self):
         return self.application
