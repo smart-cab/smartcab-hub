@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import "./Sidebar.scss";
 import Time from "./sensors/Time";
 import PinLockButton from "./PinLockButton";
+import SOSButton from "./VoIP";
 
 const sidebarNavItems = [
     {
@@ -108,6 +109,7 @@ function Sidebar({ pinLocked, setPinLocked }) {
                     pinLocked={pinLocked}
                     setPinLocked={setPinLocked}
                 />
+                <SOSButton />
             </div>
         </div>
     );
