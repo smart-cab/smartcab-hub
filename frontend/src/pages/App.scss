@@ -7,8 +7,9 @@
 
 * {
     padding: 0;
-    // cursor: none;
+    cursor: none;
     margin: 0;
+    user-select: none;
     box-sizing: border-box;
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
