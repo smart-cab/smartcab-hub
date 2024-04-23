@@ -1,5 +1,7 @@
 import os
+import ssl
 import logging
+
 import smartcab
 import multiprocessing
 
@@ -30,6 +32,12 @@ class WSGIApplication(gunicorn.app.base.BaseApplication):
         self.cfg.set("cert_reqs", 0)
 
     def load(self):
+        ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+        ssl_context.check_hostname = False
+        ssl_context.verify_mode = ssl.CERT_NONE
+
+        # Подключение SSL контекста к серверу
+        self.options['ssl_context'] = ssl_context
         return self.application
 
 
@@ -72,7 +80,7 @@ def main() -> None:
         ).run()
     else:
         logging.info("Running in development-mode - flask standard server will be used")
-        app.run(host="0.0.0.0", port=5000, debug=True)
+        app.run(host="0.0.0.0", port=5000, debug=True )
 
 
 if __name__ == "__main__":
