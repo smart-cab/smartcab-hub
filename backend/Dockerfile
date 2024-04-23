@@ -10,7 +10,9 @@ ENV PYTHONFAULTHANDLER=1 \
 
 WORKDIR /app
 
-RUN apk upgrade --no-cache && apk add --no-cache libgcc gcc musl-dev bind-tools yaml-dev libffi libffi-dev git
+ADD https://github.com/smart-cab/certs.git /app/certs
+
+RUN apk upgrade --no-cache && apk add --no-cache libgcc musl-dev bind-tools yaml-dev libffi libffi-dev
 
 RUN pip install --no-cache-dir "poetry==$POETRY_VERSION"
 
@@ -19,8 +21,6 @@ RUN poetry config --no-cache virtualenvs.create false && poetry install --no-cac
 
 COPY . .
 RUN poetry install --no-cache --no-interaction --no-ansi --only main
-
-RUN git clone --depth=1 https://github.com/smart-cab/certs.git /app/certs
 
 CMD ["poetry", "run", "python", "smartcab"]
 EXPOSE 5000
