@@ -35,9 +35,10 @@ def export_statistics() -> Response:
     excel_file_path = 'db/dump.xlsx'
     with ExcelWriter(excel_file_path) as writer:
         for table_name in table_names:
-            query = f"SELECT * FROM {table_name}"
-            df = read_sql(query, engine)
-            df.to_excel(writer, sheet_name=table_name, index=False)
+            if table_name in ["indicators", "lesson", "sensors", "eval_types"]:
+                query = f"SELECT * FROM {table_name}"
+                df = read_sql(query, engine)
+                df.to_excel(writer, sheet_name=table_name, index=False)
     return send_file(f"../{excel_file_path}", as_attachment=True)
 
 
