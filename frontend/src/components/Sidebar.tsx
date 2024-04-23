@@ -18,12 +18,12 @@ const sidebarNavItems = [
         to: "/statistics",
         section: "statistics",
     },
-    {
-        display: "Конференция",
-        icon: <i className="bx bx-user"></i>,
-        to: "/conference",
-        section: "conference",
-    },
+    /* {
+     *     display: "Конференция",
+     *     icon: <i className="bx bx-user"></i>,
+     *     to: "/conference",
+     *     section: "conference",
+     * }, */
 ];
 
 function Sidebar({ pinLocked, setPinLocked }) {
@@ -93,7 +93,10 @@ function Sidebar({ pinLocked, setPinLocked }) {
                             <div
                                 className={`sidebar__menu__item ${activeIndex === index ? "active" : ""}`}
                             >
-                                <div className="sidebar__menu__item__text" style={{zIndex: 99}}>
+                                <div
+                                    className="sidebar__menu__item__text"
+                                    style={{ zIndex: 99 }}
+                                >
                                     {item.display}
                                 </div>
                                 <div className="sidebar__menu__item__icon">
