@@ -93,11 +93,11 @@ function Sidebar({ pinLocked, setPinLocked }) {
                             <div
                                 className={`sidebar__menu__item ${activeIndex === index ? "active" : ""}`}
                             >
+                                <div className="sidebar__menu__item__text" style={{zIndex: 99}}>
+                                    {item.display}
+                                </div>
                                 <div className="sidebar__menu__item__icon">
                                     {item.icon}
-                                </div>
-                                <div className="sidebar__menu__item__text">
-                                    {item.display}
                                 </div>
                             </div>
                         </Link>
