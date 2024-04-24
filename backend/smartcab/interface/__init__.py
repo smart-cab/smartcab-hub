@@ -27,7 +27,7 @@ class MQTT(Interface):
 
 
 class SSH(Interface):
-    def __init__(self, port=22, username="root", password=None, *args, **kwargs):
+    def __init__(self, port=22, username="test", password=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.port = port
         self.username = username
@@ -42,7 +42,7 @@ class SSH(Interface):
 
         async with asyncssh.connect(
             self.addr,
-            username="root",
+            username=self.username,
             known_hosts=None,
             client_keys=["/app/certs/hub"],
         ) as conn:

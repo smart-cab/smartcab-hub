@@ -17,11 +17,11 @@ import axios from "axios";
 import { BACKADDR } from "../const";
 
 async function turnComputersOff({ setAlertStatus, setAlertText }) {
-    const computersAmount = 15;
+    const computersAmount = 1;
     let requests = [];
     for (let i = 1; i <= computersAmount; i++) {
         requests.push(
-            axios.get(`${BACKADDR}/ssh/pc` + i + "?command=shutdown now"),
+            axios.get(`${BACKADDR}/ssh/pc` + i + "?command=echo test | sudo -S shutdown now"),
         );
     }
     await axios
