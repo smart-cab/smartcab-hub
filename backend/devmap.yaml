@@ -9,5 +9,10 @@ power_socket1/mqtt:
 curtains_roller1/mqtt:
   addr: zigbee2mqtt/0x54ef441000841506
 pc1/ssh:
-  username: test
-  addr: 192.168.1.39
+  addr: 192.168.2.6
+pc2/ssh:
+  addr: 192.168.2.14
+pc3/ssh:
+  addr: 192.168.2.2
+pc4/ssh:
+  addr: 192.168.2.3
