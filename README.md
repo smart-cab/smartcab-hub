@@ -35,6 +35,12 @@ Preparation: install Raspbian Lite OS using [Raspberry Pi Imager](https://www.ra
 2. Setup WebRTC SIMPL5 client according to [the instruction](https://wiki.mikopbx.ru/faq:webrtc).
 3. Obtain pbx station ip, call number and password of the client
 
+### Result
+
+Complete infrastracture setup will look like this:
+
+![infrastructure preview](./docs/infrastructure_preview.jpg)
+
 ### Network
 
 See short network overview:
