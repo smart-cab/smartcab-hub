@@ -1,3 +1,8 @@
+<div style="display: flex;">
+  <img src="./docs/hub_preview.jpg" height="300">
+  <img src="./docs/frontend_preview.png" height="300">
+</div>
+
 # About SmartCab
 
 SmartCab is a project providing smart infrastracture for convenient automation of the device interaction within a cabinet of an educational institution.
