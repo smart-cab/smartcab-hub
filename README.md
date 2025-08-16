@@ -1,6 +1,6 @@
 <div style="display: flex;">
-  <img src="./docs/hub_preview.jpg" height="300">
-  <img src="./docs/frontend_preview.png" height="300">
+  <img src="./docs/hub_preview.jpg" width="400">
+  <img src="./docs/frontend_preview.png" width="400">
 </div>
 
 # About SmartCab
