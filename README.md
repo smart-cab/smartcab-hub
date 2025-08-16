@@ -37,9 +37,9 @@ Preparation: install Raspbian Lite OS using [Raspberry Pi Imager](https://www.ra
 
 ### Result
 
-Complete infrastracture setup will look like this:
+Completed hardware setup looks like this:
 
-![infrastructure preview](./docs/infrastructure_preview.jpg)
+<img src="./docs/infrastructure_preview.jpg" width="600">
 
 ### Network
 
